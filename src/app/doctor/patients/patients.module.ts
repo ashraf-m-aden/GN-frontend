@@ -1,3 +1,4 @@
+import { ConsultationService } from './consultations/consultation.service';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -13,6 +14,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatStepperModule } from "@angular/material/stepper";
 import { MatSortModule } from "@angular/material/sort";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatTabsModule } from "@angular/material/tabs";
@@ -29,6 +31,7 @@ import { DeleteComponent } from "./allpatients/dialog/delete/delete.component";
 import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialog.component";
 import { PatientService } from "./allpatients/patient.service";
 import { ConsultationsComponent } from './consultations/consultations.component';
+import {NgxPrintModule} from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -45,12 +48,14 @@ import { ConsultationsComponent } from './consultations/consultations.component'
     PatientsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPrintModule,
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
     MatButtonModule,
+    MatStepperModule,
     MatIconModule,
     MatDialogModule,
     MatSortModule,
@@ -64,6 +69,6 @@ import { ConsultationsComponent } from './consultations/consultations.component'
     MaterialFileInputModule,
     MatProgressSpinnerModule,
   ],
-  providers: [PatientService],
+  providers: [PatientService, ConsultationService],
 })
 export class PatientsModule {}

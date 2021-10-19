@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { fromEvent, BehaviorSubject, Observable, merge, map } from 'rxjs';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-consultations',
@@ -31,12 +32,18 @@ export class ConsultationsComponent
   index: number;
   id: number;
   consultation: Consultation | null;
-  constructor(
-    public httpClient: HttpClient,
-    public dialog: MatDialog,
-    public consultationService: ConsultationService,
-    private snackBar: MatSnackBar,
-    private router: Router
+  isLinear = false;
+  HFormGroup1: FormGroup;
+  HFormGroup2: FormGroup;
+  VFormGroup1: FormGroup;
+  VFormGroup2: FormGroup;
+  // tslint:disable-next-line:variable-name
+  constructor(private _formBuilder: FormBuilder,
+              public httpClient: HttpClient,
+              public dialog: MatDialog,
+              public consultationService: ConsultationService,
+              private snackBar: MatSnackBar,
+              private router: Router
   ) {
     super();
   }
@@ -45,6 +52,21 @@ export class ConsultationsComponent
   @ViewChild("filter", { static: true }) filter: ElementRef;
   ngOnInit() {
     this.loadData();
+    this.HFormGroup1 = this._formBuilder.group({
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+    });
+    this.HFormGroup2 = this._formBuilder.group({
+      address: ["", Validators.required],
+    });
+
+    this.VFormGroup1 = this._formBuilder.group({
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+    });
+    this.VFormGroup2 = this._formBuilder.group({
+      address: ["", Validators.required],
+    });
   }
   refresh() {
     this.loadData();

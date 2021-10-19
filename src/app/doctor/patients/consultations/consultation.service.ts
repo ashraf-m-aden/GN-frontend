@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
 @Injectable()
 export class ConsultationService extends UnsubscribeOnDestroyAdapter {
-  private readonly API_URL = "assets/data/consultation.json";
+  private readonly API_URL = "assets/data/consultations.json";
   isTblLoading = true;
   dataChange: BehaviorSubject<Consultation[]> = new BehaviorSubject<Consultation[]>([]);
   // Temporarily stores data from dialogs

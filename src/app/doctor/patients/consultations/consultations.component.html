@@ -45,36 +45,24 @@
             <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.date}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="gender">
-            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Gender
+          <ng-container matColumnDef="doc">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Docteur
             </mat-header-cell>
-            <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-8'"> {{row.gender}}
+            <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-8'"> {{row.idDoc}}
             </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="gendarme">
-            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-15'">Gendarme
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-20'">
-              <ng-container *ngIf="expression; else elseTemplate">
-                Oui
-              </ng-container>
-              <ng-template #elseTemplate>
-                Non
-              </ng-template>
 
-            </mat-cell>
+          <ng-container matColumnDef="contenu">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Contenu</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.contenu}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="mobile">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.mobile}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="matricule">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Matricule</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.mobile}}</mat-cell>
+          <ng-container matColumnDef="idOrdonnance">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Ordonnance</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.idOrdonnance}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="dossier">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Dossier</mat-header-cell>
@@ -100,6 +88,61 @@
           [pageSizeOptions]="[5, 10, 25, 100]">
         </mat-paginator>
       </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="card">
+    <div class="header">
+      <h2>
+        <strong>Stepper Verticle</strong>
+      </h2>
+    </div>
+    <div class="body">
+      <mat-vertical-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="VFormGroup1">
+          <form [formGroup]="VFormGroup1">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" required>
+              <mat-icon matSuffix>face</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" required>
+              <mat-icon matSuffix>face</mat-icon>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button matStepperNext color="primary"
+                [disabled]="!VFormGroup1.valid">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="VFormGroup2">
+          <form [formGroup]="VFormGroup2">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Address</mat-label>
+              <textarea matInput formControlName="address" placeholder="Ex. 1 Main St, New York, NY"
+                required></textarea>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+              <button mat-raised-button matStepperNext color="primary"
+                [disabled]="!VFormGroup2.valid">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
+            <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
     </div>
   </div>
 </div>
