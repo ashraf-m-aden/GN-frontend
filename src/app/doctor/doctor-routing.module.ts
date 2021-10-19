@@ -7,6 +7,11 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
   },
+  {
+    path: "patients",
+    loadChildren: () =>
+      import("./patients/patients.module").then((m) => m.PatientsModule),
+  },
   { path: '**', component: Page404Component },
 ];
 
