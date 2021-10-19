@@ -15,6 +15,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatSortModule } from "@angular/material/sort";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MaterialFileInputModule } from "ngx-material-file-input";
@@ -27,6 +28,7 @@ import { PatientProfileComponent } from "./patient-profile/patient-profile.compo
 import { DeleteComponent } from "./allpatients/dialog/delete/delete.component";
 import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialog.component";
 import { PatientService } from "./allpatients/patient.service";
+import { ConsultationsComponent } from './consultations/consultations.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { PatientService } from "./allpatients/patient.service";
     PatientProfileComponent,
     DeleteComponent,
     FormDialogComponent,
+    ConsultationsComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,7 @@ import { PatientService } from "./allpatients/patient.service";
     MatIconModule,
     MatDialogModule,
     MatSortModule,
+    MatTabsModule,
     MatToolbarModule,
     MatDatepickerModule,
     MatSelectModule,
