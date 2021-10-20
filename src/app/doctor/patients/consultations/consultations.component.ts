@@ -34,9 +34,6 @@ export class ConsultationsComponent
   consultation: Consultation | null;
   isLinear = false;
   HFormGroup1: FormGroup;
-  HFormGroup2: FormGroup;
-  VFormGroup1: FormGroup;
-  VFormGroup2: FormGroup;
   // tslint:disable-next-line:variable-name
   constructor(private _formBuilder: FormBuilder,
               public httpClient: HttpClient,
@@ -53,20 +50,9 @@ export class ConsultationsComponent
   ngOnInit() {
     this.loadData();
     this.HFormGroup1 = this._formBuilder.group({
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
-    });
-    this.HFormGroup2 = this._formBuilder.group({
-      address: ["", Validators.required],
+      contenu: ["", Validators.required],
     });
 
-    this.VFormGroup1 = this._formBuilder.group({
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
-    });
-    this.VFormGroup2 = this._formBuilder.group({
-      address: ["", Validators.required],
-    });
   }
   refresh() {
     this.loadData();

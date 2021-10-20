@@ -32,6 +32,8 @@ import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialo
 import { PatientService } from "./allpatients/patient.service";
 import { ConsultationsComponent } from './consultations/consultations.component';
 import {NgxPrintModule} from 'ngx-print';
+import { AllOrdonnancesComponent } from './ordonnances/all-ordonnances/all-ordonnances.component';
+import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import {NgxPrintModule} from 'ngx-print';
     DeleteComponent,
     FormDialogComponent,
     ConsultationsComponent,
+    AllOrdonnancesComponent,
+    OrdonnanceComponent,
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 import { PatientProfileComponent } from "./patient-profile/patient-profile.component";
 import { EditPatientComponent } from "./edit-patient/edit-patient.component";
 import { AddPatientComponent } from "./add-patient/add-patient.component";
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: "patient-profile",
     component: PatientProfileComponent,
+  },
+  {
+    path: "ordonnance",
+    component: OrdonnanceComponent,
   },
   { path: "**", component: Page404Component },
 ];

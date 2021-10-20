@@ -8,7 +8,7 @@
               <ul class="header-buttons-left ms-0">
                 <li class="dropdown">
                   <h2>
-                    <strong>Toutes les consultations du patient</strong></h2>
+                    <strong>Tous les ordonnances du patient</strong></h2>
                 </li>
                 <li class="dropdown m-l-20">
                   <label for="search-input"><i class="material-icons search-icon">search</i></label>
@@ -60,9 +60,11 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Contenu</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.contenu}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="idOrdonnance">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Ordonnance</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.idOrdonnance}}</mat-cell>
+          <ng-container matColumnDef="fichier">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Fichier</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <img src="../../../../../assets/images/image-gallery/pdf.jpg" height="50">
+            </mat-cell>
           </ng-container>
           <ng-container matColumnDef="dossier">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Dossier</mat-header-cell>
@@ -71,7 +73,7 @@
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkPatient(row.id)"
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkOrdonnance()"
             [style.cursor]="'pointer'" matRipple>
           </mat-row>
         </mat-table>
@@ -95,7 +97,7 @@
   <div class="card">
     <div class="header">
       <h2>
-        <strong>Diagnostique du docteur</strong>
+        <strong>Prescriptions</strong>
       </h2>
     </div>
     <div class="body">
@@ -116,9 +118,10 @@
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Terminer</ng-template>
-          <p>La consultation a eté enregistrée</p>
+          <p>L'ordonnance a eté enregistrée</p>
           <div>
-            <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle consultation</button>
+            <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle ordonnance</button>
+            <button mat-raised-button matStepperPrevious color="primary" (click)="checkOrdonnance()" class="msr-2 small">Voir l'ordonnance</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>
