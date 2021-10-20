@@ -10,22 +10,14 @@ export class AddPatientComponent {
   patientForm: FormGroup;
   constructor(private fb: FormBuilder) {
     this.patientForm = this.fb.group({
-      first: ["", [Validators.required, Validators.pattern("[a-zA-Z]+")]],
-      last: [""],
+      name: ["", [Validators.required, Validators.pattern("[a-zA-Z]+")]],
       gender: ["", [Validators.required]],
       mobile: [""],
+      matricule: ["", [Validators.required]],
       dob: ["", [Validators.required]],
-      age: [""],
-      email: [
-        "",
-        [Validators.required, Validators.email, Validators.minLength(5)],
-      ],
       maritalStatus: [""],
       address: [""],
       bGroup: [""],
-      bPresure: [""],
-      sugger: [""],
-      injury: [""],
       uploadImg: [""],
     });
   }

@@ -34,6 +34,7 @@ import { ConsultationsComponent } from './consultations/consultations.component'
 import {NgxPrintModule} from 'ngx-print';
 import { AllOrdonnancesComponent } from './ordonnances/all-ordonnances/all-ordonnances.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
+import { CommentairesComponent } from './commentaires/commentaires.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.compone
     ConsultationsComponent,
     AllOrdonnancesComponent,
     OrdonnanceComponent,
+    CommentairesComponent,
   ],
   imports: [
     CommonModule,
