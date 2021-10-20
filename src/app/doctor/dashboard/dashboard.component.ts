@@ -141,11 +141,11 @@ export class DashboardComponent implements OnInit {
     this.areaChartOptions = {
       series: [
         {
-          name: 'New Patients',
+          name: 'Gendarme',
           data: [31, 40, 28, 51, 42, 85, 77],
         },
         {
-          name: 'Old Patients',
+          name: 'Famille',
           data: [11, 32, 45, 32, 34, 52, 41],
         },
       ],
@@ -157,7 +157,7 @@ export class DashboardComponent implements OnInit {
         },
         foreColor: '#9aa0ac',
       },
-      colors: ['#7D4988', '#66BB6A'],
+      colors: ['#338bf4', '#66BB6A'],
       dataLabels: {
         enabled: false,
       },
@@ -165,15 +165,15 @@ export class DashboardComponent implements OnInit {
         curve: 'smooth',
       },
       xaxis: {
-        type: 'datetime',
+        type: 'category',
         categories: [
-          '2018-09-19T00:00:00.000Z',
-          '2018-09-19T01:30:00.000Z',
-          '2018-09-19T02:30:00.000Z',
-          '2018-09-19T03:30:00.000Z',
-          '2018-09-19T04:30:00.000Z',
-          '2018-09-19T05:30:00.000Z',
-          '2018-09-19T06:30:00.000Z',
+          'Juillet',
+          'Aout',
+          'Septembre',
+          'Octobre',
+          'Novembre',
+          'Decembre',
+          'Janvier',
         ],
       },
       legend: {
@@ -214,7 +214,7 @@ export class DashboardComponent implements OnInit {
             total: {
               show: true,
               label: 'Total',
-              formatter: function (w) {
+              formatter: (w) => {
                 return '249';
               },
             },

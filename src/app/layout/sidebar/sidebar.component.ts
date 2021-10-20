@@ -101,11 +101,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.authService.currentUserValue) {
       const userRole = this.authService.currentUserValue.role;
-      this.userFullName =
-        this.authService.currentUserValue.firstName +
-        " " +
-        this.authService.currentUserValue.lastName;
+      // this.userFullName =
+      //   this.authService.currentUserValue.firstName +
+      //   " " +
+      //   this.authService.currentUserValue.lastName;
       this.userImg = this.authService.currentUserValue.img;
+
+      this.userFullName = "Djibril Mohamed";
 
       this.sidebarItems = ROUTES.filter(
         (x) => x.role.indexOf(userRole) !== -1 || x.role.indexOf("All") !== -1
@@ -129,6 +131,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.routerObj.unsubscribe();
   }
   initLeftSidebar() {
+    // tslint:disable-next-line:variable-name
     const _this = this;
     // Set menu height
     _this.setMenuHeight();
