@@ -1,7 +1,7 @@
 {
   "MENUITEMS": {
     "MAIN": {
-      "TEXT": "-- Main"
+      "TEXT": ""
     },
     "HOME": {
       "TEXT": "Home",
@@ -63,7 +63,7 @@
         "INVOICE": "Invoice"
       }
     },
-    "DOCTOR": {    
+    "DOCTOR": {
         "DASHBOARD": "Dashboard",
         "APPOINTMENTS": "Appointments",
         "DOCTORS": "Doctors",
@@ -71,7 +71,7 @@
         "SETTINGS": "Settings",
         "CHAT": "Chat"
     },
-    "PATIENT": {    
+    "PATIENT": {
       "TEXT": "Patient",
       "DASHBOARD": "Dashboard",
       "APPOINTMENTS": {

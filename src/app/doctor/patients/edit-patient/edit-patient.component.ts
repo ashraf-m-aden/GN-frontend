@@ -9,19 +9,15 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class EditPatientComponent {
   patientForm: FormGroup;
   formdata = {
-    first: "Pooja",
-    last: "Sarma",
+    name: "Pooja",
     gender: "Female",
+    matricule : '111111',
     mobile: "123456789",
-    age: "23",
-    email: "test@example.com",
-    maritalStatus: "1",
+    maritalStatus: "celibataire",
     bGroup: "O+",
-    bPresure: "123",
-    sugger: "150",
-    injury: "Fever",
     address: "101, Elanxa, New Yourk",
     dob: "1987-02-17T14:22:18Z",
+    uploadImg: "ghjkl"
   };
   constructor(private fb: FormBuilder) {
     this.patientForm = this.createContactForm();
@@ -31,25 +27,19 @@ export class EditPatientComponent {
   }
   createContactForm(): FormGroup {
     return this.fb.group({
-      first: [
-        this.formdata.first,
+      name: [
+        this.formdata.name,
         [Validators.required, Validators.pattern("[a-zA-Z]+")],
       ],
-      last: [this.formdata.last],
       gender: [this.formdata.gender, [Validators.required]],
       mobile: [this.formdata.mobile, [Validators.required]],
-      age: [this.formdata.age],
+      matricule: [this.formdata.mobile, [Validators.required]],
       maritalStatus: [this.formdata.maritalStatus],
-      email: [
-        this.formdata.email,
-        [Validators.required, Validators.email, Validators.minLength(5)],
-      ],
+
       bGroup: [this.formdata.bGroup],
-      bPresure: [this.formdata.bPresure],
+      uploadImg: [this.formdata.uploadImg],
       address: [this.formdata.address],
       dob: [this.formdata.dob, [Validators.required]],
-      sugger: [this.formdata.sugger],
-      injury: [this.formdata.injury],
     });
   }
 }
