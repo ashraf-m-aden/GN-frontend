@@ -7,7 +7,7 @@
     "department": "Urology",
     "mobile": "1234567890",
     "name": "Dr.John Doe",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "002",
@@ -18,7 +18,7 @@
     "department": "Dentist",
     "mobile": "1234567890",
     "name": "Dr.Sarah Smith",
-    "degree": "BHMS"
+    "grade": "BHMS"
   },
   {
     "id": "003",
@@ -29,7 +29,7 @@
     "department": "General",
     "mobile": "1234567890",
     "name": "Dr.Rajesh",
-    "degree": "MBBS,MD"
+    "grade": "MBBS,MD"
   },
   {
     "id": "004",
@@ -40,7 +40,7 @@
     "department": "Urology",
     "mobile": "1234567890",
     "name": "Dr.Jay Soni",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "005",
@@ -51,7 +51,7 @@
     "department": "Gynecology",
     "mobile": "1234567890",
     "name": "Dr.Rajesh",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "006",
@@ -62,7 +62,7 @@
     "department": "Oncology",
     "mobile": "1234567890",
     "name": "Dr.John Doe",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "007",
@@ -73,7 +73,7 @@
     "department": "Otolaryngology",
     "mobile": "1234567890",
     "name": "Dr.Cara Stevens",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "008",
@@ -84,7 +84,7 @@
     "department": "Radiology",
     "mobile": "1234567890",
     "name": "Dr.Jay Soni",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "009",
@@ -95,7 +95,7 @@
     "department": "Urology",
     "mobile": "1234567890",
     "name": "Dr.Angelica Ramos",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "010",
@@ -106,7 +106,7 @@
     "department": "Dentist",
     "mobile": "1234567890",
     "name": "Dr.Airi Satou",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "011",
@@ -117,7 +117,7 @@
     "department": "General",
     "mobile": "1234567890",
     "name": "Dr.Jay Soni",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "012",
@@ -128,7 +128,7 @@
     "department": "Urology",
     "mobile": "1234567890",
     "name": "Dr.Cara Stevens",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "013",
@@ -139,7 +139,7 @@
     "department": "Urology",
     "mobile": "1234567890",
     "name": "Dr.Sarah Smith",
-    "degree": "BHMS"
+    "grade": "BHMS"
   },
   {
     "id": "014",
@@ -150,7 +150,7 @@
     "department": "Gynecology",
     "mobile": "1234567890",
     "name": "Dr.Ashton Cox",
-    "degree": "MBBS,MD"
+    "grade": "MBBS,MD"
   },
   {
     "id": "015",
@@ -161,7 +161,7 @@
     "department": "Otolaryngology",
     "mobile": "1234567890",
     "name": "Dr.Jay Soni",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   },
   {
     "id": "016",
@@ -172,6 +172,6 @@
     "department": "General",
     "mobile": "1234567890",
     "name": "Dr.Angelica Ramos",
-    "degree": "MBBS,MS"
+    "grade": "MBBS,MS"
   }
 ]

@@ -4,7 +4,7 @@
       "TEXT": ""
     },
     "HOME": {
-      "TEXT": "Home",
+      "TEXT": "Acceuil",
       "LIST": {
         "DASHBOARD1": "Dashboard 1",
         "DASHBOARD2": "Dashboard 2",
@@ -21,13 +21,12 @@
       }
     },
     "DOCTORS": {
-      "TEXT": "Doctors",
+      "TEXT": "Docteurs",
       "LIST": {
-        "ALL-DOCTOR": "All Doctors",
-        "ADD-DOCTOR": "Add Doctor",
-        "STAT": "Doctor's stats",
-        "EDIT-DOCTOR": "Edit Doctor",
-        "PROFILE": "Doctor Profile"
+        "ALL-DOCTOR": "Tous les docteurs",
+        "ADD-DOCTOR": "Ajouter docteurs",
+        "EDIT-DOCTOR": "Modifier docteurs",
+        "PROFILE": "Docteur Profile"
       }
     },
     "STAFF": {
@@ -42,9 +41,9 @@
     "PATIENTS": {
       "TEXT": "Patients",
       "LIST": {
-        "ALL-PATIENT": "All Patients",
-        "ADD-PATIENT": "Add Patient",
-        "EDIT-PATIENT": "Edit Patient",
+        "ALL-PATIENT": "Tous les Patients",
+        "ADD-PATIENT": "Ajouter Patient",
+        "EDIT-PATIENT": "Modifier Patient",
         "PROFILE": "Patient Profile"
       }
     },
@@ -65,11 +64,11 @@
       }
     },
     "DOCTOR": {
-        "DASHBOARD": "Dashboard",
-        "APPOINTMENTS": "Appointments",
-        "DOCTORS": "Doctors",
+        "DASHBOARD": "ACCEUIL",
+        "APPOINTMENTS": "RENDEZ-VOUS",
+        "DOCTORS": "Docteurs",
         "PATIENTS": "Patients",
-        "SETTINGS": "Settings",
+        "SETTINGS": "Configuration",
         "CHAT": "Chat"
     },
     "PATIENT": {
