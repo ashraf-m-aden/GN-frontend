@@ -387,7 +387,7 @@ export class ChartWidgetComponent implements OnInit {
         labels: {
           useSeriesColors: true,
         },
-        formatter: function (seriesName, opts) {
+        formatter: (seriesName, opts) => {
           return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex];
         },
         itemMargin: {

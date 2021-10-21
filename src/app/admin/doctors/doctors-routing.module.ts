@@ -1,3 +1,4 @@
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { ChartWidgetComponent } from './chart-widget/chart-widget.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: "add-doctor",
     component: AddDoctorComponent,
+  },
+  {
+    path: "doctor-profile",
+    component: DoctorProfileComponent,
   },
   {
     path: "stat-doctor",

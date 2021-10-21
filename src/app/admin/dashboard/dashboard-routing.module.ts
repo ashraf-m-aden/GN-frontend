@@ -16,10 +16,6 @@ const routes: Routes = [
     component: MainComponent,
   },
   {
-    path: 'dashboard2',
-    component: Dashboard2Component,
-  },
-  {
     path: 'doctor-dashboard',
     component: doctorDashboard,
   },

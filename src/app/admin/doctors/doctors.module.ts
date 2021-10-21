@@ -20,13 +20,15 @@ import { AlldoctorsComponent } from "./alldoctors/alldoctors.component";
 import { AddDoctorComponent } from "./add-doctor/add-doctor.component";
 import { DoctorProfileComponent } from "./doctor-profile/doctor-profile.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
-import { MatTabsModule } from "@angular/material/tabs";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { DoctorsService } from "./alldoctors/doctors.service";
-import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
-import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgApexchartsModule } from 'ng-apexcharts';
+import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
+import { NgApexchartsModule } from "ng-apexcharts";
+import { ChartsModule as chartjsModule } from "ng2-charts";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   imports: [
     CommonModule,
     FormsModule,
+    chartjsModule,
     ReactiveFormsModule,
     MatTableModule,
     MatTabsModule,
@@ -45,6 +48,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MatFormFieldModule,
     PerfectScrollbarModule,
     MatPaginatorModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,

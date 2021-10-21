@@ -16,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
 
   // Admin Modules
   {
-    path: "/admin/dashboard/dashboard2",
+    path: "/admin/dashboard/main",
     title: "MENUITEMS.HOME.TEXT",
     moduleName: "dashboard",
     iconType: "material-icons-two-tone",
@@ -43,19 +43,6 @@ export const ROUTES: RouteInfo[] = [
       {
         path: "/admin/doctors/allDoctors",
         title: "MENUITEMS.DOCTORS.LIST.ALL-DOCTOR",
-        moduleName: "doctors",
-        iconType: "",
-        icon: "",
-        class: "ml-menu",
-        groupTitle: false,
-        badge: "",
-        badgeClass: "",
-        role: [""],
-        submenu: [],
-      },
-      {
-        path: "/admin/doctors/stat-doctor",
-        title: "MENUITEMS.DOCTORS.LIST.STAT",
         moduleName: "doctors",
         iconType: "",
         icon: "",
