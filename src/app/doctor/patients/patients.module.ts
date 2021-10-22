@@ -35,6 +35,9 @@ import {NgxPrintModule} from 'ngx-print';
 import { AllOrdonnancesComponent } from './ordonnances/all-ordonnances/all-ordonnances.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 import { CommentairesComponent } from './commentaires/commentaires.component';
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import { AllAnalysesComponent } from './analyses/all-analyses/all-analyses.component';
+import { AnalyseComponent } from './analyses/analyse/analyse.component';
 
 @NgModule({
   declarations: [
@@ -48,11 +51,14 @@ import { CommentairesComponent } from './commentaires/commentaires.component';
     AllOrdonnancesComponent,
     OrdonnanceComponent,
     CommentairesComponent,
+    AllAnalysesComponent,
+    AnalyseComponent,
   ],
   imports: [
     CommonModule,
     PatientsRoutingModule,
     FormsModule,
+    NgxDatatableModule,
     ReactiveFormsModule,
     NgxPrintModule,
     MatTableModule,

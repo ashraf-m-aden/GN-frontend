@@ -8,7 +8,7 @@
               <ul class="header-buttons-left ms-0">
                 <li class="dropdown">
                   <h2>
-                    <strong>Tous les ordonnances du patient</strong></h2>
+                    <strong>Toutes les analyses du patient</strong></h2>
                 </li>
                 <li class="dropdown m-l-20">
                   <label for="search-input"><i class="material-icons search-icon">search</i></label>
@@ -50,7 +50,7 @@
             <mat-cell *matCellDef="let row"> {{row.date}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="doc">
-            <mat-header-cell *matHeaderCellDef mat-sort-header >Docteur
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Docteur
             </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.idDoc}}
             </mat-cell>
@@ -61,20 +61,26 @@
             <mat-cell *matCellDef="let row"> {{row.contenu}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="fichier">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Fichier</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Analyse</mat-header-cell>
             <mat-cell *matCellDef="let row">
               <img src="../../../../../assets/images/image-gallery/pdf.jpg" height="25">
             </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="dossier">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Dossier</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.mobile}}</mat-cell>
+          <ng-container matColumnDef="resultat">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Resultat</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <img src="../../../../../assets/images/image-gallery/pdf.jpg" height="25">
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="observation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Observation</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.contenu}}</mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkOrdonnance()"
-            [style.cursor]="'pointer'" matRipple>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkAnalyse()" [style.cursor]="'pointer'"
+            matRipple>
           </mat-row>
         </mat-table>
         <!-- Loading spinner -->
@@ -93,4 +99,56 @@
     </div>
   </div>
 </div>
+<div class=" col-lg-12 col-md-12">
+  <div class="header">
+    <h2>Details</h2>
+  </div>
 
+  <div class="tab-pane body active" id="about">
+
+    <small class="text-muted">Date: </small>
+    <p>21/02/2018</p>
+    <div>
+      <div>
+        <small class="text-muted">Docteur: </small>
+        <p>Djibril Mohamed</p>
+      </div>
+
+    </div>
+    <div><small class="text-muted">Diagnostique: </small>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut officia delectus nostrum qui provident? Impedit
+        cum sequi voluptatum labore soluta tempora optio adipisci, nam excepturi blanditiis, veritatis iure nemo
+        aperiam?</p>
+    </div>
+    <div class="d-flex justify-content-between col-12 col-md-4">
+      <div>
+        <small class="text-muted">Analyse à faire: </small>
+        <p>  <a routerLink="/doctor/patients/ordonnance" target="_blank">
+          <img src="../../../../../assets/images/image-gallery/pdf.jpg" height="25"
+          ></a>
+        </p>
+      </div>
+      <div>
+        <small class="text-muted">Resultats des analyses: </small>
+        <p>
+          <a routerLink="/doctor/patients/ordonnance" target="_blank">
+            <img src="../../../../../assets/images/image-gallery/pdf.jpg" height="25"
+            ></a>
+        </p>
+      </div>
+    </div>
+    <div class="">
+      <div>
+        <small class="text-muted">Observations: </small>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, recusandae enim? Reiciendis voluptatem
+          quis, recusandae asperiores maxime animi inventore enim necessitatibus, facere laborum, doloribus aut! Error
+          fugit eum incidunt dolore!</p>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+  <button mat-raised-button color="primary"
+    routerLinkActive="router-link-active" class=" mr-0 col-xs-12 col-sm-12 col-md-2 col-lg-2 p-0">Modifier</button>
+
+</div>

@@ -10,7 +10,8 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { fromEvent, BehaviorSubject, Observable, merge, map } from 'rxjs';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-consultations',
@@ -20,6 +21,29 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ConsultationsComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit {
+    selectedRowData: selectRowInterface;
+
+    rows = [];
+  newUserImg = "assets/images/user/user1.jpg";
+  data = [];
+  filteredData = [];
+  editForm: FormGroup;
+  register: FormGroup;
+  selectedOption: string;
+  columns = [
+    { name: "medicament" },
+    { name: "frequence" },
+
+  ];
+  genders = [
+    { id: "1", value: "Male" },
+    { id: "2", value: "Female" },
+  ];
+  foods = [
+    { value: "steak-0", viewValue: "Steak" },
+    { value: "pizza-1", viewValue: "Pizza" },
+    { value: "tacos-2", viewValue: "Tacos" },
+  ];
   displayedColumns = [
     "date",
     "doc",
@@ -40,9 +64,20 @@ export class ConsultationsComponent
               public dialog: MatDialog,
               public consultationService: ConsultationService,
               private snackBar: MatSnackBar,
-              private router: Router
+              private router: Router,
+              private modalService: NgbModal,
+              // tslint:disable-next-line:variable-name
+              private _snackBar: MatSnackBar,
+              private fb: FormBuilder
+
+
   ) {
     super();
+    this.editForm = this.fb.group({
+      medicament: new FormControl(),
+      frequence: new FormControl(),
+
+    });
   }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -52,13 +87,93 @@ export class ConsultationsComponent
     this.HFormGroup1 = this._formBuilder.group({
       contenu: ["", Validators.required],
     });
+    this.register = this.fb.group({
+      medicament: ["", [Validators.required, Validators.pattern("[a-zA-Z]+")]],
+      frequence: ["", [Validators.required]],
 
+    });
   }
   refresh() {
     this.loadData();
   }
 
+  addRow(content) {
+    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
+    this.register.patchValue({
+      id: this.getId(10, 100),
+    });
+  }
+  onAddRowSave(form: FormGroup) {
+    this.data.push(form.value);
+    this.data = [...this.data];
+    // console.log(this.data);
+    form.reset();
+    this.modalService.dismissAll();
+    this.showNotification(
+      "bg-green",
+      "Add Record Successfully",
+      "bottom",
+      "right"
+    );
+  }
+  onEditSave(form: FormGroup) {
+    this.data = this.data.filter((value, key) => {
+      if (value.id === form.value.id) {
+        value.firstName = form.value.firstName;
+        value.lastName = form.value.lastName;
+        value.phone = form.value.phone;
+        value.gender = form.value.gender;
+        value.email = form.value.email;
+        value.address = form.value.address;
+      }
+      this.modalService.dismissAll();
+      return true;
+    });
+    this.showNotification(
+      "bg-black",
+      "Edit Record Successfully",
+      "bottom",
+      "right"
+    );
+  }
+  editRow(row, rowIndex, content) {
+    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
+    this.editForm.setValue({
+      medicament: row.medicament,
+      frequence: row.frequence,
+    });
+    this.selectedRowData = row;
+  }
+  getId(min, max) {
+    // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  checkOrdonnance() {
 
+    this.router.navigateByUrl("/doctor/patients/ordonnance");
+  }
+  deleteRow(row) {
+    this.data = this.arrayRemove(this.data, row.id);
+    this.showNotification(
+      "bg-red",
+      "Delete Record Successfully",
+      "bottom",
+      "right"
+    );
+  }
+  arrayRemove(array, id) {
+    return array.filter((element) => {
+      return element.id !== id;
+    });
+  }
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this._snackBar.open(text, "", {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName,
+    });
+  }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
@@ -164,4 +279,9 @@ export class ExampleDataSource extends DataSource<Consultation> {
       );
     });
   }
+}
+// tslint:disable-next-line:class-name
+export interface selectRowInterface {
+  medicament: string;
+  frequence: number;
 }
