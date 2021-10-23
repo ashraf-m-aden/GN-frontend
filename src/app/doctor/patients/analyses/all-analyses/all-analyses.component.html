@@ -99,9 +99,12 @@
     </div>
   </div>
 </div>
-<div class=" col-lg-12 col-md-12">
-  <div class="header">
+<div class=" col-lg-12 col-md-12" [hidden]="isModifying || !clicked">
+  <div class="header d-flex justify-content-between">
     <h2>Details</h2>
+    <button mat-icon-button (click)="clicked = false">
+      <mat-icon class="col-red">close</mat-icon>
+    </button>
   </div>
 
   <div class="tab-pane body active" id="about">
@@ -148,7 +151,59 @@
     </div>
   </div>
   <hr>
-  <button mat-raised-button color="primary"
-    routerLinkActive="router-link-active" class=" mr-0 col-xs-12 col-sm-12 col-md-2 col-lg-2 p-0">Modifier</button>
+  <button mat-raised-button color="primary" (click)="isModifying = !isModifying" class=" mr-0 col-xs-12 col-sm-12 col-md-2 col-lg-2 p-0">Modifier</button>
+
+</div>
+<div class=" col-lg-12 col-md-12" [hidden]="!isModifying" >
+  <div class="header">
+    <h2>Modifier</h2>
+  </div>
+
+  <div class="tab-pane body active" id="about">
+
+    <small class="text-muted">Date: </small>
+    <p>21/02/2018</p>
+    <div>
+      <div>
+        <small class="text-muted">Docteur: </small>
+        <p>Djibril Mohamed</p>
+      </div>
+
+    </div>
+    <div><small class="text-muted">Diagnostique: </small>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut officia delectus nostrum qui provident? Impedit
+        cum sequi voluptatum labore soluta tempora optio adipisci, nam excepturi blanditiis, veritatis iure nemo
+        aperiam?</p>
+    </div>
+    <div class="d-flex justify-content-between col-12 col-md-4">
+      <div>
+        <small class="text-muted">Analyse à faire: </small>
+        <p>  <a routerLink="/doctor/patients/ordonnance" target="_blank">
+          <img src="../../../../../assets/images/image-gallery/pdf.jpg" height="25"
+          ></a>
+        </p>
+      </div>
+      <div>
+        <small class="text-muted">Resultats des analyses: </small>
+        <p>
+          <a routerLink="/doctor/patients/ordonnance" target="_blank">
+            <img src="../../../../../assets/images/image-gallery/pdf.jpg" height="25"
+            ></a>
+        </p>
+      </div>
+    </div>
+    <div class="">
+      <div>
+        <small class="text-muted">Observations: </small>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, recusandae enim? Reiciendis voluptatem
+          quis, recusandae asperiores maxime animi inventore enim necessitatibus, facere laborum, doloribus aut! Error
+          fugit eum incidunt dolore!</p>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+  <button mat-raised-button color="primary" (click)="isModifying = !isModifying" class=" mr-0 col-xs-12 col-sm-12 col-md-2 col-lg-2 p-0">Enregistrer</button>
+  <button mat-raised-button color="danger" (click)="isModifying = !isModifying" class=" mr-0 col-xs-12 col-sm-12 col-md-2 col-lg-2 p-0">Annuler</button>
 
 </div>

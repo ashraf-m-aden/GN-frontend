@@ -35,15 +35,6 @@ export class ConsultationsComponent
     { name: "frequence" },
 
   ];
-  genders = [
-    { id: "1", value: "Male" },
-    { id: "2", value: "Female" },
-  ];
-  foods = [
-    { value: "steak-0", viewValue: "Steak" },
-    { value: "pizza-1", viewValue: "Pizza" },
-    { value: "tacos-2", viewValue: "Tacos" },
-  ];
   displayedColumns = [
     "date",
     "doc",

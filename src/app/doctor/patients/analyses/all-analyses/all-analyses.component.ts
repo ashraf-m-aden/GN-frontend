@@ -36,6 +36,8 @@ id: number;
 consultation: Consultation | null;
 isLinear = false;
 HFormGroup1: FormGroup;
+isModifying = false;
+clicked = false;
 // tslint:disable-next-line:variable-name
 constructor(private _formBuilder: FormBuilder,
             public httpClient: HttpClient,
@@ -63,6 +65,10 @@ refresh() {
 checkOrdonnance() {
 
   this.router.navigateByUrl("/doctor/patients/ordonnance");
+}
+
+checkAnalyse() {
+  this.clicked = true;
 }
 
 private refreshTable() {

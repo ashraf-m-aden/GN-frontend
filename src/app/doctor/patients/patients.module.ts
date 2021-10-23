@@ -38,6 +38,8 @@ import { CommentairesComponent } from './commentaires/commentaires.component';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { AllAnalysesComponent } from './analyses/all-analyses/all-analyses.component';
 import { AnalyseComponent } from './analyses/analyse/analyse.component';
+import { AddOrdonnanceComponent } from './ordonnances/add-ordonnance/add-ordonnance.component';
+import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { AnalyseComponent } from './analyses/analyse/analyse.component';
     CommentairesComponent,
     AllAnalysesComponent,
     AnalyseComponent,
+    AddOrdonnanceComponent,
+    AddAnalyseComponent,
   ],
   imports: [
     CommonModule,
