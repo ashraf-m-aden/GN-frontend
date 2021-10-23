@@ -4,7 +4,6 @@ import { Page404Component } from './../../authentication/page404/page404.compone
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
-import { Dashboard2Component } from './dashboard2/dashboard2.component';
 const routes: Routes = [
   {
     path: '',

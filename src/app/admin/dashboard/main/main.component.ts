@@ -484,11 +484,11 @@ export class MainComponent implements OnInit {
 
     this.areaChartData = [
       {
-        label: "Foods",
+        label: "Gendarme",
         data: [24, 18, 16, 18, 24, 36, 28],
       },
       {
-        label: "Electronics",
+        label: "Famille",
         data: [20, 22, 30, 22, 18, 22, 30],
       },
     ];
@@ -586,7 +586,7 @@ export class MainComponent implements OnInit {
       dataLabels: {
         enabled: false,
       },
-      labels: ["Science", "Mathes", "Economics", "History", "Music"],
+      labels: ["Paracetamol", "Ibuprofene", "Spasfon", "VitamInE B", "Voltarene"],
       responsive: [
         {
           breakpoint: 480,
@@ -599,7 +599,7 @@ export class MainComponent implements OnInit {
     this.avgLecChartOptions = {
       series: [
         {
-          name: "Avg. Lecture",
+          name: "Arret maladie",
           data: [65, 72, 62, 73, 66, 74, 63, 67],
         },
       ],
@@ -667,7 +667,7 @@ export class MainComponent implements OnInit {
   }
   private pieChart() {
     this.circleChartOptions = {
-      series: [76, 67, 61, 90],
+      series: [10, 24, 42, 24],
       chart: {
         height: 275,
         type: "radialBar",
@@ -694,7 +694,7 @@ export class MainComponent implements OnInit {
         },
       },
       colors: ["#FF4560", "#775DD0", "#00E396", "#FEB019"],
-      labels: ["Vimeo", "Messenger", "Facebook", "LinkedIn"],
+      labels: ["5 à 20", "21 à 30", "31 à 40", "40+"],
       legend: {
         show: true,
         floating: true,
