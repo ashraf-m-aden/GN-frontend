@@ -4,7 +4,7 @@
       "TEXT": ""
     },
     "HOME": {
-      "TEXT": "Home",
+      "TEXT": "Acceuil",
       "LIST": {
         "DASHBOARD1": "Dashboard 1",
         "DASHBOARD2": "Dashboard 2",
@@ -21,13 +21,13 @@
       }
     },
     "DOCTORS": {
-      "TEXT": "Doctors",
+      "TEXT": "Docteurs",
       "LIST": {
-        "ALL-DOCTOR": "All Doctors",
-        "ADD-DOCTOR": "Add Doctor",
-        "STAT": "Doctor's stats",
-        "EDIT-DOCTOR": "Edit Doctor",
-        "PROFILE": "Doctor Profile"
+        "ALL-DOCTOR": "Tous les docteurs",
+        "ADD-DOCTOR": "Ajouter un docteur",
+        "STAT": "Docteur's stats",
+        "EDIT-DOCTOR": "Edit Docteur",
+        "PROFILE": "Docteur Profile"
       }
     },
     "STAFF": {
@@ -42,8 +42,8 @@
     "PATIENTS": {
       "TEXT": "Patients",
       "LIST": {
-        "ALL-PATIENT": "All Patients",
-        "ADD-PATIENT": "Add Patient",
+        "ALL-PATIENT": "Tous les patients",
+        "ADD-PATIENT": "Ajouter un patient",
         "EDIT-PATIENT": "Edit Patient",
         "PROFILE": "Patient Profile"
       }
@@ -67,7 +67,7 @@
     "DOCTOR": {
         "DASHBOARD": "Dashboard",
         "APPOINTMENTS": "Appointments",
-        "DOCTORS": "Doctors",
+        "Docteurs": "Docteurs",
         "PATIENTS": "Patients",
         "SETTINGS": "Settings",
         "CHAT": "Chat"

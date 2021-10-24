@@ -39,7 +39,6 @@ export class ConsultationsComponent
     "date",
     "doc",
     "contenu",
-    "idOrdonnance",
   ];
   exampleDatabase: ConsultationService | null;
   dataSource: ExampleDataSource | null;

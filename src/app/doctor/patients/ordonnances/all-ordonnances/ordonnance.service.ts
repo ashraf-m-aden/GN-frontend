@@ -3,11 +3,14 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
+import { Medicaments } from './medicaments.model';
 @Injectable()
-export class ConsultationService extends UnsubscribeOnDestroyAdapter {
+export class OrdonnanceService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = "assets/data/ordonnances.json";
+  private readonly API_URL2 = "assets/data/medicaments.json";
   isTblLoading = true;
   dataChange: BehaviorSubject<Ordonnance[]> = new BehaviorSubject<Ordonnance[]>([]);
+  dataChangeMedoc: BehaviorSubject<Medicaments[]> = new BehaviorSubject<Medicaments[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
   constructor(private httpClient: HttpClient) {
@@ -15,6 +18,9 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
   }
   get data(): Ordonnance[] {
     return this.dataChange.value;
+  }
+  get dataMedoc(): Medicaments[] {
+    return this.dataChangeMedoc.value;
   }
   getDialogData() {
     return this.dialogData;
@@ -25,6 +31,20 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
       (data) => {
         this.isTblLoading = false;
         this.dataChange.next(data);
+      },
+      (error: HttpErrorResponse) => {
+        this.isTblLoading = false;
+        console.log(error.name + " " + error.message);
+      }
+    );
+  }
+  getAllMedicaments(): void {
+    this.subs.sink = this.httpClient.get<Medicaments[]>(this.API_URL2).subscribe(
+      (data) => {
+        console.log(data);
+
+        this.isTblLoading = false;
+        this.dataChangeMedoc.next(this.dataMedoc);
       },
       (error: HttpErrorResponse) => {
         this.isTblLoading = false;

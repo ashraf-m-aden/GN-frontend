@@ -5,16 +5,16 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <ul class="breadcrumb breadcrumb-style ">
             <li class="breadcrumb-item">
-              <h4 class="page-title">View Patient</h4>
+              <h4 class="page-title">Tous les patients</h4>
             </li>
             <li class="breadcrumb-item bcrumb-1">
               <a routerLink="/doctor/dashboard">
-                <i class="fas fa-home"></i> Home</a>
+                <i class="fas fa-home"></i> Acceuil</a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">Patient</a>
+              <a href="#" onClick="return false;">Patients</a>
             </li>
-            <li class="breadcrumb-item active">All patients</li>
+            <li class="breadcrumb-item active">Tous les patients</li>
           </ul>
         </div>
       </div>
@@ -79,7 +79,7 @@
                   <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="gender">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Gender
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Sexe
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-8'"> {{row.gender}}
                   </mat-cell>

@@ -151,7 +151,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin"],
+    role: ["Adminn"],
     submenu: [
       {
         path: "/authentication/signin",
@@ -243,7 +243,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin"],
+    role: ["Adminn"],
     submenu: [
       {
         path: "/extra-pages/blank",
@@ -270,7 +270,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin"],
+    role: ["Adminn"],
     submenu: [
       {
         path: "/multilevel/first1",

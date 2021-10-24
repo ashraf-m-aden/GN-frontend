@@ -5,8 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Consultation } from '../../consultations/consultation.model';
-import { ConsultationService } from '../all-ordonnances/ordonnance.service';
 
 @Component({
   selector: 'app-add-ordonnance',
