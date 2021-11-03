@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class GenerateComponent implements OnInit {
   isLinear = false;
   HFormGroup1: FormGroup;
+  active = 1;
   constructor(
     // tslint:disable-next-line:variable-name
     private _formBuilder: FormBuilder,

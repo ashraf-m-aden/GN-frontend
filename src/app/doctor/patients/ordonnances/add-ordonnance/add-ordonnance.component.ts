@@ -110,7 +110,7 @@ export class AddOrdonnanceComponent implements OnInit {
   }
   checkOrdonnance() {
 
-    this.router.navigateByUrl("/doctor/patients/ordonnance");
+    window.open( "#/doctor/patients/ordonnance", "_blank");
   }
   deleteRow(row) {
     this.data = this.arrayRemove(this.data, row.id);

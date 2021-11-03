@@ -41,6 +41,7 @@ import { AnalyseComponent } from './analyses/analyse/analyse.component';
 import { AddOrdonnanceComponent } from './ordonnances/add-ordonnance/add-ordonnance.component';
 import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.component';
 import { GenerateComponent } from './generate/generate.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { GenerateComponent } from './generate/generate.component';
     CommonModule,
     PatientsRoutingModule,
     FormsModule,
+    NgbModule,
     NgxDatatableModule,
     ReactiveFormsModule,
     NgxPrintModule,
