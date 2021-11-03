@@ -7,6 +7,7 @@ import { AllpatientsComponent } from "./allpatients/allpatients.component";
 import { Page404Component } from "./../../authentication/page404/page404.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { MedocComponent } from './medicaments/medicaments.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: "ordonnance",
     component: OrdonnanceComponent,
+  },
+  {
+    path: "medoc",
+    component: MedocComponent,
   },
   {
     path: "analyse",

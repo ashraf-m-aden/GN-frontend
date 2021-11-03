@@ -42,12 +42,12 @@
                         <ngx-datatable #table class="material" [rows]="data" [columns]="columns" [sortType]="'multi'"
                           [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
 
-                          <ngx-datatable-column name="Medicament" [width]="130"></ngx-datatable-column>
-                          <ngx-datatable-column name="Frequence" [width]="130"></ngx-datatable-column>
+                          <ngx-datatable-column name="medicament"></ngx-datatable-column>
+                          <ngx-datatable-column name="frequence" ></ngx-datatable-column>
                           <!-- <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
                                             </ngx-datatable-column> -->
                           <!-- action buttons -->
-                          <ngx-datatable-column name="Actions" sortable="false" [width]="120">
+                          <ngx-datatable-column name="Actions" sortable="false" >
                             <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                               <span>
                                 <button class="btn tblActnBtn h-auto" (click)='editRow(row, rowIndex, editRecord)'>
@@ -61,7 +61,7 @@
                           </ngx-datatable-column>
                         </ngx-datatable>
                         <!-- Add Record Modal Window -->
-                        <ng-template #addRecord let-modal>
+                        <ng-template #addRecord let-modal >
                           <div class="modal-header editRowModal">
                             <h4 class="modal-title" id="modal-basic-title">
                               <div class="modal-header ">
@@ -72,7 +72,7 @@
                                 </div>
                               </div>
                             </h4>
-                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                            <button type="button" class="close btn" aria-label="Close" (click)="modal.dismiss()">
                               <span aria-hidden="true"><i class="material-icons">close</i></span>
                             </button>
                           </div>
@@ -110,6 +110,8 @@
                               </div>
                             </form>
                           </div>
+                          <app-medicaments (medoc)="onSelected($event)">
+                            </app-medicaments>
                         </ng-template>
                         <!-- Edit Record Modal Window -->
                         <ng-template #editRecord let-modal>
@@ -159,6 +161,8 @@
                               </div>
                             </form>
                           </div>
+                          <app-medicaments (medoc)="onSelected($event)">
+                          </app-medicaments>
                         </ng-template>
                       </div>
                     </div>

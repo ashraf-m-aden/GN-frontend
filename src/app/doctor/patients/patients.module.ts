@@ -1,3 +1,5 @@
+import { MedocComponent } from './medicaments/medicaments.component';
+import { MedocService } from './medicaments/medoc.service';
 import { ConsultationService } from './consultations/consultation.service';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -60,6 +62,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddOrdonnanceComponent,
     AddAnalyseComponent,
     GenerateComponent,
+    MedocComponent
   ],
   imports: [
     CommonModule,
@@ -89,6 +92,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MaterialFileInputModule,
     MatProgressSpinnerModule,
   ],
-  providers: [PatientService, ConsultationService],
+  providers: [PatientService, ConsultationService, MedocService],
 })
 export class PatientsModule {}

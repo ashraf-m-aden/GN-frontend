@@ -1,0 +1,89 @@
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable-line">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body">
+                  <div class="table-responsive">
+                    <div class="materialTableHeader">
+                      <div class="row">
+                        <div class="col-8">
+                          <ul class="header-buttons-left ms-0">
+                            <li class="dropdown">
+                              <h2>
+                                <strong>Medicaments</strong></h2>
+                            </li>
+                            <li class="dropdown m-l-20">
+                              <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                              <input placeholder="Rechercher" type="text" #filter class="browser-default search-field"
+                                aria-label="Search box">
+                            </li>
+
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+                      <!-- ID Column -->
+                      <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Id
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Medicaments
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.title}}
+                        </mat-cell>
+                      </ng-container>
+                      <!-- actions -->
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell class="psl-3 tbl-col-width-per-10" *matHeaderCellDef>Actions
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i=index;" class="psl-3 tbl-col-width-per-10">
+                          <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item>
+                              <i class="material-icons-two-tone align-middle msr-2">done</i>
+                              <span>Approve</span>
+                            </button>
+                            <button mat-menu-item>
+                              <i class="material-icons-two-tone align-middle msr-2">highlight_off</i>
+                              <span>Cancel</span>
+                            </button>
+                          </mat-menu>
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumns">
+                      </mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="select(row.title)"
+                        [style.cursor]="'pointer'" matRipple>
+                      </mat-row>
+                    </mat-table>
+                    <!-- Loading spinner -->
+                    <div *ngIf="exampleDatabase.isTblLoading" class="tbl-spinner">
+                      <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                      </mat-progress-spinner>
+                    </div>
+                    <div *ngIf="!exampleDatabase.isTblLoading" class="no-results"
+                      [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+                      No results
+                    </div>
+                    <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="5"
+                      [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

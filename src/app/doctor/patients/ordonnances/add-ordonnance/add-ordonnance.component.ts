@@ -51,10 +51,14 @@ export class AddOrdonnanceComponent implements OnInit {
       contenu: ["", Validators.required],
     });
     this.register = this.fb.group({
-      medicament: ["", [Validators.required, Validators.pattern("[a-zA-Z]+")]],
+      medicament: ["", [Validators.required]],
       frequence: ["", [Validators.required]],
 
     });
+  }
+
+  onSelected(medoc){
+    this.register.get('medicament').setValue(medoc);
   }
 
   addRow(content) {
