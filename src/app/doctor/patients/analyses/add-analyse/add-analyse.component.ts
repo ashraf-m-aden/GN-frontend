@@ -100,7 +100,9 @@ export class AddAnalyseComponent implements OnInit {
   }
   checkAnalyse() {
 
-    this.router.navigateByUrl("/doctor/patients/analyse");
+    // this.router.navigateByUrl("/doctor/patients/analyse");
+    window.open( "#/doctor/patients/analyse", "_blank");
+
   }
   deleteRow(row) {
     this.data = this.arrayRemove(this.data, row.id);

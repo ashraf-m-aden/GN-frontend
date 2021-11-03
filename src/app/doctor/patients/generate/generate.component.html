@@ -1,0 +1,57 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="card">
+    <div class="header">
+    </div>
+    <div class="body">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs" backgroundColor="primary" color="warn">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Simple consultation
+          </ng-template>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+              <div class="header">
+              </div>
+              <div class="body">
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                  <mat-step [stepControl]="HFormGroup1">
+                    <form [formGroup]="HFormGroup1">
+                      <ng-template matStepLabel>Contenue</ng-template>
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <textarea matInput matTextareaAutosize formControlName="address" formControlName="contenu"  required></textarea>
+                        <mat-icon matSuffix>face</mat-icon>
+                      </mat-form-field>
+
+                      <div>
+                        <button mat-raised-button matStepperNext color="primary"
+                          [disabled]="!HFormGroup1.valid" class="small">Suivant</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step>
+                    <ng-template matStepLabel>Terminer</ng-template>
+                    <p>La consultation a eté enregistrée</p>
+                    <div>
+                      <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle consultation</button>
+                    </div>
+                  </mat-step>
+                </mat-horizontal-stepper>
+              </div>
+            </div>
+          </div>        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Ordonnance
+          </ng-template>
+          <app-add-ordonnance></app-add-ordonnance>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Analyse
+          </ng-template>
+          <app-add-analyse></app-add-analyse>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

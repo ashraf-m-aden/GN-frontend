@@ -60,7 +60,8 @@ refresh() {
 
 checkOrdonnance() {
 
-  this.router.navigateByUrl("/doctor/patients/ordonnance");
+ // this.router.navigateByUrl("/doctor/patients/ordonnance");
+  window.open( "#/doctor/patients/ordonnance", "_blank");
 }
 
 private refreshTable() {

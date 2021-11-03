@@ -40,6 +40,7 @@ import { AllAnalysesComponent } from './analyses/all-analyses/all-analyses.compo
 import { AnalyseComponent } from './analyses/analyse/analyse.component';
 import { AddOrdonnanceComponent } from './ordonnances/add-ordonnance/add-ordonnance.component';
 import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.component';
+import { GenerateComponent } from './generate/generate.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.componen
     AnalyseComponent,
     AddOrdonnanceComponent,
     AddAnalyseComponent,
+    GenerateComponent,
   ],
   imports: [
     CommonModule,
