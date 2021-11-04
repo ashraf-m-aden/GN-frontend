@@ -1,0 +1,87 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="print-section">
+        <div class="card">
+          <div class="body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="white-box">
+                  <h3>
+                    <b>Analyses</b>
+                  </h3>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="float-start">
+                        <address>
+                          <p class="text-muted">
+                            Gendarmerie nationale,
+                            <br>Etat major,
+                            <br> Centre de santé
+                          </p>
+                        </address>
+                      </div>
+                      <div class="float-end text-end">
+                        <address>
+                          <p class="m-t-30">
+                            <b>Date :</b>
+                            <i class="fa fa-calendar"></i> 14 Juillet 2017
+                          </p>
+                        </address>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="table-responsive m-t-40">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th class="text-center">#</th>
+                              <th class="text-center">Nom</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-center">1</td>
+
+                              <td class="text-center">Lorem ipsum dolor sit amet</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center">2</td>
+
+                              <td class="text-center">Consectetur adipisicing elit</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center">3</td>
+                              <td class="text-center">Dolorum provident rerum </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="float-end m-t-30 text-end">
+
+                        <hr>
+                        <p>Dr. Djibril Mohamed</p>
+                      </div>
+                      <div class="clearfix"></div>
+                      <hr>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="text-end">
+          <button mat-raised-button color="primary" printTitle="Ordonnance" [useExistingCss]="true"
+            printSectionId="print-section" ngxPrint><i class="fas fa-print msr-2"></i>Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5">
+
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs nav-justified">
+        <li [ngbNavItem]="1" class="">
+          <a ngbNavLink>Simple consultation
+          </a>
+          <ng-template ngbNavContent>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="">
+                <div class="header">
+                </div>
+                <div class="body">
+                  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                    <mat-step [stepControl]="HFormGroup1">
+                      <form [formGroup]="HFormGroup1">
+                        <ng-template matStepLabel>Contenue</ng-template>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                          <textarea matInput matTextareaAutosize formControlName="address" formControlName="contenu"  required></textarea>
+                          <mat-icon matSuffix>face</mat-icon>
+                        </mat-form-field>
+
+                        <div>
+                          <button mat-raised-button matStepperNext color="primary"
+                            [disabled]="!HFormGroup1.valid" class="small">Enregistrer</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step>
+                      <ng-template matStepLabel>Terminer</ng-template>
+                      <p>La consultation a eté enregistrée</p>
+                      <div>
+                        <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle consultation</button>
+                      </div>
+                    </mat-step>
+                  </mat-horizontal-stepper>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Ordonnance</a>
+          <ng-template ngbNavContent>
+            <app-add-ordonnance></app-add-ordonnance>
+
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <a ngbNavLink>Analyse</a>
+          <ng-template ngbNavContent>
+            <app-add-analyse></app-add-analyse>
+
+          </ng-template>
+        </li>
+      </ul>
+
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

@@ -1,0 +1,147 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="">
+    <div class="body">
+      <div class="table-responsive">
+        <div class="materialTableHeader">
+          <div class="row">
+            <div class="col-8">
+              <ul class="header-buttons-left ms-0">
+                <li class="dropdown">
+                  <h2>
+                    <strong>Toutes les consultations du patient</strong></h2>
+                </li>
+                <li class="dropdown m-l-20">
+                  <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                  <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                    aria-label="Search box">
+                </li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <ul class="header-buttons">
+                <!-- <li>
+                  <div class="icon-button-demo">
+                    <button mat-mini-fab color="primary" (click)="addNew()">
+                      <mat-icon class="col-white">add</mat-icon>
+                    </button>
+                  </div>
+                </li> -->
+                <li>
+                  <div class="icon-button-demo">
+                    <button mat-mini-fab color="primary" (click)="refresh()">
+                      <mat-icon class="col-white">refresh</mat-icon>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbr-col-width-per-8'">Date</mat-header-cell>
+            <mat-cell *matCellDef="let row" [ngClass]="'tbr-col-width-per-8'"> {{row.date}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="doc">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbr-col-width-per-8'">Docteur
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" [ngClass]="'tbr-col-width-per-8'"> {{row.idDoc}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="contenu">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Contenu</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.contenu}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="dossier">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Dossier</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.mobile}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkPatient(row.id)"
+            [style.cursor]="'pointer'" matRipple>
+          </mat-row>
+        </mat-table>
+        <!-- Loading spinner -->
+        <div *ngIf="exampleDatabase.isTblLoading" class="tbl-spinner">
+          <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+        <div *ngIf="!exampleDatabase.isTblLoading" class="no-results"
+          [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+          Pas de resultats
+        </div>
+        <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 25, 50]">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="card">
+    <div class="header">
+    </div>
+    <div class="body">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs" backgroundColor="primary" color="warn">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Simple consultation
+          </ng-template>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+              <div class="header">
+              </div>
+              <div class="body">
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                  <mat-step [stepControl]="HFormGroup1">
+                    <form [formGroup]="HFormGroup1">
+                      <ng-template matStepLabel>Contenue</ng-template>
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <textarea matInput matTextareaAutosize formControlName="address" formControlName="contenu"  required></textarea>
+                        <mat-icon matSuffix>face</mat-icon>
+                      </mat-form-field>
+
+                      <div>
+                        <button mat-raised-button matStepperNext color="primary"
+                          [disabled]="!HFormGroup1.valid" class="small">Suivant</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step>
+                    <ng-template matStepLabel>Terminer</ng-template>
+                    <p>La consultation a eté enregistrée</p>
+                    <div>
+                      <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle consultation</button>
+                    </div>
+                  </mat-step>
+                </mat-horizontal-stepper>
+              </div>
+            </div>
+          </div>        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Ordonnance
+          </ng-template>
+          <app-add-ordonnance></app-add-ordonnance>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Analyse
+          </ng-template>
+          <app-add-analyse></app-add-analyse>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div> -->
