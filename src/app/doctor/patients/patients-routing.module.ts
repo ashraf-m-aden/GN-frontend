@@ -1,4 +1,5 @@
-import { AnalyseComponent } from './analyses/analyse/analyse.component';
+import { SavedConsultationComponent } from './saved-consultation/saved-consultation.component';
+import { AnalyseComponent } from './ordonnances/analyse/analyse.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 import { PatientProfileComponent } from "./patient-profile/patient-profile.component";
 import { EditPatientComponent } from "./edit-patient/edit-patient.component";
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: "ordonnance",
     component: OrdonnanceComponent,
+  },
+  {
+    path: "consultation",
+    component: SavedConsultationComponent,
   },
   {
     path: "medoc",

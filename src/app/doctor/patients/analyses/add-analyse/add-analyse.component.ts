@@ -9,7 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-add-analyse',
   templateUrl: './add-analyse.component.html',
-  styleUrls: ['./add-analyse.component.sass']
+  styleUrls: ['./add-analyse.component.scss']
 })
 export class AddAnalyseComponent implements OnInit {
   selectedRowData: selectRowInterface;
@@ -22,6 +22,8 @@ export class AddAnalyseComponent implements OnInit {
   selectedOption: string;
   columns = [
     { name: "analyse" },
+    { name: "type" },
+      {name: "id"}
 
   ];
   index: number;
@@ -40,6 +42,7 @@ export class AddAnalyseComponent implements OnInit {
   ) {
     this.editForm = this.fb.group({
       analyse: new FormControl(),
+      type: new FormControl(),
 
     });
   }
@@ -48,13 +51,15 @@ export class AddAnalyseComponent implements OnInit {
       contenu: ["", Validators.required],
     });
     this.register = this.fb.group({
+      type: ["", [Validators.required, Validators.pattern("[a-zA-Z]+")]],
       analyse: ["", [Validators.required, Validators.pattern("[a-zA-Z]+")]],
-
+      id: [""]
     });
   }
 
   addRow(content) {
-    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
+    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title",
+    windowClass : "modal" });
     this.register.patchValue({
       id: this.getId(10, 100),
     });

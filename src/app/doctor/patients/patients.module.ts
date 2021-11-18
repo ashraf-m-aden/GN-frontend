@@ -34,13 +34,10 @@ import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialo
 import { PatientService } from "./allpatients/patient.service";
 import { ConsultationsComponent } from './consultations/consultations.component';
 import {NgxPrintModule} from 'ngx-print';
-import { AllOrdonnancesComponent } from './ordonnances/all-ordonnances/all-ordonnances.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 import { CommentairesComponent } from './commentaires/commentaires.component';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
-import { AllAnalysesComponent } from './analyses/all-analyses/all-analyses.component';
-import { AnalyseComponent } from './analyses/analyse/analyse.component';
-import { AddOrdonnanceComponent } from './ordonnances/add-ordonnance/add-ordonnance.component';
+import { AnalyseComponent } from './ordonnances/analyse/analyse.component';
 import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.component';
 import { GenerateComponent } from './generate/generate.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -53,6 +50,8 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 import { NgZorro } from './ng-zero.module';
 import { NewConsultComponent } from './new-consult/new-consult.component';
+import { AddConsultationComponent } from './add-consultation/add-consultation.component';
+import { SavedConsultationComponent } from './saved-consultation/saved-consultation.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -69,16 +68,15 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     DeleteComponent,
     FormDialogComponent,
     ConsultationsComponent,
-    AllOrdonnancesComponent,
     OrdonnanceComponent,
     CommentairesComponent,
-    AllAnalysesComponent,
     AnalyseComponent,
-    AddOrdonnanceComponent,
     AddAnalyseComponent,
     GenerateComponent,
     MedocComponent,
-    NewConsultComponent
+    NewConsultComponent,
+    AddConsultationComponent,
+    SavedConsultationComponent
   ],
   imports: [
     CommonModule,

@@ -1,29 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-  <div class="">
-    <div class="header">
-      <h2>
-        <strong>Analyse</strong>
-      </h2>
-    </div>
-    <div class="body">
-      <mat-horizontal-stepper [linear]="isLinear" #stepper>
-        <mat-step [stepControl]="HFormGroup1">
-          <form [formGroup]="HFormGroup1">
-            <ng-template matStepLabel>Contenue</ng-template>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <textarea matInput matTextareaAutosize formControlName="address" formControlName="contenu"  required></textarea>
-              <mat-icon matSuffix>face</mat-icon>
-            </mat-form-field>
 
-            <div>
-              <button mat-raised-button matStepperNext color="primary"
-                [disabled]="!HFormGroup1.valid" class="small">Suivant</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="HFormGroup1" >
           <form [formGroup]="HFormGroup1">
-            <ng-template matStepLabel>Analyse</ng-template>
             <div class="row clearfix">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
@@ -43,6 +20,7 @@
                           [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
 
                           <ngx-datatable-column name="Analyse"></ngx-datatable-column>
+                          <ngx-datatable-column name="Type"></ngx-datatable-column>
                           <!-- <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
                                             </ngx-datatable-column> -->
                           <!-- action buttons -->
@@ -61,7 +39,7 @@
                         </ngx-datatable>
                         <!-- Add Record Modal Window -->
                         <ng-template #addRecord let-modal>
-                          <div class="modal-header editRowModal">
+                          <div class="modal-header editRowModal ">
                             <h4 class="modal-title" id="modal-basic-title">
                               <div class="modal-header ">
                                 <div class="modal-about">
@@ -83,13 +61,21 @@
                               <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                   <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Analyse</mat-label>
-                                    <input matInput formControlName="analyse" required>
-                                    <mat-icon matSuffix>face</mat-icon>
-                                    <mat-error *ngIf="register.get('analyse').hasError('required')">
-                                      analyse name is required
+                                    <mat-label>Type d'analyse</mat-label>
+                                    <input matInput formControlName="type" required>
+                                    <mat-error *ngIf="register.get('type').hasError('required')">
+                                      Le type d'analyse est obligatoire
                                     </mat-error>
                                   </mat-form-field>
+                                </div>
+                                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                      <mat-label>Analyse</mat-label>
+                                      <input matInput formControlName="analyse" required>
+                                      <mat-error *ngIf="register.get('analyse').hasError('required')">
+                                        le nom d'une analyse manque
+                                      </mat-error>
+                                    </mat-form-field>
                                 </div>
 
                               </div>
@@ -152,22 +138,6 @@
                 </div>
               </div>
             </div>
-
-            <div>
-              <button mat-raised-button matStepperNext color="primary"
-                [disabled]="!HFormGroup1.valid" class="small">Terminer</button>
-            </div>
           </form>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Terminer</ng-template>
-          <p>L'analyse a eté enregistrée</p>
-          <div>
-            <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle analyse</button>
-            <button mat-raised-button matStepperPrevious color="primary" (click)="checkAnalyse()" class="msr-2 small">Voir l'analyse</button>
-          </div>
-        </mat-step>
-      </mat-horizontal-stepper>
-    </div>
-  </div>
+
 </div>

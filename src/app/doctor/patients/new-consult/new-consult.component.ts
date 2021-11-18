@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-new-consult',
@@ -7,14 +7,21 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 })
 export class NewConsultComponent implements OnInit, OnChanges {
 
-  @Input() type: string;
+  @Input() page: string;
+  @Input() id: string;
+  @Output() idConsultation = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
   ngOnChanges(): void {
+    this.idConsultation.emit(this.id);
+  }
+  checkConsultation(id){
 
-    console.log(this.type);
+    this.page = "14";
+    this.id = id;
   }
 
 }

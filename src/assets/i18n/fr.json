@@ -10,10 +10,11 @@
         "DASHBOARD2": "Dashboard 2",
         "DOCTOR-DASHBOARD": "Acceuil",
         "PATIENT-DASHBOARD": "Patient Dashboard"
+
       }
     },
-    "APPOINTMENTS": {
-      "TEXT": "Appointments",
+    "AGENDA": {
+      "TEXT": "Agenda",
       "LIST": {
         "VIEW-APPOINTMENT": "View Appointment",
         "BOOK-APPOINTMENT": "Book Appointment",

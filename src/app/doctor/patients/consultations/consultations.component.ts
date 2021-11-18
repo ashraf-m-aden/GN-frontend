@@ -2,7 +2,7 @@ import { Consultation } from './consultation.model';
 import { ConsultationService } from './consultation.service';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,9 +21,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ConsultationsComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit {
-    selectedRowData: selectRowInterface;
+    @Output() id = new EventEmitter<string>();
 
-    rows = [];
+  selectedRowData: selectRowInterface;
+  rows = [];
   newUserImg = "assets/images/user/user1.jpg";
   data = [];
   filteredData = [];
@@ -44,7 +45,6 @@ export class ConsultationsComponent
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<Consultation>(true, []);
   index: number;
-  id: number;
   consultation: Consultation | null;
   isLinear = false;
   HFormGroup1: FormGroup;
@@ -56,7 +56,7 @@ export class ConsultationsComponent
               private snackBar: MatSnackBar,
               private router: Router,
               private modalService: NgbModal,
-              // tslint:disable-next-line:variable-name
+    // tslint:disable-next-line:variable-name
               private _snackBar: MatSnackBar,
               private fb: FormBuilder
 
@@ -141,6 +141,9 @@ export class ConsultationsComponent
   checkOrdonnance() {
 
     this.router.navigateByUrl("/doctor/patients/ordonnance");
+  }
+  checkConsultation(id) {
+    this.id.emit(id);
   }
   deleteRow(row) {
     this.data = this.arrayRemove(this.data, row.id);

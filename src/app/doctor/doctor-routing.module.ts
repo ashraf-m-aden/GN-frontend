@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () =>
       import("./patients/patients.module").then((m) => m.PatientsModule),
   },
+  {
+    path: "agenda",
+    loadChildren: () =>
+      import("./calendar/calendar.module").then((m) => m.CalendarsModule),
+  },
   { path: '**', component: Page404Component },
 ];
 

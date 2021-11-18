@@ -59,14 +59,10 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Contenu</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.contenu}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="dossier">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Dossier</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.mobile}}</mat-cell>
-          </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkPatient(row.id)"
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkConsultation(row.id)"
             [style.cursor]="'pointer'" matRipple>
           </mat-row>
         </mat-table>

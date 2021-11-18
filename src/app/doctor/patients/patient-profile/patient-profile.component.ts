@@ -33,6 +33,10 @@ const TREE_DATA: FoodNode[] = [
         children: [{ name: 'Standard', id: "221" }, { name: 'TDM', id: "222" }, { name: 'IRM', id: "223" }]
       }
     ]
+  },
+  {
+    name: 'Commentaires',
+    id: '3'
   }
 ];
 
@@ -51,7 +55,8 @@ interface ExampleFlatNode {
   styleUrls: ["./patient-profile.component.scss"],
 })
 export class PatientProfileComponent implements AfterViewInit {
-  @Output() type = new EventEmitter<string>();
+  @Output() page = new EventEmitter<string>();
+  @Output() id = new EventEmitter<string>();
   private transformer = (node: FoodNode, level: number): ExampleFlatNode => ({
     expandable: !!node.children && node.children.length > 0,
     name: node.name,
@@ -97,9 +102,15 @@ export class PatientProfileComponent implements AfterViewInit {
     return this.treeControl.dataNodes.find(n => n.name === name) || null;
   }
 
-  test(content) {
-    this.type.emit(content);
+  changePage(page) {
+    this.page.emit(page);
 
+  }
+  checkConsultation(event){
+    console.log(event);
+
+    this.id.emit(event.value);
+    this.page.emit('14');
   }
 }
 

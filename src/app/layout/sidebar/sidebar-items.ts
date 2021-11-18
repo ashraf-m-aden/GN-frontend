@@ -164,7 +164,19 @@ export const ROUTES: RouteInfo[] = [
       }
     ],
   },
-
+  {
+    path: "/doctor/agenda/dates",
+    title: "MENUITEMS.AGENDA.TEXT",
+    moduleName: "calendar",
+    iconType: "material-icons-two-tone",
+    icon: "event",
+    class: "",
+    groupTitle: false,
+    badge: "",
+    badgeClass: "",
+    role: ["Doctor"],
+    submenu: [],
+  },
   // Patient Modules
   {
     path: "/patient/dashboard",
