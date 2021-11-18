@@ -1,3 +1,2 @@
-<p>
-  {{type}}
-</p>
+<app-consultations *ngIf="type ==='1' || type ==='11' ||type ==='12' "></app-consultations>
+<app-add-ordonnance *ngIf="type == '13'"></app-add-ordonnance>

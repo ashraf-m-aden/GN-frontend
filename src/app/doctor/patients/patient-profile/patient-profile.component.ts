@@ -7,24 +7,30 @@ import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 interface FoodNode {
   name: string;
   disabled?: boolean;
+  id: string;
   children?: FoodNode[];
 }
 
 const TREE_DATA: FoodNode[] = [
   {
     name: 'Consultation',
-    children: [{ name: 'GN' }, { name: 'Externe' }]
+    id: "1",
+    children: [{ name: 'GN', id: "11" }, { name: 'Externe', id: "12" },
+    { name: 'Consulter', id: "13" }]
   },
   {
     name: 'Exploration',
+    id: "2",
     children: [
       {
         name: 'Biologique',
-        children: [{ name: 'Hemathologie' }, { name: 'Biochimie' }]
+        id: "21",
+        children: [{ name: 'Hemathologie', id: "211" }, { name: 'Biochimie', id: "212" }]
       },
       {
         name: 'Radiologique',
-        children: [{ name: 'Standard' }, { name: 'TDM' }, { name: 'IRM' }]
+        id: "22",
+        children: [{ name: 'Standard', id: "221" }, { name: 'TDM', id: "222" }, { name: 'IRM', id: "223" }]
       }
     ]
   }
@@ -34,6 +40,7 @@ const TREE_DATA: FoodNode[] = [
 interface ExampleFlatNode {
   expandable: boolean;
   name: string;
+  id: string;
   level: number;
   disabled: boolean;
 }
@@ -41,13 +48,14 @@ interface ExampleFlatNode {
 @Component({
   selector: "app-patient-profile",
   templateUrl: "./patient-profile.component.html",
-  styleUrls: ["./patient-profile.component.sass"],
+  styleUrls: ["./patient-profile.component.scss"],
 })
 export class PatientProfileComponent implements AfterViewInit {
   @Output() type = new EventEmitter<string>();
   private transformer = (node: FoodNode, level: number): ExampleFlatNode => ({
     expandable: !!node.children && node.children.length > 0,
     name: node.name,
+    id: node.id,
     level,
     disabled: !!node.disabled
   })
@@ -90,12 +98,7 @@ export class PatientProfileComponent implements AfterViewInit {
   }
 
   test(content) {
-    if (content === 'folder') {
-      this.type.emit("folder");
-    } else {
-      this.type.emit("file");
-     }
-
+    this.type.emit(content);
 
   }
 }

@@ -90,12 +90,14 @@
 
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
-                  <div class="header">
+                  <div class="header h3">
+                    <u>                    Dossier medical du patient
+                    </u>
                   </div>
                   <div class="body">
                     <div class="row clearfix">
 
-                      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 border">
                         <nz-tree-view [nzTreeControl]="treeControl" [nzDataSource]="dataSource"
                           [nzDirectoryTree]="true">
                           <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodePadding>
@@ -103,7 +105,7 @@
                             <nz-tree-node-option [nzDisabled]="node.disabled"
                               [nzSelected]="selectListSelection.isSelected(node)"
                               (nzClick)="selectListSelection.toggle(node)"
-                              (click)="test()">
+                              (click)="test(node.id)" [class]="node.name=='Consulter'? 'consulter' : ''">
                               {{ node.name }}
                             </nz-tree-node-option>
                           </nz-tree-node>
@@ -115,7 +117,7 @@
                             <nz-tree-node-option [nzDisabled]="node.disabled"
                               [nzSelected]="selectListSelection.isSelected(node)"
                               (nzClick)="selectListSelection.toggle(node)"
-                              (click)="test('folder')">
+                              (click)="test(node.id)">
 
                               <i nz-icon [nzType]="treeControl.isExpanded(node) ? 'folder-open' : 'folder'"
                                 nzTheme="outline"></i>
@@ -123,8 +125,9 @@
                             </nz-tree-node-option>
                           </nz-tree-node>
                         </nz-tree-view>
+
                       </div>
-                      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                      <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
 
                         <app-new-consult [type]="type | async"></app-new-consult>
                       </div>

@@ -13,7 +13,7 @@ import { NgModule } from '@angular/core';
 // import { NzCardModule } from 'ng-zorro-antd/card';
 // import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 // import { NzCascaderModule } from 'ng-zorro-antd/cascader';
-// import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 // import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 // import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
@@ -21,7 +21,7 @@ import { NzTransButtonModule } from 'ng-zorro-antd/core/trans-button';
 // import { NzWaveModule } from 'ng-zorro-antd/core/wave';
 // import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 // import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-// import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 // import { NzEmptyModule } from 'ng-zorro-antd/empty';
@@ -84,12 +84,12 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
     // NzCardModule,
     // NzCarouselModule,
     // NzCascaderModule,
-    // NzCheckboxModule,
+    NzCheckboxModule,
     // NzCollapseModule,
     // NzCommentModule,
     // NzDatePickerModule,
     // NzDescriptionsModule,
-    // NzDividerModule,
+    NzDividerModule,
     NzDrawerModule,
     NzDropDownModule,
     // NzEmptyModule,

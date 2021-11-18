@@ -1,0 +1,191 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="">
+    <div class="header">
+      <h2>
+        <strong>Faire une consultation</strong>
+      </h2>
+    </div>
+    <div class="body">
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="HFormGroup1">
+          <form [formGroup]="HFormGroup1">
+            <ng-template matStepLabel>Contenue</ng-template>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <textarea matInput matTextareaAutosize formControlName="address" formControlName="contenu"  required></textarea>
+              <mat-icon matSuffix>face</mat-icon>
+            </mat-form-field>
+
+            <div>
+              <button mat-raised-button matStepperNext color="primary"
+                [disabled]="!HFormGroup1.valid" class="small">Suivant</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="HFormGroup1">
+          <form [formGroup]="HFormGroup1">
+            <ng-template matStepLabel>Medicament</ng-template>
+            <div class="row clearfix">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                  <div class="body">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="ngxTableHeader">
+                          <ul class="header-buttons">
+                            <li>
+                              <button mat-mini-fab color="primary" (click)='addRow(addRecord)'>
+                                <mat-icon class="col-white">add</mat-icon>
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                        <ngx-datatable #table class="material" [rows]="data" [columns]="columns" [sortType]="'multi'"
+                          [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
+
+                          <ngx-datatable-column name="medicament"></ngx-datatable-column>
+                          <ngx-datatable-column name="frequence" ></ngx-datatable-column>
+                          <!-- <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
+                                            </ngx-datatable-column> -->
+                          <!-- action buttons -->
+                          <ngx-datatable-column name="Actions" sortable="false" >
+                            <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                              <span>
+                                <button class="btn tblActnBtn h-auto" (click)='editRow(row, rowIndex, editRecord)'>
+                                  <i class="material-icons">mode_edit</i>
+                                </button>
+                                <button class="btn tblActnBtn h-auto" (click)='deleteRow(row)'>
+                                  <i class="material-icons">delete</i>
+                                </button>
+                              </span>
+                            </ng-template>
+                          </ngx-datatable-column>
+                        </ngx-datatable>
+                        <!-- Add Record Modal Window -->
+                        <ng-template #addRecord let-modal >
+                          <div class="modal-header editRowModal">
+                            <h4 class="modal-title" id="modal-basic-title">
+                              <div class="modal-header ">
+                                <img [src]='newUserImg' alt="avatar">
+                                <div class="modal-about">
+                                  <div class="font-weight-bold p-t-10 font-17">
+                                    Nouveau medicament</div>
+                                </div>
+                              </div>
+                            </h4>
+                            <button type="button" class="close btn" aria-label="Close" (click)="modal.dismiss()">
+                              <span aria-hidden="true"><i class="material-icons">close</i></span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form class="register-form" [formGroup]="register" (ngSubmit)="onAddRowSave(register)">
+                              <!-- <div class="input-field col s12 d-none">
+                                <input formControlName="id" class="form-control" type="hidden">
+                              </div>
+                               -->
+                              <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                  <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Medicament</mat-label>
+                                    <input matInput formControlName="medicament" required>
+                                    <mat-icon matSuffix>face</mat-icon>
+                                    <mat-error *ngIf="register.get('medicament').hasError('required')">
+                                      medicament name is required
+                                    </mat-error>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                  <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Frequence</mat-label>
+                                    <input matInput formControlName="frequence">
+                                    <mat-icon matSuffix>face</mat-icon>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                  <button class="btn-space" [disabled]="!register.valid" mat-raised-button
+                                    color="primary">Submit</button>
+                                  <button type="button" mat-button data-dismiss="modal">Cancel</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <app-medicaments (medoc)="onSelected($event)">
+                            </app-medicaments>
+                        </ng-template>
+                        <!-- Edit Record Modal Window -->
+                        <ng-template #editRecord let-modal>
+                          <div class="modal-header editRowModal">
+                            <h4 class="modal-title" id="modal-basic-title">
+                              <div class="modal-header ">
+                                <div class="modal-about">
+                                  <div class="font-weight-bold p-t-10 font-17">
+                                    {{selectedRowData?.medicament}}
+                                    {{selectedRowData?.frequence}}</div>
+                                </div>
+                              </div>
+                            </h4>
+                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                              <span aria-hidden="true"><i class="material-icons">close</i></span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)">
+                              <!-- <div class="input-field col s12 d-none">
+                                <input formControlName="id" class="form-control" type="hidden">
+                              </div> -->
+                              <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                  <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Medicament</mat-label>
+                                    <input matInput formControlName="medicament" required>
+                                    <mat-icon matSuffix>face</mat-icon>
+                                    <mat-error *ngIf="editForm.get('medicament').hasError('required')">
+                                      medicament name is required
+                                    </mat-error>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                  <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>frequence</mat-label>
+                                    <input matInput formControlName="frequence">
+                                    <mat-icon matSuffix>face</mat-icon>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <div class="button-demo">
+                                  <button mat-raised-button type="submit" color="primary">Save</button>
+                                  <button mat-button type="button" (click)="modal.close()">Cancel</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <app-medicaments (medoc)="onSelected($event)">
+                          </app-medicaments>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button mat-raised-button matStepperNext color="primary"
+                [disabled]="!HFormGroup1.valid" class="small">Terminer</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Terminer</ng-template>
+          <p>L'ordonnance a eté enregistrée</p>
+          <div>
+            <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle ordonnance</button>
+            <button mat-raised-button matStepperPrevious color="primary" (click)="checkOrdonnance()" class="msr-2 small">Voir l'ordonnance</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>
