@@ -44,6 +44,21 @@ import { AddOrdonnanceComponent } from './ordonnances/add-ordonnance/add-ordonna
 import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.component';
 import { GenerateComponent } from './generate/generate.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTreeModule } from '@angular/material/tree';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
+import { NgZorro } from './ng-zero.module';
+import { NewConsultComponent } from './new-consult/new-consult.component';
+
+
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
 
 @NgModule({
   declarations: [
@@ -62,7 +77,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddOrdonnanceComponent,
     AddAnalyseComponent,
     GenerateComponent,
-    MedocComponent
+    MedocComponent,
+    NewConsultComponent
   ],
   imports: [
     CommonModule,
@@ -70,6 +86,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule,
     NgxDatatableModule,
+    NzTreeModule,
+    NzTreeViewModule,
+    NgZorro,
     ReactiveFormsModule,
     NgxPrintModule,
     MatTableModule,
@@ -91,7 +110,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatCheckboxModule,
     MaterialFileInputModule,
     MatProgressSpinnerModule,
+    MatTreeModule
   ],
-  providers: [PatientService, ConsultationService, MedocService],
+  bootstrap: [ PatientProfileComponent ],
+
+  providers: [PatientService, ConsultationService, MedocService,
+    { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
 })
 export class PatientsModule {}
