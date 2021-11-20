@@ -39,7 +39,6 @@ import { CommentairesComponent } from './commentaires/commentaires.component';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { AnalyseComponent } from './ordonnances/analyse/analyse.component';
 import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.component';
-import { GenerateComponent } from './generate/generate.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTreeModule } from '@angular/material/tree';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
@@ -49,9 +48,13 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 import { NgZorro } from './ng-zero.module';
-import { NewConsultComponent } from './new-consult/new-consult.component';
-import { AddConsultationComponent } from './add-consultation/add-consultation.component';
-import { SavedConsultationComponent } from './saved-consultation/saved-consultation.component';
+import { AddConsultationComponent } from './consultations/add-consultation/add-consultation.component';
+import { SavedConsultationComponent } from './consultations/saved-consultation/saved-consultation.component';
+import { TreeMenuPageComponent } from './tree-menu-page/tree-menu-page.component';
+import { AddSuiviComponent } from './consultations/add-suivi/add-suivi.component';
+import { AddSuiviExterneComponent } from './consultations/add-suivi-externe/add-suivi-externe.component';
+import { AddOrdonnanceComponent } from './analyses/add-ordonnance/add-ordonnance.component';
+import { ExplorationsComponent } from './explorations/explorations.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -72,11 +75,14 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     CommentairesComponent,
     AnalyseComponent,
     AddAnalyseComponent,
-    GenerateComponent,
     MedocComponent,
-    NewConsultComponent,
     AddConsultationComponent,
-    SavedConsultationComponent
+    SavedConsultationComponent,
+    TreeMenuPageComponent,
+    AddSuiviComponent,
+    AddSuiviExterneComponent,
+    AddOrdonnanceComponent,
+    ExplorationsComponent
   ],
   imports: [
     CommonModule,

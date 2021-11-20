@@ -1,5 +1,5 @@
 export class Consultation {
-  id: number;
+  id: string;
   idDoc: string;
   idPatient: string;
   contenu: string;

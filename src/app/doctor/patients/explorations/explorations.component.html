@@ -1,0 +1,28 @@
+<nz-table #basicTable [nzData]="listOfData">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Docteur</th>
+      <th>Type</th>
+      <th>Demande</th>
+      <th>Resultat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.date }}</td>
+      <td>{{ data.doctor }}</td>
+      <td>{{ data.type }}</td>
+      <td>
+        <a [href]="data.demande" target="_blank" >
+          <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+        </a>
+      </td>
+      <td>
+        <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+
+      </td>
+
+    </tr>
+  </tbody>
+</nz-table>

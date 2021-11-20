@@ -34,6 +34,16 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { fr_FR } from 'ng-zorro-antd/i18n';
 import fr from '@angular/common/locales/fr';
 import { FormsModule } from '@angular/forms';
+import { NgZorro } from './ng-zero.module';
+
+
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
 
 registerLocaleData(fr);
 
@@ -75,6 +85,7 @@ export function createTranslateLoader(http: HttpClient): any {
     CoreModule,
     SharedModule,
     FormsModule,
+    NgZorro
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -85,7 +96,7 @@ export function createTranslateLoader(http: HttpClient): any {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     fakeBackendProvider,
-    { provide: NZ_I18N, useValue: fr_FR },
+    { provide: NZ_I18N, useValue: fr_FR }, { provide: NZ_ICONS, useValue: icons }
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

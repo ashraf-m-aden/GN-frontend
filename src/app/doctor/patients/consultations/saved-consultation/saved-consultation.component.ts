@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-saved-consultation',
@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SavedConsultationComponent implements OnInit {
   @Input() idConsultation: string;
+  @Output() id = new EventEmitter<string>();
+
   data = [
     {
       url: '#/doctor/patients/consultation',
@@ -25,9 +27,11 @@ export class SavedConsultationComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  checkFile(url){
+  checkFile(url){  // redirect to the file page
     window.open( url, "_blank");
-
+  }
+  addSuivi() { // send the id of the consultation we want to follow
+    this.id.emit(this.idConsultation);
   }
 
 }

@@ -1,4 +1,4 @@
-import { SavedConsultationComponent } from './saved-consultation/saved-consultation.component';
+import { SavedConsultationComponent } from './consultations/saved-consultation/saved-consultation.component';
 import { AnalyseComponent } from './ordonnances/analyse/analyse.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 import { PatientProfileComponent } from "./patient-profile/patient-profile.component";

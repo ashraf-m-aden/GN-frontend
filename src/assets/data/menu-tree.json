@@ -1,0 +1,37 @@
+[
+  {
+    "name": "CONSULTER",
+    "id": "0"
+  },
+  {
+    "name":"Historique",
+    "id" : "2",
+    "children": [
+      {
+        "name": "Consultation",
+        "id": "1",
+        "children": [{ "name": "GN", "id": "11" }, { "name": "Externe", "id": "12" }]
+      },
+      {
+        "name": "Exploration",
+        "id": "2",
+        "children": [
+          {
+            "name": "Biologique",
+            "id": "21",
+            "children": [{ "name": "Hemathologie", "id": "211" }, { "name": "Biochimie", "id": "212" }]
+          },
+          {
+            "name": "Radiologique",
+            "id": "22",
+            "children": [{ "name": "Standard", "id": "221" }, { "name": "TDM", "id": "222" }, { "name": "IRM", "id": "223" }]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Commentaires",
+    "id": "3"
+  }
+]

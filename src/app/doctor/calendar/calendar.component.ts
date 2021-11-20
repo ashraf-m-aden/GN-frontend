@@ -59,7 +59,9 @@ export class CalendarComponent
   ) {
     super();
     this.dialogTitle = "Add New Event";
-    this.calendar = new Calendar({});
+    this.calendar = new Calendar({
+      locale: 'fr'
+    });
     this.addCusForm = this.createCalendarForm(this.calendar);
   }
 

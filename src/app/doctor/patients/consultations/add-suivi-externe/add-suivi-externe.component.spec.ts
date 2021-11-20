@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenerateComponent } from './generate.component';
+import { AddSuiviExterneComponent } from './add-suivi-externe.component';
 
-describe('GenerateComponent', () => {
-  let component: GenerateComponent;
-  let fixture: ComponentFixture<GenerateComponent>;
+describe('AddSuiviExterneComponent', () => {
+  let component: AddSuiviExterneComponent;
+  let fixture: ComponentFixture<AddSuiviExterneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GenerateComponent ]
+      declarations: [ AddSuiviExterneComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GenerateComponent);
+    fixture = TestBed.createComponent(AddSuiviExterneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-new-consult',
-  templateUrl: './new-consult.component.html',
-  styleUrls: ['./new-consult.component.sass']
+  selector: 'app-tree-menu-page',
+  templateUrl: './tree-menu-page.component.html',
+  styleUrls: ['./tree-menu-page.component.sass']
 })
-export class NewConsultComponent implements OnInit, OnChanges {
+export class TreeMenuPageComponent  implements OnInit, OnChanges {
 
   @Input() page: string;
   @Input() id: string;
@@ -21,6 +21,12 @@ export class NewConsultComponent implements OnInit, OnChanges {
   checkConsultation(id){
 
     this.page = "14";
+    this.id = id;
+  }
+
+  addSuivi(id){
+
+    this.page = "01";
     this.id = id;
   }
 

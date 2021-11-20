@@ -1,44 +1,46 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { AfterViewInit, Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
 
 import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
+import { BehaviorSubject } from 'rxjs';
 
-interface FoodNode {
+interface TreeMenu {
   name: string;
   disabled?: boolean;
   id: string;
-  children?: FoodNode[];
+  children?: TreeMenu[];
 }
-
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Consultation',
-    id: "1",
-    children: [{ name: 'GN', id: "11" }, { name: 'Externe', id: "12" },
-    { name: 'Consulter', id: "13" }]
-  },
-  {
-    name: 'Exploration',
-    id: "2",
-    children: [
-      {
-        name: 'Biologique',
-        id: "21",
-        children: [{ name: 'Hemathologie', id: "211" }, { name: 'Biochimie', id: "212" }]
-      },
-      {
-        name: 'Radiologique',
-        id: "22",
-        children: [{ name: 'Standard', id: "221" }, { name: 'TDM', id: "222" }, { name: 'IRM', id: "223" }]
-      }
-    ]
-  },
-  {
-    name: 'Commentaires',
-    id: '3'
-  }
-];
+// const TREE_DATA: TreeMenu[] = [
+//   {
+//     name: 'Consultation',
+//     id: "1",
+//     children: [{ name: 'GN', id: "11" }, { name: 'Externe', id: "12" },
+//     { name: 'Consulter', id: "13" }]
+//   },
+//   {
+//     name: 'Exploration',
+//     id: "2",
+//     children: [
+//       {
+//         name: 'Biologique',
+//         id: "21",
+//         children: [{ name: 'Hemathologie', id: "211" }, { name: 'Biochimie', id: "212" }]
+//       },
+//       {
+//         name: 'Radiologique',
+//         id: "22",
+//         children: [{ name: 'Standard', id: "221" }, { name: 'TDM', id: "222" }, { name: 'IRM', id: "223" }]
+//       }
+//     ]
+//   },
+//   {
+//     name: 'Commentaires',
+//     id: '3'
+//   }
+// ];
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
@@ -54,10 +56,19 @@ interface ExampleFlatNode {
   templateUrl: "./patient-profile.component.html",
   styleUrls: ["./patient-profile.component.scss"],
 })
-export class PatientProfileComponent implements AfterViewInit {
+export class PatientProfileComponent implements AfterViewInit, OnInit {
   @Output() page = new EventEmitter<string>();
   @Output() id = new EventEmitter<string>();
-  private transformer = (node: FoodNode, level: number): ExampleFlatNode => ({
+  private readonly API_URL = "assets/data/menu-tree.json";
+  isTblLoading = true;
+  dataChange: BehaviorSubject<TreeMenu[]> = new BehaviorSubject<
+    TreeMenu[]
+  >([]);
+  // Temporarily stores data from dialogs
+  dialogData: any;
+  subs: UnsubscribeOnDestroyAdapter;
+
+  private transformer = (node: TreeMenu, level: number): ExampleFlatNode => ({
     expandable: !!node.children && node.children.length > 0,
     name: node.name,
     id: node.id,
@@ -84,9 +95,37 @@ export class PatientProfileComponent implements AfterViewInit {
 
   // tslint:disable-next-line:member-ordering
   dataSource = new NzTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  constructor(private httpClient: HttpClient) {
+  //  this.dataSource.setData(TREE_DATA);
+  this.getAllTreeMenu();
 
-  constructor() {
-    this.dataSource.setData(TREE_DATA);
+  }
+
+  ngOnInit(): void {
+
+
+  }
+  get data(): TreeMenu[] {
+    return this.dataChange.value;
+  }
+  getDialogData() {
+    return this.dialogData;
+  }
+  /** CRUD METHODS */
+  getAllTreeMenu(): void {
+     this.httpClient
+      .get<TreeMenu[]>(this.API_URL)
+      .subscribe(
+        (data) => {
+          this.isTblLoading = false;
+          this.dataChange.next(data);
+          this.dataSource.setData(data);
+        },
+        (error: HttpErrorResponse) => {
+          this.isTblLoading = false;
+          console.log(error.name + " " + error.message);
+        }
+      );
   }
 
   hasChild = (_: number, node: ExampleFlatNode): boolean => node.expandable;
@@ -106,7 +145,7 @@ export class PatientProfileComponent implements AfterViewInit {
     this.page.emit(page);
 
   }
-  checkConsultation(event){
+  checkConsultation(event) {
     console.log(event);
 
     this.id.emit(event.value);

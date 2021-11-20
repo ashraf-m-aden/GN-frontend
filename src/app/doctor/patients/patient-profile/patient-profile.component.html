@@ -97,7 +97,7 @@
                   <div class="body">
                     <div class="row clearfix">
 
-                      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 border">
+                      <div class="col-lg-auto col-auto col-sm-12 col-xs-12 border">
                         <nz-tree-view [nzTreeControl]="treeControl" [nzDataSource]="dataSource"
                           [nzDirectoryTree]="true">
                           <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodePadding>
@@ -127,9 +127,9 @@
                         </nz-tree-view>
 
                       </div>
-                      <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 
-                        <app-new-consult  [page]="page | async"></app-new-consult>
+                        <app-tree-menu-page  [page]="page | async"></app-tree-menu-page>
                       </div>
                     </div>
 
