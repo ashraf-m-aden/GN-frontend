@@ -37,307 +37,309 @@ export class AddAnalyseComponent implements OnInit {
     name: "RADIOLOGIQUE",
     id: "23",
   }]; // l'array du type 1
-  array2 = [{
+  array2 = [
+    {
     name: "Hematologique",
     id: "211",
-    idParent: 21
+    idParent: 231
   }, {
     name: "Biochimique",
-    id: "212", idParent: 21
+    id: "212", idParent: 231
   }, {
     name: "Bilan Hormonal",
-    id: "212", idParent: 21
+    id: "213", idParent: 231
   },
   {
     name: "Infectieux",
-    id: "212", idParent: 21
+    id: "214", idParent: 231
   }, {
     name: "Urinaire",
-    id: "212", idParent: 21
+    id: "221", idParent: 22
   }, {
     name: "Fecale",
-    id: "212", idParent: 21
+    id: "222", idParent: 22
   }, {
     name: "Standard",
-    id: "212", idParent: 21
+    id: "231", idParent: 23
   }, {
     name: "TDM",
-    id: "212", idParent: 21
+    id: "232", idParent: 23
   }, {
     name: "IRM",
-    id: "212", idParent: 21
+    id: "233", idParent: 23
   }]; // l'array du type 2
-  array3 = [{
+  array3 = [
+    {
     name: "Numeration",
-    id: "212", idParent: 21
+    id: "2111", idParent: 2311
   }, {
     name: "Hemostase",
-    id: "212", idParent: 21
+    id: "2112", idParent: 2311
   }, {
     name: "Fonction renale",
-    id: "212", idParent: 21
+    id: "2121", idParent: 2312
   }, {
     name: "Fonction hepatique",
-    id: "212", idParent: 21
+    id: "2122", idParent: 2312
   }, {
     name: "Bilan pancreatique",
-    id: "212", idParent: 21
+    id: "2123", idParent: 2312
   },
   {
     name: "Bilan lipidique",
-    id: "212", idParent: 21
+    id: "2124", idParent: 2312
   }, {
     name: "Diabete",
-    id: "212", idParent: 21
+    id: "2125", idParent: 2312
   }, {
     name: "Inflammatoire",
-    id: "212", idParent: 21
+    id: "2126", idParent: 2312
   }, {
     name: "Thyroide",
-    id: "212", idParent: 21
+    id: "2131", idParent: 2313
   }, {
     name: "Surennale",
-    id: "212", idParent: 21
+    id: "2132", idParent: 2313
   }, {
     name: "Reproduction",
-    id: "212", idParent: 21
+    id: "212", idParent: 231
   }, {
     name: "Viral",
-    id: "212", idParent: 21
+    id: "2141", idParent: 2314
   }, {
     name: "Parasitaire",
-    id: "212", idParent: 21
+    id: "2142", idParent: 2314
   }, {
     name: "Bacterien",
-    id: "212", idParent: 21
+    id: "2143", idParent: 2314
   }, {
     name: "Proteinurie",
-    id: "212", idParent: 21
+    id: "2211", idParent: 221
   }, {
     name: "Albuminurie",
-    id: "212", idParent: 21
+    id: "2212", idParent: 221
   }, {
     name: "ECBU",
-    id: "212", idParent: 21
+    id: "2213", idParent: 221
   }, {
     name: "KAOP",
-    id: "212", idParent: 21
+    id: "2221", idParent: 222
   }, {
     name: "Coproculture",
-    id: "212", idParent: 21
+    id: "2222", idParent: 222
   }, {
     name: "Thorax",
-    id: "212", idParent: 21
+    id: "2311", idParent: 231
   }, {
     name: "ASP",
-    id: "212", idParent: 21
+    id: "2312", idParent: 231
   }, {
     name: "Bassin",
-    id: "212", idParent: 21
+    id: "2313", idParent: 231
   }, {
     name: "OPN",
-    id: "212", idParent: 21
+    id: "2314", idParent: 231
   }, {
     name: "Arcad dentaire",
-    id: "212", idParent: 21
+    id: "2315", idParent: 231
   }, {
     name: "Extremité",
-    id: "212", idParent: 21
+    id: "2316", idParent: 231
   }, {
     name: "Cerebrale",
-    id: "212", idParent: 21
+    id: "212", idParent: 232
   }, {
     name: "Cervicale",
-    id: "212", idParent: 21
+    id: "2321", idParent: 232
   },
   {
     name: "Thoracique",
-    id: "212", idParent: 21
+    id: "2322", idParent: 232
   }, {
     name: "Abdominale",
-    id: "212", idParent: 21
+    id: "2323", idParent: 232
   },
   {
     name: "Extremité",
-    id: "212", idParent: 21
+    id: "2325", idParent: 232
   }
     , {
     name: "Cerebrale",
-    id: "212", idParent: 21
+    id: "2331", idParent: 233
   }, {
     name: "Cervicale",
-    id: "212", idParent: 21
+    id: "2332", idParent: 233
   },
   {
     name: "Thoracique",
-    id: "212", idParent: 21
+    id: "2333", idParent: 233
   }, {
     name: "Abdominale",
-    id: "212", idParent: 21
+    id: "2334", idParent: 233
   },
   {
     name: "Extremité",
-    id: "212", idParent: 21
+    id: "2335", idParent: 235
   }]; // l'array du type 3
   array4 = [
     , {
       name: "NFS",
-      id: "212", idParent: 21
+      id: "21111", idParent: 2111
     }, {
       name: "TP , TCK, INR,",
-      id: "212", idParent: 21
+      id: "21121", idParent: 2112
     },
     {
       name: "D-dimere",
-      id: "212", idParent: 21
+      id: "21122", idParent: 2112
     }, {
       name: "iono",
-      id: "212", idParent: 21
+      id: "21211", idParent: 2121
     },
     {
       name: "calcium",
-      id: "212", idParent: 21
+      id: "21212", idParent: 2121
     },
     {
       name: "Urée, creat",
-      id: "212", idParent: 21
+      id: "21213", idParent: 2121
     },
     {
       name: "ASAT, ALAT",
-      id: "212", idParent: 21
+      id: "21221", idParent: 2122
     },
     {
       name: "BT, BC",
-      id: "212", idParent: 21
+      id: "21222", idParent: 2122
     },
     {
       name: "GT, PAL",
-      id: "212", idParent: 21
+      id: "21223", idParent: 2122
     },
     {
       name: "Proteine totale",
-      id: "212", idParent: 21
+      id: "21224", idParent: 2122
     },
     {
       name: "Albumine",
-      id: "212", idParent: 21
+      id: "21225", idParent: 2122
     }, {
       name: "Amylase",
-      id: "212", idParent: 21
+      id: "21231", idParent: 2123
     }, {
       name: "Lipasémie",
-      id: "212", idParent: 21
+      id: "21232", idParent: 231
     }, {
       name: "Triglycéride",
-      id: "212", idParent: 21
+      id: "21241", idParent: 2124
     }, {
       name: "Cholestérol total",
-      id: "212", idParent: 21
+      id: "21242", idParent: 2124
     }, {
       name: "HDL-C",
-      id: "212", idParent: 21
+      id: "21243", idParent: 2124
     }, {
       name: "LDL-C",
-      id: "212", idParent: 21
+      id: "21244", idParent: 2124
     }, {
       name: "Glycemie a jeun",
-      id: "212", idParent: 21
+      id: "21251", idParent: 2125
     }, {
       name: "Hemoglobine glyquée",
-      id: "212", idParent: 21
+      id: "21252", idParent: 2125
     }, {
       name: "autre",
-      id: "212", idParent: 21
+      id: "21253", idParent: 2125
     }, {
       name: "CRP",
-      id: "212", idParent: 21
+      id: "21261", idParent: 2126
     }, {
       name: "TSH",
-      id: "212", idParent: 21
+      id: "21311", idParent: 2131
     }, {
       name: "T4 L",
-      id: "212", idParent: 21
+      id: "21312", idParent: 2131
     }, {
       name: "T3",
-      id: "212", idParent: 21
+      id: "21313", idParent: 2131
     }, {
       name: "PTH",
-      id: "212", idParent: 21
+      id: "21314", idParent: 2131
     }, {
       name: "Aldosterone",
-      id: "212", idParent: 21
+      id: "21321", idParent: 2132
     }, {
       name: "cortisol",
-      id: "212", idParent: 21
+      id: "21322", idParent: 2132
     }, {
       name: "ADH",
-      id: "212", idParent: 21
+      id: "21323", idParent: 2132
     }, {
       name: "FSH",
-      id: "212", idParent: 21
+      id: "21331", idParent: 2133
     }, {
       name: "LH",
-      id: "212", idParent: 21
+      id: "21332", idParent: 2133
     }, {
       name: "Estrogene total",
-      id: "212", idParent: 21
+      id: "21333", idParent: 2133
     }, {
       name: "Prolactine ",
-      id: "212", idParent: 21
+      id: "21334", idParent: 2133
     }, {
       name: "Testosterone",
-      id: "212", idParent: 21
+      id: "21335", idParent: 2133
     }, {
       name: "IgMAnti-HAV",
-      id: "212", idParent: 21
+      id: "21411", idParent: 2141
     }, {
       name: "IgG Anti-HAV",
-      id: "212", idParent: 21
+      id: "21412", idParent: 2141
     }, {
       name: "Ag HBs",
-      id: "212", idParent: 21
+      id: "21413", idParent: 2141
     }, {
       name: "Ac Anti-HBs",
-      id: "212", idParent: 21
+      id: "21414", idParent: 2141
     }, {
       name: "Ac Anti-HBe",
-      id: "212", idParent: 21
+      id: "21415", idParent: 2141
     },
     {
       name: "Ac Anti-HBc",
-      id: "212", idParent: 21
+      id: "21416", idParent: 2141
     }, {
       name: "Ac Anti-HCV",
-      id: "212", idParent: 21
+      id: "21417", idParent: 2141
     }, {
       name: "Seologie α",
-      id: "212", idParent: 21
+      id: "21418", idParent: 2141
     }, {
       name: "CMV",
-      id: "212", idParent: 21
+      id: "21419", idParent: 2141
     }, {
       name: "HSV",
-      id: "212", idParent: 21
+      id: "214110", idParent: 2141
     },
     , {
       name: "Serologie rubeole",
-      id: "212", idParent: 21
+      id: "214111", idParent: 2141
     },
     , {
       name: "Serologie toxoplasmose",
-      id: "212", idParent: 21
+      id: "214112", idParent: 2141
     },
     , {
       name: "Goutte epaisse ",
-      id: "212", idParent: 21
+      id: "21421", idParent: 2142
     },
     , {
       name: "Hemoculture aerobique",
-      id: "212", idParent: 21
+      id: "21431", idParent: 2143
     },
     {
       name: "Hemoculture anaerobique",
-      id: "212", idParent: 21
+      id: "21432", idParent: 2143
     }
 
   ]; // l'array du type 4

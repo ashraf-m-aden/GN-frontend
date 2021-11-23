@@ -61,15 +61,15 @@
                   "children": [
                     {
                     "name": "iono",
-                    "id": "211"
+                    "id": "21211"
                   },
                   {
                     "name": "calcium",
-                    "id": "211"
+                    "id": "21212"
                   },
                   {
                     "name": "Urée, creat",
-                    "id": "211"
+                    "id": "21213"
                   }
                 ]
                 },
@@ -79,23 +79,23 @@
                   "children": [
                     {
                     "name": "ASAT, ALAT",
-                    "id": "211"
+                    "id": "21221"
                   },
                   {
                     "name": "BT, BC",
-                    "id": "211"
+                    "id": "21222"
                   },
                   {
                     "name": "GT, PAL",
-                    "id": "211"
+                    "id": "21223"
                   },
                   {
                     "name": "Proteine totale",
-                    "id": "211"
+                    "id": "21224"
                   },
                   {
                     "name": "Albumine",
-                    "id": "211"
+                    "id": "21225"
                   }
                 ]
                 },
@@ -160,28 +160,6 @@
                     {
                     "name": "CRP",
                     "id": "21261"
-                  }
-                ]
-                },
-                {
-                  "name": "Thyroide",
-                  "id": "2127",
-                  "children": [
-                    {
-                    "name": "TSH",
-                    "id": "21271"
-                  },
-                  {
-                    "name": "T4 L",
-                    "id": "21272"
-                  },
-                  {
-                    "name": "T3",
-                    "id": "21273"
-                  },
-                  {
-                    "name": "PTH",
-                    "id": "21274"
                   }
                 ]
                 }
