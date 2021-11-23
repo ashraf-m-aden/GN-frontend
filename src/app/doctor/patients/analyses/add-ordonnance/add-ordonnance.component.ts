@@ -24,7 +24,9 @@ export class AddOrdonnanceComponent implements OnInit {
   selectedOption: string;
   columns = [
     { name: "medicament" },
-    { name: "frequence" },
+    { name: "unite" },
+    { name: "Frequence" },
+    { name: "jour" },
     {name: "id"}
 
   ];
@@ -45,6 +47,8 @@ export class AddOrdonnanceComponent implements OnInit {
     this.editForm = this.fb.group({
       medicament: new FormControl(),
       frequence: new FormControl(),
+      unite: new FormControl(),
+      jour: new FormControl(),
 
     });
 
@@ -56,6 +60,8 @@ export class AddOrdonnanceComponent implements OnInit {
     this.register = this.fb.group({
       medicament: ["", [Validators.required]],
       frequence: ["", [Validators.required]],
+      unite: ["", [Validators.required]],
+      jour: [""],
       id: [""]
 
     });

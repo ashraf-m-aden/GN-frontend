@@ -105,7 +105,7 @@
                             <nz-tree-node-option [nzDisabled]="node.disabled"
                               [nzSelected]="selectListSelection.isSelected(node)"
                               (nzClick)="selectListSelection.toggle(node)"
-                              (click)="changePage(node.id)" [class]="node.name=='CONSULTER'? 'consulter' : ''">
+                              (click)="changePage(node.id, node.name)" [class]="node.name=='CONSULTER'? 'consulter' : ''">
                               {{ node.name }}
                             </nz-tree-node-option>
                           </nz-tree-node>
@@ -117,7 +117,7 @@
                             <nz-tree-node-option [nzDisabled]="node.disabled"
                               [nzSelected]="selectListSelection.isSelected(node)"
                               (nzClick)="selectListSelection.toggle(node)"
-                              (click)="changePage(node.id)">
+                              (click)="changePage(node.id, node.name)">
 
                               <i nz-icon [nzType]="treeControl.isExpanded(node) ? 'folder-open' : 'folder'"
                                 nzTheme="outline"></i>
@@ -127,9 +127,9 @@
                         </nz-tree-view>
 
                       </div>
-                      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 
-                        <app-tree-menu-page  [page]="page | async"></app-tree-menu-page>
+                        <app-tree-menu-page  [page]="page | async" [Expotype]="type | async"></app-tree-menu-page>
                       </div>
                     </div>
 

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
-import { Medicaments } from "./medicaments.model";
+import { Medicaments } from "../patients/medicaments/medicaments.model";
 @Injectable()
 export class MedocService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = "assets/data/medicaments.json";

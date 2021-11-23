@@ -1,5 +1,5 @@
 import { Consultation } from './consultation.model';
-import { ConsultationService } from './consultation.service';
+import { ConsultationService } from '../../services/consultation.service';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';

@@ -24,6 +24,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { DoctorRoutingModule } from './doctor-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AnalyseTypeTypeService } from './services/analyse-type.service';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -54,5 +55,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatRadioModule,
     DragDropModule,
   ],
+  providers: [AnalyseTypeTypeService]
 })
 export class DoctorModule {}

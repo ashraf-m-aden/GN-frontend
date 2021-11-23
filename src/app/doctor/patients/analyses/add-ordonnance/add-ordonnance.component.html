@@ -6,8 +6,8 @@
         <div class="body">
           <div class="row">
             <div class="col-sm-12">
-              <div class="ngxTableHeader">
-                <ul class="header-buttons">
+              <div class="header d-flex justify-content-end">
+                <ul class="header-buttons float-end">
                   <li>
                     <button mat-mini-fab color="primary" (click)='addRow(addRecord)'>
                       <mat-icon class="col-white">add</mat-icon>
@@ -15,16 +15,19 @@
                   </li>
                 </ul>
               </div>
-              <ngx-datatable #table class="material" [rows]="data" [columns]="columns" [sortType]="'multi'"
-                [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
-
-                <ngx-datatable-column name="medicament"></ngx-datatable-column>
-                <ngx-datatable-column name="frequence"></ngx-datatable-column>
-                <!-- <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
-                                  </ngx-datatable-column> -->
-                <!-- action buttons -->
-                <ngx-datatable-column name="Actions" sortable="false">
-                  <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
+              <nz-table #basicTable [nzData]="data">
+                <thead>
+                  <tr>
+                    <th>Medicaments</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of basicTable.data">
+                    <td><u>{{ data.medicament }}</u> <br>
+                    <i>{{data.unite}} <span *ngIf="data.frequence < 1"> x {{data.frequence}}</span> par jour, pendant {{data.jour}} jours. </i></td>
+                    <td>
+                      <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
                     ngx-datatable-cell-template>
                     <span>
                       <button class="btn tblActnBtn h-auto" (click)='editRow(row, rowIndex, editRecord)'>
@@ -35,8 +38,11 @@
                       </button>
                     </span>
                   </ng-template>
-                </ngx-datatable-column>
-              </ngx-datatable>
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
+
               <!-- Add Record Modal Window -->
               <ng-template #addRecord let-modal>
                 <div class="modal-header editRowModal">
@@ -64,17 +70,33 @@
                         <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Medicament</mat-label>
                           <input matInput formControlName="medicament" required>
-                          <mat-icon matSuffix>face</mat-icon>
                           <mat-error *ngIf="register.get('medicament').hasError('required')">
-                            medicament name is required
+                            Ce champ ne peut etre vide
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Unite</mat-label>
+                          <input matInput formControlName="unite" required>
+                          <mat-error *ngIf="register.get('unite').hasError('required')">
+                            Ce champ ne peut etre vide
                           </mat-error>
                         </mat-form-field>
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                         <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Frequence</mat-label>
-                          <input matInput formControlName="frequence">
-                          <mat-icon matSuffix>face</mat-icon>
+                          <input matInput formControlName="frequence" required>
+                          <mat-error *ngIf="register.get('frequence').hasError('required')">
+                            Ce champ ne peut etre vide
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Jour</mat-label>
+                          <input matInput formControlName="jour">
                         </mat-form-field>
                       </div>
                     </div>

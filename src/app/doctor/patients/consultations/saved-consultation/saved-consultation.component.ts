@@ -11,7 +11,7 @@ export class SavedConsultationComponent implements OnInit {
 
   data = [
     {
-      url: '#/doctor/patients/consultation',
+      url: '#/doctor/patients/referer',
       title: 'Consultation prescrite'
     },
     {

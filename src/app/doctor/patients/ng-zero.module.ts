@@ -47,7 +47,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 // import { NzRadioModule } from 'ng-zorro-antd/radio';
 // import { NzRateModule } from 'ng-zorro-antd/rate';
 // import { NzResultModule } from 'ng-zorro-antd/result';
-// import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 // import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 // import { NzSliderModule } from 'ng-zorro-antd/slider';
 // import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -116,7 +116,7 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
     // NzRadioModule,
     // NzRateModule,
     // NzResultModule,
-    // NzSelectModule,
+    NzSelectModule,
     // NzSkeletonModule,
     // NzSliderModule,
     // NzSpinModule,

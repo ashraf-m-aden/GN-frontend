@@ -58,6 +58,7 @@ interface ExampleFlatNode {
 })
 export class PatientProfileComponent implements AfterViewInit, OnInit {
   @Output() page = new EventEmitter<string>();
+  @Output() type = new EventEmitter<string>();
   @Output() id = new EventEmitter<string>();
   private readonly API_URL = "assets/data/menu-tree.json";
   isTblLoading = true;
@@ -141,8 +142,10 @@ export class PatientProfileComponent implements AfterViewInit, OnInit {
     return this.treeControl.dataNodes.find(n => n.name === name) || null;
   }
 
-  changePage(page) {
+  changePage(page, type) {
     this.page.emit(page);
+    this.type.emit(type);
+
 
   }
   checkConsultation(event) {

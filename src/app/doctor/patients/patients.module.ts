@@ -1,6 +1,6 @@
 import { MedocComponent } from './medicaments/medicaments.component';
-import { MedocService } from './medicaments/medoc.service';
-import { ConsultationService } from './consultations/consultation.service';
+import { MedocService } from '../services/medoc.service';
+import { ConsultationService } from '../services/consultation.service';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -55,6 +55,7 @@ import { AddSuiviComponent } from './consultations/add-suivi/add-suivi.component
 import { AddSuiviExterneComponent } from './consultations/add-suivi-externe/add-suivi-externe.component';
 import { AddOrdonnanceComponent } from './analyses/add-ordonnance/add-ordonnance.component';
 import { ExplorationsComponent } from './explorations/explorations.component';
+import { RefererComponent } from './ordonnances/referer/referer.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -82,7 +83,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AddSuiviComponent,
     AddSuiviExterneComponent,
     AddOrdonnanceComponent,
-    ExplorationsComponent
+    ExplorationsComponent,
+    RefererComponent
   ],
   imports: [
     CommonModule,

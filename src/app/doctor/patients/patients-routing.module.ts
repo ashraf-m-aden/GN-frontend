@@ -1,3 +1,4 @@
+import { RefererComponent } from './ordonnances/referer/referer.component';
 import { SavedConsultationComponent } from './consultations/saved-consultation/saved-consultation.component';
 import { AnalyseComponent } from './ordonnances/analyse/analyse.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: "analyse",
     component: AnalyseComponent,
+  },
+  {
+    path: "referer",
+    component: RefererComponent,
   },
   { path: "**", component: Page404Component },
 ];
