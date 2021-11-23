@@ -4,10 +4,6 @@
       <a href="#" onClick="return false;" class="navbar-toggle collapsed"
         (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
       <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
-      <a class="navbar-brand" routerLink={{homePage}}>
-        <img src="assets/images/image-gallery/log.png" alt=""  height="40" />
-        <img src="assets/images/image-gallery/brand.png" alt=""  height="40" />
-      </a>
     </div>
     <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
       <ul class="float-start collapse-menu-icon">

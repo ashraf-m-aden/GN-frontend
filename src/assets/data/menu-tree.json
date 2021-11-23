@@ -1,37 +1,491 @@
-[
-  {
+[{
     "name": "CONSULTER",
     "id": "0"
   },
   {
-    "name":"Historique",
-    "id" : "2",
-    "children": [
-      {
+    "name": "Historique",
+    "id": "1",
+    "children": [{
         "name": "Consultation",
         "id": "1",
-        "children": [{ "name": "GN", "id": "11" }, { "name": "Externe", "id": "12" }]
+        "children": [{
+          "name": "GN",
+          "id": "11"
+        }, {
+          "name": "Externe",
+          "id": "12"
+        }]
       },
       {
         "name": "Exploration",
         "id": "2",
-        "children": [
-          {
-            "name": "Biologique",
+        "children": [{
+            "name": "SANGUIN",
             "id": "21",
-            "children": [{ "name": "Hemathologie", "id": "211" }, { "name": "Biochimie", "id": "212" }]
-          },
+            "children": [
+              {
+              "name": "Hematologique",
+              "id": "211",
+              "children": [
+                {
+                  "name": "Numeration",
+                  "id": "2111",
+                  "children": [
+                    {
+                    "name": "NFS",
+                    "id": "21111"
+                  }]
+                },
+                {
+                  "name": "Hemostase",
+                  "id": "2112",
+                  "children": [{
+                      "name": "TP , TCK, INR,",
+                      "id": "21121"
+                    },
+                    {
+                      "name": "D-dimere",
+                      "id": "21122"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Biochimique",
+              "id": "212",
+              "children": [
+                {
+                  "name": "Fonction rénale",
+                  "id": "2121",
+                  "children": [
+                    {
+                    "name": "iono",
+                    "id": "211"
+                  },
+                  {
+                    "name": "calcium",
+                    "id": "211"
+                  },
+                  {
+                    "name": "Urée, creat",
+                    "id": "211"
+                  }
+                ]
+                },
+                {
+                  "name": "Fonction Hepatique",
+                  "id": "2122",
+                  "children": [
+                    {
+                    "name": "ASAT, ALAT",
+                    "id": "211"
+                  },
+                  {
+                    "name": "BT, BC",
+                    "id": "211"
+                  },
+                  {
+                    "name": "GT, PAL",
+                    "id": "211"
+                  },
+                  {
+                    "name": "Proteine totale",
+                    "id": "211"
+                  },
+                  {
+                    "name": "Albumine",
+                    "id": "211"
+                  }
+                ]
+                },
+                {
+                  "name": "Bilan pancreatique",
+                  "id": "2123",
+                  "children": [
+                    {
+                    "name": "Amylase",
+                    "id": "21231"
+                  },
+                  {
+                    "name": "Lipasémie",
+                    "id": "21232"
+                  }
+                ]
+                },
+                {
+                  "name": "Bilan lipidique",
+                  "id": "2124",
+                  "children": [
+                    {
+                    "name": "Triglycéride",
+                    "id": "21241"
+                  },
+                  {
+                    "name": "cholesterol total",
+                    "id": "21242"
+                  },
+                  {
+                    "name": "HDL-C",
+                    "id": "21243"
+                  },
+                  {
+                    "name": "LDL-C",
+                    "id": "21244"
+                  }
+                ]
+                },
+                {
+                  "name": "Diabete",
+                  "id": "2125",
+                  "children": [
+                    {
+                    "name": "Glycemie à jeun",
+                    "id": "21251"
+                  },
+                  {
+                    "name": "Hémoglobine gliquée",
+                    "id": "21252"
+                  },
+                  {
+                    "name": "Autre",
+                    "id": "21253"
+                  }
+                ]
+                },
+                {
+                  "name": "Inflammatoire",
+                  "id": "2126",
+                  "children": [
+                    {
+                    "name": "CRP",
+                    "id": "21261"
+                  }
+                ]
+                },
+                {
+                  "name": "Thyroide",
+                  "id": "2127",
+                  "children": [
+                    {
+                    "name": "TSH",
+                    "id": "21271"
+                  },
+                  {
+                    "name": "T4 L",
+                    "id": "21272"
+                  },
+                  {
+                    "name": "T3",
+                    "id": "21273"
+                  },
+                  {
+                    "name": "PTH",
+                    "id": "21274"
+                  }
+                ]
+                }
+              ]
+            },
+            {
+              "name": "Bilan hormonal",
+              "id": "213",
+              "children": [
+
+                {
+                  "name": "Thyroide",
+                  "id": "2131",
+                  "children": [
+                    {
+                    "name": "TSH",
+                    "id": "21311"
+                  },
+                  {
+                    "name": "T4 L",
+                    "id": "21312"
+                  },
+                  {
+                    "name": "T3",
+                    "id": "21313"
+                  },
+                  {
+                    "name": "PTH",
+                    "id": "21314"
+                  }
+                ]
+                },
+                {
+                  "name": "Surrenale",
+                  "id": "2132",
+                  "children": [
+                    {
+                    "name": "Aldosterone",
+                    "id": "21321"
+                  },
+                  {
+                    "name": "Cortisol",
+                    "id": "21322"
+                  },
+                  {
+                    "name": "ADH",
+                    "id": "21323"
+                  }
+                ]
+                },
+                {
+                  "name": "Reproduction",
+                  "id": "2133",
+                  "children": [
+                    {
+                    "name": "FSH",
+                    "id": "21331"
+                  },
+                  {
+                    "name": "LH",
+                    "id": "21332"
+                  },
+                  {
+                    "name": "Estrogene total",
+                    "id": "21333"
+                  },
+                  {
+                    "name": "Prolactine",
+                    "id": "21334"
+                  },
+                  {
+                    "name": "Testosterone",
+                    "id": "21335"
+                  }
+                ]
+                }
+              ]
+            },
+            {
+              "name": "Infectieux",
+              "id": "214",
+              "children": [
+
+                {
+                  "name": "Viral",
+                  "id": "2141",
+                  "children": [
+                    {
+                    "name": "IgMAnti-HAV",
+                    "id": "21411"
+                  },
+                  {
+                    "name": "IgG Anti-HAV",
+                    "id": "21412"
+                  },
+                  {
+                    "name": "Ag HBs",
+                    "id": "21413"
+                  },
+                  {
+                    "name": "Ac Anti-HBs",
+                    "id": "21414"
+                  },
+                  {
+                    "name": "Ac Anti-HBe",
+                    "id": "21415"
+                  },
+                  {
+                    "name": "Ac Anti-HBc",
+                    "id": "21416"
+                  },
+                  {
+                    "name": "Ac Anti-HCVc",
+                    "id": "21417"
+                  },
+                  {
+                    "name": "Seologie α",
+                    "id": "21418"
+                  },
+                  {
+                    "name": "CMV",
+                    "id": "21419"
+                  },
+                  {
+                    "name": "HSV",
+                    "id": "214110"
+                  },
+                  {
+                    "name": "Serologie rubeole",
+                    "id": "214111"
+                  },
+                  {
+                    "name": "Serologie toxoplasmose",
+                    "id": "214112"
+                  }
+
+                ]
+                },
+                {
+                  "name": "Parasitaire",
+                  "id": "2142",
+                  "children": [
+                    {
+                    "name": "Goutte épaisse",
+                    "id": "21421"
+                  }
+
+                ]
+                },
+                {
+                  "name": "Bactérien",
+                  "id": "2143",
+                  "children": [
+                    {
+                    "name": "Hemoculture aerobique",
+                    "id": "21431"
+                  },
+                  {
+                    "name": "Hemoculture anaerobique",
+                    "id": "21432"
+                  }
+
+                ]
+                }
+              ]
+            }
+          ]},
           {
-            "name": "Radiologique",
+            "name": "NON-SANGUIN",
             "id": "22",
-            "children": [{ "name": "Standard", "id": "221" }, { "name": "TDM", "id": "222" }, { "name": "IRM", "id": "223" }]
+            "children": [
+            {
+              "name": "Urinaire",
+              "id": "221",
+              "children": [
+
+
+                {
+                  "name": "Proteinurie",
+                  "id": "2211"
+                },
+                {
+                  "name": "Albuminurie",
+                  "id": "2212"
+                },
+                {
+                  "name": "ECBU",
+                  "id": "2213"
+                }
+              ]
+            },
+            {
+              "name": "Fecale",
+              "id": "222",
+              "children": [
+
+                {
+                  "name": "KAOP",
+                  "id": "2221"
+                },
+                {
+                  "name": "Coproculture",
+                  "id": "2222"
+                }
+
+              ]
+            }
+          ]},
+          {
+            "name": "RADIOLOGIQUE",
+            "id": "23",
+            "children": [
+
+            {
+              "name": "Standard",
+              "id": "231",
+              "children": [
+
+                {
+                  "name": "Thorax",
+                  "id": "2311"
+                },
+                {
+                  "name": "ASP",
+                  "id": "2312"
+                },
+                {
+                  "name": "Bassin",
+                  "id": "2313"
+                },
+                {
+                  "name": "OPN",
+                  "id": "2314"
+                },
+                {
+                  "name": "Arcade dentaire",
+                  "id": "2315"
+                },
+                {
+                  "name": "Extremité",
+                  "id": "2316"
+                }
+
+              ]
+            },
+            {
+              "name": "TDM",
+              "id": "232",
+              "children": [
+
+                {
+                  "name": "Cerebral",
+                  "id": "2321"
+                },
+                {
+                  "name": "Cervicale",
+                  "id": "2322"
+                },
+                {
+                  "name": "Thoracique",
+                  "id": "2323"
+                },
+                {
+                  "name": "Abdominale",
+                  "id": "2324"
+                },
+                {
+                  "name": "Extremité",
+                  "id": "2325"
+                }
+              ]
+            },
+            {
+              "name": "IRM",
+              "id": "233",
+              "children": [
+
+                {
+                  "name": "Cerebral",
+                  "id": "2331"
+                },
+                {
+                  "name": "Cervicale",
+                  "id": "2332"
+                },
+                {
+                  "name": "Thoracique",
+                  "id": "2333"
+                },
+                {
+                  "name": "Abdominale",
+                  "id": "2334"
+                },
+                {
+                  "name": "Extremité",
+                  "id": "2335"
+                }
+              ]
+            }
+          ]
           }
+
         ]
       }
     ]
-  },
-  {
-    "name": "Commentaires",
-    "id": "3"
   }
 ]

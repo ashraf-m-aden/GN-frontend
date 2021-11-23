@@ -7,15 +7,9 @@
         [ngStyle]="{'position' : 'relative', 'max-height' : listMaxHeight+'px', 'max-width' : listMaxWidth+'px'}"
         [perfectScrollbar]>
         <li class="sidebar-user-panel">
-          <div class="user-panel">
-            <div class=" image">
-              <nz-avatar [nzShape]="'square'" [nzSize]="64" [nzIcon]="'user'"></nz-avatar>
-            </div>
-          </div>
-          <div class="profile-usertitle">
-            <div class="sidebar-userpic-name">{{userFullName}} </div>
-            <div class="profile-usertitle-job ">{{userType}} </div>
-          </div>
+          <a class="img" routerLink={{homePage}}>
+            <img class="" src="assets/images/image-gallery/logoflat.png" alt=""  />
+          </a>
         </li>
         <!-- Top Most level menu -->
         <li [class.active]="level1Menu === sidebarItem.moduleName && sidebarItem.submenu.length != 0"

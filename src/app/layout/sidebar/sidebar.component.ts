@@ -15,7 +15,7 @@ import { Role } from "src/app/core/models/role";
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.sass"],
+  styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   public sidebarItems: any[];
@@ -32,6 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   headerHeight = 60;
   currentRoute: string;
   routerObj = null;
+  homePage: string;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -120,6 +121,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.userType = Role.Doctor;
       } else {
         this.userType = Role.Admin;
+      }
+
+      if (userRole === "Admin") {
+        this.homePage = "admin/dashboard/main";
+      } else if (userRole === "Patient") {
+        this.homePage = "patient/dashboard";
+      } else if (userRole === "Doctor") {
+        this.homePage = "doctor/dashboard";
+      } else {
+        this.homePage = "admin/dashboard/main";
       }
     }
 
