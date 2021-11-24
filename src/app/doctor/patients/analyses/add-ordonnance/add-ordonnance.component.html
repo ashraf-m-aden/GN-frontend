@@ -23,22 +23,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let data of basicTable.data">
+                  <tr *ngFor="let data of basicTable.data; let i=index">
                     <td><u>{{ data.medicament }}</u> <br>
-                    <i>{{data.unite}} <span *ngIf="data.frequence < 1"> x {{data.frequence}}</span> par jour, pendant {{data.jour}} jours. </i></td>
+                    <i>{{data.unite}} comprimés <span *ngIf="data.frequence > 1"> {{data.frequence}} fois</span> par jour, pendant {{data.jour}} jours. </i></td>
                     <td>
-                      <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
-                    ngx-datatable-cell-template>
-                    <span>
-                      <button class="btn tblActnBtn h-auto" (click)='editRow(row, rowIndex, editRecord)'>
-                        <i class="material-icons">mode_edit</i>
-                      </button>
-                      <button class="btn tblActnBtn h-auto" (click)='deleteRow(row)'>
-                        <i class="material-icons">delete</i>
-                      </button>
-                    </span>
-                  </ng-template>
-                    </td>
+
+                      <span>
+                        <button class="btn tblActnBtn h-auto" (click)='editRow(data, i, editRecord)'>
+                          <i class="material-icons">mode_edit</i>
+                        </button>
+                        <button class="btn tblActnBtn h-auto" (click)='deleteRow(i)'>
+                          <i class="material-icons">delete</i>
+                        </button>
+                      </span>
+                      </td>
                   </tr>
                 </tbody>
               </nz-table>

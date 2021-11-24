@@ -116,14 +116,25 @@ export class AddOrdonnanceComponent implements OnInit {
     );
   }
 
-  editRow(row, rowIndex, content) {
-    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-    this.editForm.setValue({
-      medicament: row.medicament,
-      frequence: row.frequence,
-    });
-    this.selectedRowData = row;
-  }
+deleteRow(index) {
+  this.data = this.arrayRemove(this.data, index);
+  this.showNotification(
+    "bg-red",
+    "Delete Record Successfully",
+    "bottom",
+    "right"
+  );
+}
+arrayRemove(array, index) {
+  return array.splice(index, 1);
+}
+editRow(data, content) {
+  this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
+  this.editForm.setValue({
+    analyse: data.medicament,
+  });
+  this.selectedRowData = data;
+}
 
   getId(min, max) {
     // min and max included
@@ -134,21 +145,8 @@ export class AddOrdonnanceComponent implements OnInit {
     window.open( "#/doctor/patients/ordonnance", "_blank");
   }
 
-  deleteRow(row) {
-    this.data = this.arrayRemove(this.data, row.id);
-    this.showNotification(
-      "bg-red",
-      "Delete Record Successfully",
-      "bottom",
-      "right"
-    );
-  }
 
-  arrayRemove(array, id) {
-    return array.filter((element) => {
-      return element.id !== id;
-    });
-  }
+
   showNotification(colorName, text, placementFrom, placementAlign) {
     this._snackBar.open(text, "", {
       duration: 2000,
