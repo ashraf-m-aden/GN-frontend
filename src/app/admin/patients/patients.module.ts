@@ -1,6 +1,6 @@
 import { MedocComponent } from './medicaments/medicaments.component';
-import { MedocService } from './medicaments/medoc.service';
-import { ConsultationService } from './consultations/consultation.service';
+import { MedocService } from '../services/medoc.service';
+import { ConsultationService } from '../services/consultation.service';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -34,16 +34,34 @@ import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialo
 import { PatientService } from "./allpatients/patient.service";
 import { ConsultationsComponent } from './consultations/consultations.component';
 import {NgxPrintModule} from 'ngx-print';
-import { AllOrdonnancesComponent } from './ordonnances/all-ordonnances/all-ordonnances.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 import { CommentairesComponent } from './commentaires/commentaires.component';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
-import { AllAnalysesComponent } from './analyses/all-analyses/all-analyses.component';
-import { AnalyseComponent } from './analyses/analyse/analyse.component';
-import { AddOrdonnanceComponent } from './ordonnances/add-ordonnance/add-ordonnance.component';
+import { AnalyseComponent } from './ordonnances/analyse/analyse.component';
 import { AddAnalyseComponent } from './analyses/add-analyse/add-analyse.component';
-import { GenerateComponent } from './generate/generate.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTreeModule } from '@angular/material/tree';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
+import { NgZorro } from './ng-zero.module';
+import { AddConsultationComponent } from './consultations/add-consultation/add-consultation.component';
+import { SavedConsultationComponent } from './consultations/saved-consultation/saved-consultation.component';
+import { TreeMenuPageComponent } from './tree-menu-page/tree-menu-page.component';
+import { AddSuiviComponent } from './consultations/add-suivi/add-suivi.component';
+import { AddSuiviExterneComponent } from './consultations/add-suivi-externe/add-suivi-externe.component';
+import { AddOrdonnanceComponent } from './analyses/add-ordonnance/add-ordonnance.component';
+import { ExplorationsComponent } from './explorations/explorations.component';
+import { RefererComponent } from './ordonnances/referer/referer.component';
+
+
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
 
 @NgModule({
   declarations: [
@@ -54,15 +72,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DeleteComponent,
     FormDialogComponent,
     ConsultationsComponent,
-    AllOrdonnancesComponent,
     OrdonnanceComponent,
     CommentairesComponent,
-    AllAnalysesComponent,
     AnalyseComponent,
-    AddOrdonnanceComponent,
     AddAnalyseComponent,
-    GenerateComponent,
-    MedocComponent
+    MedocComponent,
+    AddConsultationComponent,
+    SavedConsultationComponent,
+    TreeMenuPageComponent,
+    AddSuiviComponent,
+    AddSuiviExterneComponent,
+    AddOrdonnanceComponent,
+    ExplorationsComponent,
+    RefererComponent
   ],
   imports: [
     CommonModule,
@@ -70,6 +92,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule,
     NgxDatatableModule,
+    NzTreeModule,
+    NzTreeViewModule,
+    NgZorro,
     ReactiveFormsModule,
     NgxPrintModule,
     MatTableModule,
@@ -91,7 +116,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatCheckboxModule,
     MaterialFileInputModule,
     MatProgressSpinnerModule,
+    MatTreeModule
   ],
-  providers: [PatientService, ConsultationService, MedocService],
+  bootstrap: [ PatientProfileComponent ],
+
+  providers: [PatientService, ConsultationService, MedocService,
+    { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
 })
 export class PatientsModule {}

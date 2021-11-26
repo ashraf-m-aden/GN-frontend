@@ -33,7 +33,9 @@ export class HeaderComponent
   langStoreValue: string;
   defaultFlag: string;
   isOpenSidebar: boolean;
+  currentUser: any = localStorage.getItem('currentUser');
   constructor(
+    // tslint:disable-next-line:no-shadowed-variable
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public elementRef: ElementRef,
@@ -96,8 +98,8 @@ export class HeaderComponent
   ];
   ngOnInit() {
     this.config = this.configService.configData;
-    const userRole = this.authService.currentUserValue.role;
-    this.userImg = this.authService.currentUserValue.img;
+    const userRole = this.currentUser.role;
+    this.userImg = this.currentUser.img;
 
     if (userRole === "Admin") {
       this.homePage = "admin/dashboard/main";

@@ -37,15 +37,15 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let data of basicTable.data; let i=index">
-                              <td>{{ data.analyse }}
+                            <tr *ngFor="let item of data; let i=index">
+                              <td>{{ item.analyse }}
                               <td>
 
                               <span>
-                                <button class="btn tblActnBtn h-auto" (click)='editRow(data, i, editRecord)'>
+                                <button class="btn tblActnBtn h-auto" (click)='editRow(item, i, editRecord)'>
                                   <i class="material-icons">mode_edit</i>
                                 </button>
-                                <button class="btn tblActnBtn h-auto" (click)='deleteRow(i)'>
+                                <button class="btn tblActnBtn h-auto" (click)='deleteRow(item)'>
                                   <i class="material-icons">delete</i>
                                 </button>
                               </span>
@@ -91,7 +91,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                   <button class="btn-space" [disabled]="!register.valid" mat-raised-button
                                     color="primary">Soumettre</button>
-                                  <button type="button" mat-button data-dismiss="modal">Cancel</button>
+                                  <button type="button" mat-button item-dismiss="modal">Cancel</button>
                                 </div>
                               </div>
                             </form>

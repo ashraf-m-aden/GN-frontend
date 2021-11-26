@@ -25,20 +25,24 @@ export class SigninComponent
     private authService: AuthService
   ) {
     super();
+    if (localStorage.getItem('currentUser')) {
+      this.routing(JSON.parse(localStorage.getItem("currentUser"))
+      );
+    }
   }
 
   ngOnInit() {
     this.authForm = this.formBuilder.group({
-      username: ["admin@hospital.org", Validators.required],
-      password: ["admin@123", Validators.required],
+      username: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
   get f() {
     return this.authForm.controls;
   }
   adminSet() {
-    this.authForm.get("username").setValue("admin@hospital.org");
-    this.authForm.get("password").setValue("admin@123");
+    this.authForm.get("username").setValue("ashraf.mohamed");
+    this.authForm.get("password").setValue("molotov1");
   }
   doctorSet() {
     this.authForm.get("username").setValue("doctor@hospital.org");
@@ -53,25 +57,19 @@ export class SigninComponent
     this.loading = true;
     this.error = "";
     if (this.authForm.invalid) {
-      this.error = "Username and Password not valid !";
+      this.error = "Login ou mot de passe invalides";
       return;
     } else {
       this.subs.sink = this.authService
-        .login(this.f.username.value, this.f.password.value)
-        .subscribe(
-          (res) => {
-            if (res) {
+        .login(this.f.username.value, this.f.password.value).subscribe(
+        (user) => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            if (user) {
+              localStorage.setItem('currentUser', JSON.stringify(user.user));
+              localStorage.setItem('token', JSON.stringify(user.token));
+
               setTimeout(() => {
-                const role = this.authService.currentUserValue.role;
-                if (role === Role.All || role === Role.Admin) {
-                  this.router.navigate(["/admin/dashboard/main"]);
-                } else if (role === Role.Doctor) {
-                  this.router.navigate(["/doctor/dashboard"]);
-                } else if (role === Role.Patient) {
-                  this.router.navigate(["/patient/dashboard"]);
-                } else {
-                  this.router.navigate(["/authentication/signin"]);
-                }
+                this.routing(user.user);
                 this.loading = false;
               }, 1000);
             } else {
@@ -84,6 +82,21 @@ export class SigninComponent
             this.loading = false;
           }
         );
+    }
+  }
+
+  routing(user) {
+    const role = user.role;
+    if (role === Role.All || role === Role.Admin ) {
+      console.log('c bn');
+
+      this.router.navigate(["/admin/dashboard/main"]);
+    }else if (role === Role.Doctor) {
+      this.router.navigate(["/doctor/dashboard"]);
+    } else if (role === Role.Patient) {
+      this.router.navigate(["/patient/dashboard"]);
+    } else {
+      this.router.navigate(["/authentication/signin"]);
     }
   }
 }

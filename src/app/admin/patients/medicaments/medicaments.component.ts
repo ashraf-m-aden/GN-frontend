@@ -1,6 +1,6 @@
 import { Medicaments } from './medicaments.model';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
-import { MedocService } from "./medoc.service";
+import { MedocService } from "../../services/medoc.service";
 import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";

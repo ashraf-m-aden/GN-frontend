@@ -1,0 +1,77 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="header d-flex justify-content-between">
+    <h2>
+      <strong>Suivie de consultation</strong>
+    </h2>
+    <p>
+      Faite par Dr. Djibril Mohamed
+      <br>
+      Le 25/09/2021
+    </p>
+  </div>
+  <div class="body">
+    <nz-divider nzText="Hypotheses diagnostique initial" nzOrientation="left" class="m-0"></nz-divider>
+    <p>
+      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
+    </p>
+    <nz-divider nzText="Evaluation clinique" nzOrientation="left" class="m-0"></nz-divider>
+    <p>
+      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
+    </p>
+    <nz-divider nzText="Exploration" nzOrientation="left" class="m-0"></nz-divider>
+    <table class="table">
+      <tr>
+        <td>Ordonnance medicale</td>
+        <td>
+          <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+        </td>
+      </tr>
+      <tr>
+
+        <td>Ordonnance exploration</td>
+        <td>
+          <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+        </td>
+      </tr>
+      <tr class="result">
+
+        <td><strong>Resultats</strong></td>
+        <td>
+          <!-- mettre un array ici et charger les fichier dans l'array -->
+          <nz-list [nzBordered]="false" *ngFor="let in of array; let i=index">
+            <nz-list-item [aria-label]="in" >
+              <nz-avatar  nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+            </nz-list-item>
+          </nz-list>
+        </td>
+        <td>
+          <mat-form-field class="">
+            <mat-label>Charger un fichier</mat-label>
+            <ngx-mat-file-input>
+            </ngx-mat-file-input>
+            <mat-icon matSuffix>file</mat-icon>
+          </mat-form-field>
+          <button class="btn btn-group" color="primary" (click)="addFile()">Sauvegarder</button>
+        </td>
+      </tr>
+    </table>
+
+    <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
+      <label nz-checkbox [(ngModel)]="isCheckedReferer">Referer</label>
+      <p class="mt-3">
+        <textarea name="" class=" form-control" *ngIf="isCheckedReferer" id="" matTextareaAutosize
+        placeholder="Ecrire ici"></textarea>
+      </p>
+
+    <p>
+      <label nz-checkbox [(ngModel)]="isCheckedOM">Ordonnance medicale</label>
+      <app-add-ordonnance *ngIf="isCheckedOM"></app-add-ordonnance>
+      <p>
+        <label nz-checkbox [(ngModel)]="isCheckedOP">Ordonnance exploration</label>
+        <app-add-analyse *ngIf="isCheckedOP"></app-add-analyse>
+      </p>
+  </div>
+  <button class="btn-group btn btn-primary" [disabled]="!isCheckedOM && !isCheckedOP && !isCheckedReferer">
+    Enregistrer
+  </button>
+</div>

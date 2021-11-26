@@ -20,7 +20,7 @@ export class ExplorationsComponent implements OnInit, OnChanges {
       {
         id: '1',
         date: '24/06/2021',
-        doctor: 'Djibril Mohamed',
+        user: 'Djibril Mohamed',
         type: this.type,
         name: 'Hemathologie',
         demande: "#/doctor/patients/analyse",
@@ -29,7 +29,7 @@ export class ExplorationsComponent implements OnInit, OnChanges {
       {
         id: '1',
         date: '24/06/2021',
-        doctor: 'Djibril Mohamed',
+        user: 'Djibril Mohamed',
         type: this.type,
         name: 'Hemathologie',
         demande: "#/doctor/patients/analyse",
@@ -38,7 +38,7 @@ export class ExplorationsComponent implements OnInit, OnChanges {
       {
         id: '1',
         date: '24/06/2021',
-        doctor: 'Djibril Mohamed',
+        user: 'Djibril Mohamed',
         type: this.type,
         name: 'Hemathologie',
         demande: "#/doctor/patients/analyse",

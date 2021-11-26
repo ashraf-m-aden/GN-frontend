@@ -1,0 +1,12 @@
+
+.consulter {
+  color:#0c88c9;
+&:hover {
+  transform: scale(1.1);
+}
+}
+.border{
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+}

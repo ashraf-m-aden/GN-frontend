@@ -1,3 +1,5 @@
+import { ConsultationService } from './services/consultation.service';
+import { MedocService } from './services/medoc.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -55,6 +57,6 @@ import { AnalyseTypeTypeService } from './services/analyse-type.service';
     MatRadioModule,
     DragDropModule,
   ],
-  providers: [AnalyseTypeTypeService]
+  providers: [AnalyseTypeTypeService, MedocService, ConsultationService]
 })
 export class DoctorModule {}

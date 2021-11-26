@@ -1,37 +1,27 @@
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-  <div class="">
-    <div class="header">
-      <h2>
-        <strong>Analyse</strong>
-      </h2>
-    </div>
-    <div class="body">
-      <mat-horizontal-stepper [linear]="isLinear" #stepper>
-        <mat-step [stepControl]="HFormGroup1">
-          <form [formGroup]="HFormGroup1">
-            <ng-template matStepLabel>Contenue</ng-template>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <textarea matInput matTextareaAutosize formControlName="address" formControlName="contenu"  required></textarea>
-              <mat-icon matSuffix>face</mat-icon>
-            </mat-form-field>
-
-            <div>
-              <button mat-raised-button matStepperNext color="primary"
-                [disabled]="!HFormGroup1.valid" class="small">Suivant</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="HFormGroup1" >
-          <form [formGroup]="HFormGroup1">
-            <ng-template matStepLabel>Analyse</ng-template>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-4">
+<p><u><i>Selectionnez le type d'exploration</i></u></p>
+<div class="d-flex m-2 justify-content-between">
+  <nz-select [ngModel]="newAnalyse.typeI"  nzSize="large" nzAllowClear (ngModelChange)="selectType($event)" nzPlaceHolder="Type d'analyse" >
+    <nz-option *ngFor="let type of array1" [nzValue]="type.id" [nzLabel]="type.name"  ></nz-option>
+  </nz-select>
+  <nz-select [ngModel]="newAnalyse.typeII" nzSize="large" (ngModelChange)="selectType2($event)" nzAllowClear nzPlaceHolder="Sous-Type d'analyse">
+    <nz-option *ngFor="let type of filteredArray1" [nzValue]="type.id" [nzLabel]="type.name"></nz-option>
+  </nz-select>
+  <nz-select [ngModel]="newAnalyse.typeIII"  nzSize="large" (ngModelChange)="selectType3($event)" nzAllowClear nzPlaceHolder="Sous-Type 2">
+    <nz-option *ngFor="let type of filteredArray2" [nzValue]="type.id" [nzLabel]="type.name"></nz-option>
+  </nz-select>
+  <nz-select [ngModel]="newAnalyse.typeIV"  nzSize="large" nzAllowClear nzPlaceHolder="Sous-Type 3">
+    <nz-option *ngFor="let type of filteredArray3" [nzValue]="type.id" [nzLabel]="type.name"></nz-option>
+  </nz-select>
+</div>
             <div class="row clearfix">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="body">
                     <div class="row">
                       <div class="col-sm-12">
-                        <div class="ngxTableHeader">
-                          <ul class="header-buttons">
+                        <div class="header d-flex justify-content-end">
+                          <ul class="header-buttons float-end">
                             <li>
                               <button mat-mini-fab color="primary" (click)='addRow(addRecord)'>
                                 <mat-icon class="col-white">add</mat-icon>
@@ -39,29 +29,33 @@
                             </li>
                           </ul>
                         </div>
-                        <ngx-datatable #table class="material" [rows]="data" [columns]="columns" [sortType]="'multi'"
-                          [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'" [limit]="10">
+                        <nz-table #basicTable [nzData]="data">
+                          <thead>
+                            <tr>
+                              <th>Explorations</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of data; let i=index">
+                              <td>{{ item.analyse }}
+                              <td>
 
-                          <ngx-datatable-column name="Analyse"></ngx-datatable-column>
-                          <!-- <ngx-datatable-column *ngFor="let col of columns" [name]="col.name">
-                                            </ngx-datatable-column> -->
-                          <!-- action buttons -->
-                          <ngx-datatable-column name="Actions" sortable="false">
-                            <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                               <span>
-                                <button class="btn tblActnBtn h-auto" (click)='editRow(row, rowIndex, editRecord)'>
+                                <button class="btn tblActnBtn h-auto" (click)='editRow(item, i, editRecord)'>
                                   <i class="material-icons">mode_edit</i>
                                 </button>
-                                <button class="btn tblActnBtn h-auto" (click)='deleteRow(row)'>
+                                <button class="btn tblActnBtn h-auto" (click)='deleteRow(item)'>
                                   <i class="material-icons">delete</i>
                                 </button>
                               </span>
-                            </ng-template>
-                          </ngx-datatable-column>
-                        </ngx-datatable>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </nz-table>
                         <!-- Add Record Modal Window -->
                         <ng-template #addRecord let-modal>
-                          <div class="modal-header editRowModal">
+                          <div class="modal-header editRowModal ">
                             <h4 class="modal-title" id="modal-basic-title">
                               <div class="modal-header ">
                                 <div class="modal-about">
@@ -81,15 +75,15 @@
                               </div>
                                -->
                               <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                  <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Analyse</mat-label>
-                                    <input matInput formControlName="analyse" required>
-                                    <mat-icon matSuffix>face</mat-icon>
-                                    <mat-error *ngIf="register.get('analyse').hasError('required')">
-                                      analyse name is required
-                                    </mat-error>
-                                  </mat-form-field>
+
+                                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                      <mat-label>Analyse</mat-label>
+                                      <input matInput formControlName="analyse" required>
+                                      <mat-error *ngIf="register.get('analyse').hasError('required')">
+                                        le nom d'une analyse manque
+                                      </mat-error>
+                                    </mat-form-field>
                                 </div>
 
                               </div>
@@ -97,7 +91,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                   <button class="btn-space" [disabled]="!register.valid" mat-raised-button
                                     color="primary">Soumettre</button>
-                                  <button type="button" mat-button data-dismiss="modal">Cancel</button>
+                                  <button type="button" mat-button item-dismiss="modal">Cancel</button>
                                 </div>
                               </div>
                             </form>
@@ -153,21 +147,4 @@
               </div>
             </div>
 
-            <div>
-              <button mat-raised-button matStepperNext color="primary"
-                [disabled]="!HFormGroup1.valid" class="small">Terminer</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Terminer</ng-template>
-          <p>L'analyse a eté enregistrée</p>
-          <div>
-            <button mat-raised-button matStepperPrevious color="warn" (click)="stepper.reset()" class="msr-2 small">Nouvelle analyse</button>
-            <button mat-raised-button matStepperPrevious color="primary" (click)="checkAnalyse()" class="msr-2 small">Voir l'analyse</button>
-          </div>
-        </mat-step>
-      </mat-horizontal-stepper>
-    </div>
-  </div>
 </div>

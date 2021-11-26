@@ -6,6 +6,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AdminRoutingModule } from './admin-routing.module';
+import { AnalyseTypeTypeService } from './services/analyse-type.service';
+import { ConsultationService } from './services/consultation.service';
+import { MedocService } from './services/medoc.service';
 
 @NgModule({
   declarations: [],
@@ -20,5 +23,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     MatIconModule,
     MatButtonModule,
   ],
+  providers: [AnalyseTypeTypeService, MedocService, ConsultationService]
+
 })
 export class AdminModule {}

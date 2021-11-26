@@ -33,6 +33,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   currentRoute: string;
   routerObj = null;
   homePage: string;
+  currentUser: any = JSON.parse(localStorage.getItem("currentUser"));
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -100,15 +101,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit() {
-    if (this.authService.currentUserValue) {
-      const userRole = this.authService.currentUserValue.role;
-      // this.userFullName =
-      //   this.authService.currentUserValue.firstName +
-      //   " " +
-      //   this.authService.currentUserValue.lastName;
-      this.userImg = this.authService.currentUserValue.img;
+    if (this.currentUser) {
+      const userRole = this.currentUser.role;
+      this.userFullName =
+        this.currentUser.name;
+      this.userImg = this.currentUser.img;
 
-      this.userFullName = "Djibril Mohamed";
 
       this.sidebarItems = ROUTES.filter(
         (x) => x.role.indexOf(userRole) !== -1 || x.role.indexOf("All") !== -1

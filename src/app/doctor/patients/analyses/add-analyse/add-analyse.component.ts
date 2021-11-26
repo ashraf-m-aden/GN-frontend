@@ -416,10 +416,8 @@ export class AddAnalyseComponent implements OnInit {
     window.open("#/doctor/patients/analyse", "_blank");
 
   }
-  deleteRow(id) {
-    console.log(this.data);
-
-    this.data = this.arrayRemove(this.data, id);
+  deleteRow(item) {
+    this.data = this.arrayRemove(this.data, item);
     this.showNotification(
       "bg-red",
       "Delete Record Successfully",
@@ -427,8 +425,10 @@ export class AddAnalyseComponent implements OnInit {
       "right"
     );
   }
-  arrayRemove(array, index) {
-    return array.splice(index - 1, 1);
+  arrayRemove(array, data) {
+    return array.filter(item => {
+      return item !== data;
+    });
   }
   editRow(data, content) {
     this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });

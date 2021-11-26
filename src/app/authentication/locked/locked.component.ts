@@ -14,6 +14,7 @@ export class LockedComponent implements OnInit {
   userImg: string;
   userFullName: string;
   hide = true;
+  currentUser: any = localStorage.getItem("currentUser");
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -23,11 +24,9 @@ export class LockedComponent implements OnInit {
     this.authForm = this.formBuilder.group({
       password: ['', Validators.required],
     });
-    this.userImg = this.authService.currentUserValue.img;
+    this.userImg = this.currentUser.img;
     this.userFullName =
-      this.authService.currentUserValue.firstName +
-      ' ' +
-      this.authService.currentUserValue.lastName;
+      this.currentUser.name;
   }
   get f() {
     return this.authForm.controls;
@@ -38,8 +37,8 @@ export class LockedComponent implements OnInit {
     if (this.authForm.invalid) {
       return;
     } else {
-      const role = this.authService.currentUserValue.role;
-      if (role === Role.All || role === Role.Admin) {
+      const role = this.currentUser.role;
+      if (role === Role.All || role === Role.Admin || role === Role.Super) {
         this.router.navigate(['/admin/dashboard/main']);
       } else if (role === Role.Doctor) {
         this.router.navigate(['/doctor/dashboard']);

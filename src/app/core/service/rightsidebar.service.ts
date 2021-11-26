@@ -7,7 +7,7 @@ export class RightSidebarService {
 
   setRightSidebar = (value: boolean) => {
     this.sidebarSubject.next(value);
-  };
+  }
 
   constructor() {}
 }

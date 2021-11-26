@@ -1,10 +1,25 @@
 export class Consultation {
-  id: number;
-  idDoc: string;
+  id: string;
+  idUser: string;
   idPatient: string;
-  contenu: string;
+  doctor: string;
+  patient: string;
+  motif: string;
+  antecedents: string;
+  examen: string;
+  hypotheses: string;
+  evaluation: string;
+  referer: boolean;
+  ordonnance: boolean;
+  analyse: boolean;
+  resultat: boolean;
   date: string;
-  idOrdonnance: string;
+  refererId: string;
+  ordonnanceId: string;
+  analyseId: string;
+  resultatId: string;
+  enabled: boolean;
+
 
   constructor() {
     {

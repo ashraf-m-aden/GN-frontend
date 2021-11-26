@@ -1,6 +1,6 @@
 export class Exploration {
   id: string;
-  date: string; doctor: string;
+  date: string; user: string;
 
   type: string;
   name: string;

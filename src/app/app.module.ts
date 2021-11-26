@@ -13,9 +13,6 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { RightSidebarComponent } from './layout/right-sidebar/right-sidebar.component';
 import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
-import { fakeBackendProvider } from './core/interceptor/fake-backend';
-import { ErrorInterceptor } from './core/interceptor/error.interceptor';
-import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 import { LocationStrategy, HashLocationStrategy, registerLocaleData } from '@angular/common';
 import {
   PerfectScrollbarModule,
@@ -93,9 +90,6 @@ export function createTranslateLoader(http: HttpClient): any {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider,
     { provide: NZ_I18N, useValue: fr_FR }, { provide: NZ_ICONS, useValue: icons }
   ],
   entryComponents: [],

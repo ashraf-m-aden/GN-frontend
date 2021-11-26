@@ -1,8 +1,8 @@
 import { Consultation } from './consultation.model';
-import { ConsultationService } from './consultation.service';
+import { ConsultationService } from '../../services/consultation.service';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,43 +21,33 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ConsultationsComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit {
-    selectedRowData: selectRowInterface;
+    @Output() id = new EventEmitter<string>();
 
-    rows = [];
+  selectedRowData: selectRowInterface;
+  rows = [];
   newUserImg = "assets/images/user/user1.jpg";
   data = [];
   filteredData = [];
   editForm: FormGroup;
   register: FormGroup;
   selectedOption: string;
-  columns = [
-    { name: "medicament" },
-    { name: "frequence" },
 
-  ];
   displayedColumns = [
     "date",
     "doc",
-    "contenu",
+    "motif"
   ];
   exampleDatabase: ConsultationService | null;
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<Consultation>(true, []);
-  index: number;
-  id: number;
   consultation: Consultation | null;
-  isLinear = false;
   HFormGroup1: FormGroup;
   // tslint:disable-next-line:variable-name
   constructor(private _formBuilder: FormBuilder,
               public httpClient: HttpClient,
               public dialog: MatDialog,
               public consultationService: ConsultationService,
-              private snackBar: MatSnackBar,
-              private router: Router,
-              private modalService: NgbModal,
-              // tslint:disable-next-line:variable-name
-              private _snackBar: MatSnackBar,
+    // tslint:disable-next-line:variable-name
               private fb: FormBuilder
 
 
@@ -87,87 +77,14 @@ export class ConsultationsComponent
     this.loadData();
   }
 
-  addRow(content) {
-    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-    this.register.patchValue({
-      id: this.getId(10, 100),
-    });
-  }
-  onAddRowSave(form: FormGroup) {
-    this.data.push(form.value);
-    this.data = [...this.data];
-    // console.log(this.data);
-    form.reset();
-    this.modalService.dismissAll();
-    this.showNotification(
-      "bg-green",
-      "Add Record Successfully",
-      "bottom",
-      "right"
-    );
-  }
-  onEditSave(form: FormGroup) {
-    this.data = this.data.filter((value, key) => {
-      if (value.id === form.value.id) {
-        value.firstName = form.value.firstName;
-        value.lastName = form.value.lastName;
-        value.phone = form.value.phone;
-        value.gender = form.value.gender;
-        value.email = form.value.email;
-        value.address = form.value.address;
-      }
-      this.modalService.dismissAll();
-      return true;
-    });
-    this.showNotification(
-      "bg-black",
-      "Edit Record Successfully",
-      "bottom",
-      "right"
-    );
-  }
-  editRow(row, rowIndex, content) {
-    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-    this.editForm.setValue({
-      medicament: row.medicament,
-      frequence: row.frequence,
-    });
-    this.selectedRowData = row;
-  }
   getId(min, max) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-  checkOrdonnance() {
 
-    this.router.navigateByUrl("/admin/patients/ordonnance");
+  checkConsultation(id) {
+    this.id.emit(id);
   }
-  deleteRow(row) {
-    this.data = this.arrayRemove(this.data, row.id);
-    this.showNotification(
-      "bg-red",
-      "Delete Record Successfully",
-      "bottom",
-      "right"
-    );
-  }
-  arrayRemove(array, id) {
-    return array.filter((element) => {
-      return element.id !== id;
-    });
-  }
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this._snackBar.open(text, "", {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName,
-    });
-  }
-  private refreshTable() {
-    this.paginator._changePageSize(this.paginator.pageSize);
-  }
-
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
 
@@ -225,7 +142,7 @@ export class ExampleDataSource extends DataSource<Consultation> {
           .slice()
           .filter((consultation: Consultation) => {
             const searchStr = (
-              consultation.contenu +
+              consultation.motif +
               consultation.date
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
@@ -256,7 +173,7 @@ export class ExampleDataSource extends DataSource<Consultation> {
           [propertyA, propertyB] = [a.id, b.id];
           break;
         case "contenu":
-          [propertyA, propertyB] = [a.contenu, b.contenu];
+          [propertyA, propertyB] = [a.motif, b.motif];
           break;
         case "date":
           [propertyA, propertyB] = [a.date, b.date];

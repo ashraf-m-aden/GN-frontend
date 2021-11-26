@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-ordonnance',
   templateUrl: './ordonnance.component.html',
-  styleUrls: ['./ordonnance.component.sass']
+  styleUrls: ['./ordonnance.component.scss']
 })
 export class OrdonnanceComponent implements OnInit {
 

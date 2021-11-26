@@ -27,7 +27,7 @@ export class AddOrdonnanceComponent implements OnInit {
     { name: "unite" },
     { name: "Frequence" },
     { name: "jour" },
-    {name: "id"}
+    { name: "id" }
 
   ];
   index: number;
@@ -68,7 +68,7 @@ export class AddOrdonnanceComponent implements OnInit {
 
   }
 
-  onSelected(medoc){
+  onSelected(medoc) {
     this.register.get('medicament').setValue(medoc);
   }
 
@@ -116,25 +116,27 @@ export class AddOrdonnanceComponent implements OnInit {
     );
   }
 
-deleteRow(index) {
-  this.data = this.arrayRemove(this.data, index);
-  this.showNotification(
-    "bg-red",
-    "Delete Record Successfully",
-    "bottom",
-    "right"
-  );
-}
-arrayRemove(array, index) {
-  return array.splice(index, 1);
-}
-editRow(data, content) {
-  this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-  this.editForm.setValue({
-    analyse: data.medicament,
-  });
-  this.selectedRowData = data;
-}
+  deleteRow(item) {
+    this.data = this.arrayRemove(this.data, item);
+    this.showNotification(
+      "bg-red",
+      "Delete Record Successfully",
+      "bottom",
+      "right"
+    );
+  }
+  arrayRemove(array, data) {
+    return array.filter(item => {
+      return item !== data;
+    });
+  }
+  editRow(data, content) {
+    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
+    this.editForm.setValue({
+      analyse: data.medicament,
+    });
+    this.selectedRowData = data;
+  }
 
   getId(min, max) {
     // min and max included
@@ -142,7 +144,7 @@ editRow(data, content) {
   }
   checkOrdonnance() {
 
-    window.open( "#/doctor/patients/ordonnance", "_blank");
+    window.open("#/doctor/patients/ordonnance", "_blank");
   }
 
 

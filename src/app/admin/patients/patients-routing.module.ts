@@ -1,4 +1,6 @@
-import { AnalyseComponent } from './analyses/analyse/analyse.component';
+import { RefererComponent } from './ordonnances/referer/referer.component';
+import { SavedConsultationComponent } from './consultations/saved-consultation/saved-consultation.component';
+import { AnalyseComponent } from './ordonnances/analyse/analyse.component';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
 import { PatientProfileComponent } from "./patient-profile/patient-profile.component";
 import { EditPatientComponent } from "./edit-patient/edit-patient.component";
@@ -31,12 +33,20 @@ const routes: Routes = [
     component: OrdonnanceComponent,
   },
   {
+    path: "consultation",
+    component: SavedConsultationComponent,
+  },
+  {
     path: "medoc",
     component: MedocComponent,
   },
   {
     path: "analyse",
     component: AnalyseComponent,
+  },
+  {
+    path: "referer",
+    component: RefererComponent,
   },
   { path: "**", component: Page404Component },
 ];
