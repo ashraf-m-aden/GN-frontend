@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { Consultation } from "../patients/consultations/consultation.model";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
+import { environment } from "src/environments/environment";
 @Injectable()
 export class ConsultationService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = "assets/data/consultations.json";
@@ -20,9 +21,21 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
+
+
+  setHeader() {
+    return new HttpHeaders().set('Content-Type', 'application/json')
+      .set('X-Requested-Width', 'XMLHttpRequest').set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  }
+
   getAllConsultations(userId): void {
-    this.subs.sink = this.httpClient.get<Consultation[]>(this.API_URL + '/consultations/user/' + userId).subscribe(
+    // tslint:disable-next-line:max-line-length
+    this.subs.sink = this.httpClient.get<Consultation[]>(`${environment.apiUrl}/consultations/` + userId, { headers: this.setHeader() }).subscribe(
       (data) => {
+        data.forEach(element => {
+          // tslint:disable-next-line:max-line-length
+          element.date = new Date(element.createdAt).getDate() + '/' + (new Date(element.createdAt).getMonth() + 1) + '/' + new Date(element.createdAt).getFullYear();
+        });
         this.isTblLoading = false;
         this.dataChange.next(data);
       },
@@ -31,6 +44,10 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
         console.log(error.name + " " + error.message);
       }
     );
+  }
+  getOneConsultation(idConsultation) {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Consultation>(`${environment.apiUrl}/consultation/` + idConsultation, { headers: this.setHeader() });
   }
   addConsultation(consultation: Consultation): void {
     this.dialogData = consultation;

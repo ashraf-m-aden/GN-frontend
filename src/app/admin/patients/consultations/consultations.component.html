@@ -51,7 +51,7 @@
           <ng-container matColumnDef="doc">
             <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbr-col-width-per-8'">Docteur
             </mat-header-cell>
-            <mat-cell *matCellDef="let row" [ngClass]="'tbr-col-width-per-8'"> {{row.idDoc}}
+            <mat-cell *matCellDef="let row" [ngClass]="'tbr-col-width-per-8'"> {{row.doctor}}
             </mat-cell>
           </ng-container>
 
@@ -62,7 +62,7 @@
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkConsultation(row.id)"
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkConsultation(row._id)"
             [style.cursor]="'pointer'" matRipple>
           </mat-row>
         </mat-table>

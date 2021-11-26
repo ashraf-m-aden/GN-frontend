@@ -66,7 +66,7 @@ export class SigninComponent
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             if (user) {
               localStorage.setItem('currentUser', JSON.stringify(user.user));
-              localStorage.setItem('token', JSON.stringify(user.token));
+              localStorage.setItem('token', user.token);
 
               setTimeout(() => {
                 this.routing(user.user);
@@ -88,8 +88,6 @@ export class SigninComponent
   routing(user) {
     const role = user.role;
     if (role === Role.All || role === Role.Admin ) {
-      console.log('c bn');
-
       this.router.navigate(["/admin/dashboard/main"]);
     }else if (role === Role.Doctor) {
       this.router.navigate(["/doctor/dashboard"]);

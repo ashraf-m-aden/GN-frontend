@@ -13,6 +13,7 @@ export class Consultation {
   ordonnance: boolean;
   analyse: boolean;
   resultat: boolean;
+  createdAt: string;
   date: string;
   refererId: string;
   ordonnanceId: string;

@@ -1,11 +1,15 @@
+import { AuthService } from 'src/app/core/service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
 
 import { NzTreeFlatDataSource, NzTreeFlattener } from 'ng-zorro-antd/tree-view';
 import { BehaviorSubject } from 'rxjs';
+import { Patient } from '../allpatients/patient.model';
+import { PatientService } from '../../services/patient.service';
 
 interface TreeMenu {
   name: string;
@@ -56,7 +60,7 @@ interface ExampleFlatNode {
   templateUrl: "./patient-profile.component.html",
   styleUrls: ["./patient-profile.component.scss"],
 })
-export class PatientProfileComponent implements AfterViewInit, OnInit {
+export class PatientProfileComponent implements AfterViewInit, OnInit, OnDestroy {
   @Output() page = new EventEmitter<string>();
   @Output() type = new EventEmitter<string>();
   @Output() id = new EventEmitter<string>();
@@ -68,7 +72,8 @@ export class PatientProfileComponent implements AfterViewInit, OnInit {
   // Temporarily stores data from dialogs
   dialogData: any;
   subs: UnsubscribeOnDestroyAdapter;
-
+  patient: Patient;
+  idPatient: string;
   private transformer = (node: TreeMenu, level: number): ExampleFlatNode => ({
     expandable: !!node.children && node.children.length > 0,
     name: node.name,
@@ -96,9 +101,25 @@ export class PatientProfileComponent implements AfterViewInit, OnInit {
 
   // tslint:disable-next-line:member-ordering
   dataSource = new NzTreeFlatDataSource(this.treeControl, this.treeFlattener);
-  constructor(private httpClient: HttpClient) {
-  //  this.dataSource.setData(TREE_DATA);
-  this.getAllTreeMenu();
+  // tslint:disable-next-line:max-line-length
+  constructor(private httpClient: HttpClient, private router: Router,
+              private authS: AuthService, private patientService: PatientService, private activated: ActivatedRoute) {
+    //  this.dataSource.setData(TREE_DATA);
+    activated.params.subscribe((data) => {
+      this.idPatient = data.id;
+      localStorage.setItem('idPatient', data.id);
+      this.patientService.getOnePatient(data.id).subscribe((patient: Patient) => {
+        this.patient = patient;
+      }, (error: HttpErrorResponse) => {
+        console.log(error.status);
+
+        if (error.status === 401) {
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('token');
+          this.router.navigate(["/authentication/signin"]);        }
+      });
+    });
+    this.getAllTreeMenu();
 
   }
 
@@ -114,7 +135,7 @@ export class PatientProfileComponent implements AfterViewInit, OnInit {
   }
   /** CRUD METHODS */
   getAllTreeMenu(): void {
-     this.httpClient
+    this.httpClient
       .get<TreeMenu[]>(this.API_URL)
       .subscribe(
         (data) => {
@@ -153,6 +174,10 @@ export class PatientProfileComponent implements AfterViewInit, OnInit {
 
     this.id.emit(event.value);
     this.page.emit('14');
+  }
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('idPatient');
   }
 }
 

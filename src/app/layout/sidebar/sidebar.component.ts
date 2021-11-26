@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router, NavigationEnd } from "@angular/router";
 import { DOCUMENT } from "@angular/common";
 import {
@@ -177,10 +178,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   logout() {
-    this.authService.logout().subscribe((res) => {
-      if (!res.success) {
-        this.router.navigate(["/authentication/signin"]);
-      }
-    });
+    this.authService.logout();
   }
 }

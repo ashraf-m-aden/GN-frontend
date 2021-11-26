@@ -29,9 +29,6 @@ import { AddPatientComponent } from "./add-patient/add-patient.component";
 import { AllpatientsComponent } from "./allpatients/allpatients.component";
 import { EditPatientComponent } from "./edit-patient/edit-patient.component";
 import { PatientProfileComponent } from "./patient-profile/patient-profile.component";
-import { DeleteComponent } from "./allpatients/dialog/delete/delete.component";
-import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialog.component";
-import { PatientService } from "./allpatients/patient.service";
 import { ConsultationsComponent } from './consultations/consultations.component';
 import {NgxPrintModule} from 'ngx-print';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
@@ -69,8 +66,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AllpatientsComponent,
     EditPatientComponent,
     PatientProfileComponent,
-    DeleteComponent,
-    FormDialogComponent,
     ConsultationsComponent,
     OrdonnanceComponent,
     CommentairesComponent,
@@ -120,7 +115,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   ],
   bootstrap: [ PatientProfileComponent ],
 
-  providers: [PatientService, ConsultationService, MedocService,
+  providers: [
     { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
 })
 export class PatientsModule {}

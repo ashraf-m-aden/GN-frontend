@@ -1,6 +1,6 @@
+import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { PatientService } from "./patient.service";
 import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
@@ -8,12 +8,11 @@ import { MatSort } from "@angular/material/sort";
 import { Patient } from "./patient.model";
 import { DataSource } from "@angular/cdk/collections";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { FormDialogComponent } from "./dialog/form-dialog/form-dialog.component";
-import { DeleteComponent } from "./dialog/delete/delete.component";
 import { BehaviorSubject, fromEvent, merge, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { SelectionModel } from "@angular/cdk/collections";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: "app-allpatients",
@@ -42,7 +41,8 @@ export class AllpatientsComponent
     public dialog: MatDialog,
     public patientService: PatientService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private authS: AuthService
   ) {
     super();
   }
@@ -55,105 +55,10 @@ export class AllpatientsComponent
   refresh() {
     this.loadData();
   }
-  addNew() {
-    let tempDirection;
-    if (localStorage.getItem("isRtl") === "true") {
-      tempDirection = "rtl";
-    } else {
-      tempDirection = "ltr";
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        patient: this.patient,
-        action: "add",
-      },
-      direction: tempDirection,
-    });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.exampleDatabase.dataChange.value.unshift(
-          this.patientService.getDialogData()
-        );
-        this.refreshTable();
-        this.showNotification(
-          "snackbar-success",
-          "Add Record Successfully...!!!",
-          "bottom",
-          "center"
-        );
-      }
-    });
+  checkPatient(id) {
+    this.router.navigateByUrl('/admin/patients/patient-profile/' + id);
   }
-  checkPatient() {
-    this.router.navigateByUrl('/admin/patients/patient-profile');
-  }
-  editCall(row) {
-    this.id = row.id;
-    let tempDirection;
-    if (localStorage.getItem("isRtl") === "true") {
-      tempDirection = "rtl";
-    } else {
-      tempDirection = "ltr";
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        patient: row,
-        action: "edit",
-      },
-      direction: tempDirection,
-    });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // Then you update that record using data from dialogData (values you enetered)
-        this.exampleDatabase.dataChange.value[foundIndex] =
-          this.patientService.getDialogData();
-        // And lastly refresh table
-        this.refreshTable();
-        this.showNotification(
-          "black",
-          "Edit Record Successfully...!!!",
-          "bottom",
-          "center"
-        );
-      }
-    });
-  }
-  deleteItem(i: number, row) {
-    this.index = i;
-    this.id = row.id;
-    let tempDirection;
-    if (localStorage.getItem("isRtl") === "true") {
-      tempDirection = "rtl";
-    } else {
-      tempDirection = "ltr";
-    }
-    const dialogRef = this.dialog.open(DeleteComponent, {
-      data: row,
-      direction: tempDirection,
-    });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-        this.refreshTable();
-        this.showNotification(
-          "snackbar-danger",
-          "Delete Record Successfully...!!!",
-          "bottom",
-          "center"
-        );
-      }
-    });
-  }
+
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
@@ -191,7 +96,7 @@ export class AllpatientsComponent
     );
   }
   public loadData() {
-    this.exampleDatabase = new PatientService(this.httpClient);
+    this.exampleDatabase = new PatientService(this.httpClient, this.authS, this.router);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -254,9 +159,9 @@ export class ExampleDataSource extends DataSource<Patient> {
             const searchStr = (
               patient.name +
               patient.gender +
-              patient.address +
-              patient.date +
-              patient.mobile
+              patient.addresse +
+              patient.matricule +
+              patient.numero
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -283,7 +188,7 @@ export class ExampleDataSource extends DataSource<Patient> {
       let propertyB: number | string = "";
       switch (this._sort.active) {
         case "id":
-          [propertyA, propertyB] = [a.id, b.id];
+          [propertyA, propertyB] = [a._id, b._id];
           break;
         case "name":
           [propertyA, propertyB] = [a.name, b.name];
@@ -291,14 +196,14 @@ export class ExampleDataSource extends DataSource<Patient> {
         case "gender":
           [propertyA, propertyB] = [a.gender, b.gender];
           break;
-        case "date":
-          [propertyA, propertyB] = [a.date, b.date];
+        case "matricule":
+          [propertyA, propertyB] = [a.matricule, b.matricule];
           break;
         case "address":
-          [propertyA, propertyB] = [a.address, b.address];
+          [propertyA, propertyB] = [a.addresse, b.addresse];
           break;
-        case "mobile":
-          [propertyA, propertyB] = [a.mobile, b.mobile];
+        case "numero":
+          [propertyA, propertyB] = [a.numero, b.numero];
           break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

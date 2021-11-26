@@ -12,6 +12,7 @@ export class TreeMenuPageComponent  implements OnInit, OnChanges {
   @Input() id: string; // id pour regarder les consultations existante
   @Output() idConsultation = new EventEmitter<string>();
 
+  consultationId: string; // c'est l'id de la consultation saved
   constructor() { }
 
   ngOnInit(): void {
@@ -20,10 +21,9 @@ export class TreeMenuPageComponent  implements OnInit, OnChanges {
     this.idConsultation.emit(this.id);
     this.isPage(this.page);
   }
-  checkConsultation(id){
-
+  checkConsultation(id){ // permet d'envoyez le id de la consultation desirée on va directement au saved-consultation
+    this.consultationId = id;
     this.page = "14";
-    this.id = id;
   }
 
   addSuivi(id){

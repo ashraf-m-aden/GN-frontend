@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -12,7 +13,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser'))
     );
@@ -22,6 +23,10 @@ export class AuthService {
   // public get currentUserValue(): any {
   //   return this.currentUserSubject.value;
   // }
+  setHeader() {
+    return new HttpHeaders().set('Content-Type', 'application/json')
+      .set('X-Requested-Width', 'XMLHttpRequest').set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  }
 
   login(username: string, password: string) {
     return this.http
@@ -33,8 +38,16 @@ export class AuthService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('token');
-    return of({ success: false });
+    return this.http
+    .get<any>(`${environment.apiUrl}/user/logout`, {headers: this.setHeader()}).subscribe(() => {
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
+      this.router.navigate(["/authentication/signin"]);
+    },
+      () => {
+        this.router.navigate(["/authentication/signin"]);
+
+      });
+
   }
 }

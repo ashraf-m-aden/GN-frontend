@@ -1,3 +1,4 @@
+import { PatientService } from './../doctor/patients/allpatients/patient.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -23,7 +24,7 @@ import { MedocService } from './services/medoc.service';
     MatIconModule,
     MatButtonModule,
   ],
-  providers: [AnalyseTypeTypeService, MedocService, ConsultationService]
+  providers: [AnalyseTypeTypeService, MedocService, ConsultationService, PatientService]
 
 })
 export class AdminModule {}

@@ -25,7 +25,7 @@ const routes: Routes = [
     component: EditPatientComponent,
   },
   {
-    path: "patient-profile",
+    path: "patient-profile/:id",
     component: PatientProfileComponent,
   },
   {

@@ -1,26 +1,32 @@
 export class Patient {
-  id: number;
-  img: string;
   name: string;
   gender: string;
   date: string;
-  address: string;
-  mobile: string;
   matricule: string;
   gendarme: boolean;
   dossier: string;
+  // tslint:disable-next-line:variable-name
+  _id: string;
+  numero: string;
+  addresse: string;
+  email: string;
+  bloodType: string;
+  enabled: boolean;
   constructor(patient) {
     {
-      this.id = patient.id || this.getRandomID();
-      this.img = patient.avatar || "assets/images/user/user1.jpg";
+      this._id = patient.id;
+     // this.img = patient.img || "assets/images/user/user1.jpg";
       this.name = patient.name || "";
       this.gender = patient.gender || "male";
       this.date = patient.date || "";
-      this.address = patient.address || "";
-      this.mobile = patient.mobile || "";
+      this.email = patient.email;
+      this.addresse = patient.address || "";
+      this.numero = patient.numero || "";
       this.matricule = patient.matricule || "";
-      this.gendarme = patient.gendarme || "";
+      this.gendarme = patient.gendarme || true;
       this.dossier = patient.dossier || "";
+      this.bloodType = patient.bloodType || "";
+      this.enabled = patient.enabled ;
     }
   }
   public getRandomID(): string {

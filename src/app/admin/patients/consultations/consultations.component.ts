@@ -31,7 +31,7 @@ export class ConsultationsComponent
   editForm: FormGroup;
   register: FormGroup;
   selectedOption: string;
-
+  idPatient: string = localStorage.getItem("idPatient");
   displayedColumns = [
     "date",
     "doc",
@@ -56,7 +56,6 @@ export class ConsultationsComponent
     this.editForm = this.fb.group({
       medicament: new FormControl(),
       frequence: new FormControl(),
-
     });
   }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -82,7 +81,7 @@ export class ConsultationsComponent
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  checkConsultation(id) {
+  checkConsultation(id) {  // envoie au tree l'id de la consultation desirée
     this.id.emit(id);
   }
 
@@ -134,7 +133,7 @@ export class ExampleDataSource extends DataSource<Consultation> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getAllConsultations();
+    this.exampleDatabase.getAllConsultations(localStorage.getItem('idPatient'));
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
