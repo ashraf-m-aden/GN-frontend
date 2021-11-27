@@ -1,10 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { User } from './../../../../core/models/user';
+import { Exploration } from './../../analyses/analyse.model';
+import { Consultation } from './../consultation.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConsultationService } from 'src/app/admin/services/consultation.service';
 
 @Component({
   selector: 'app-add-consultation',
@@ -12,32 +16,40 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./add-consultation.component.scss']
 })
 export class AddConsultationComponent implements OnInit {
+@Output() page = new EventEmitter<string>();
+  consultation: Consultation = {
+    _id: undefined,
+    idUser: '',
+    initial: true ,
+    idPatient: '',
+    doctor: '',
+    patient: '',
+    motif: '',
+    antecedents: '',
+    examen: '',
+    hypotheses: '',
+    evaluation: '',
+    isGN: true,
+    referer: false,
+    ordonnance: false,
+    analyse: false,
+    resultat: false,
+    createdAt: '',
+    date: '',
+    refererContent: '',
+    medicaments: [],
+    exploration: new Exploration(),
+    resultatId: undefined,
+    enabled: false
+  };
 
-  selectedRowData: selectRowInterface;
-
-  isCheckedReferer = false; // dit si on doit envoyer ailleurs ou pas
-  isCheckedOM = false; // si on doit faire une ordonnance medicale
-  isCheckedOP = false; // dit si on doit faire une ordonnance prescriptive
-
+  loading = false; // une fois que submit a eté cliqué le bouton loading apparait
+  docProfile: User = JSON.parse(localStorage.getItem('currentUser'));
   rows = [];
-  newUserImg = "assets/images/user/user1.jpg";
-  data = [];
-  filteredData = [];
-  editForm: FormGroup; // form pour les s
-  register: FormGroup;
-  selectedOption: string;
-  columns = [
-    { name: "medicament" },
-    { name: "frequence" },
-    {name: "id"}
+  consultationForm: FormGroup; // form pour les s
 
-  ];
-  index: number;
-  id: number;
-  isLinear = false;
-  HFormGroup1: FormGroup;
   // tslint:disable-next-line:variable-name
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private consultS: ConsultationService,
               public httpClient: HttpClient,
               public dialog: MatDialog,
               private router: Router,
@@ -46,107 +58,70 @@ export class AddConsultationComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private fb: FormBuilder
   ) {
-    this.editForm = this.fb.group({
-      medicament: new FormControl(),
-      frequence: new FormControl(),
+    this.consultationForm = this.fb.group({
+      // tslint:disable-next-line:variable-name
+      motif: ["", [Validators.required]],
+      antecedents: ["", [Validators.required]],
+      examen: ["", [Validators.required]],
+      hypotheses: ["", [Validators.required]],
+      refererContent: [""],
+      isCheckedReferer: false, // dit si on doit envoyer ailleurs ou pas
+      isCheckedOM: false, // si on doit faire une ordonnance medicale
+      isCheckedOP: false, // dit si on doit faire une ordonnance prescriptive
 
     });
+
+
 
   }
   ngOnInit() {
-    this.HFormGroup1 = this._formBuilder.group({
-      contenu: ["", Validators.required],
-    });
-    this.register = this.fb.group({
-      medicament: ["", [Validators.required]],
-      frequence: ["", [Validators.required]],
-      id: [""]
 
-    });
-
-  }
-
-  onSelected(medoc){
-    this.register.get('medicament').setValue(medoc);
-  }
-
-  addRow(content) {
-    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-    this.register.patchValue({
-      id: this.getId(10, 100),
-    });
-  }
-
-
-
-  onAddRowSave(form: FormGroup) {
-    this.data.push(form.value);
-    this.data = [...this.data];
-    // console.log(this.data);
-    form.reset();
-    this.modalService.dismissAll();
-    this.showNotification(
-      "bg-green",
-      "Add Record Successfully",
-      "bottom",
-      "right"
-    );
-  }
-
-  onEditSave(form: FormGroup) {
-    this.data = this.data.filter((value, key) => {
-      if (value.id === form.value.id) {
-        value.firstName = form.value.firstName;
-        value.lastName = form.value.lastName;
-        value.phone = form.value.phone;
-        value.gender = form.value.gender;
-        value.email = form.value.email;
-        value.address = form.value.address;
-      }
-      this.modalService.dismissAll();
-      return true;
-    });
-    this.showNotification(
-      "bg-black",
-      "Edit Record Successfully",
-      "bottom",
-      "right"
-    );
-  }
-
-  editRow(row, rowIndex, content) {
-    this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" });
-    this.editForm.setValue({
-      medicament: row.medicament,
-      frequence: row.frequence,
-    });
-    this.selectedRowData = row;
-  }
-
-  getId(min, max) {
-    // min and max included
-    return Math.floor(Math.random() * (max - min + 1) + min);
   }
   checkOrdonnance() {
 
-    window.open( "#/admin/patients/ordonnance", "_blank");
+    window.open("#/admin/patients/ordonnance", "_blank");
   }
+  async onSubmit() {
 
-  deleteRow(row) {
-    this.data = this.arrayRemove(this.data, row.id);
-    this.showNotification(
-      "bg-red",
-      "Delete Record Successfully",
-      "bottom",
-      "right"
-    );
-  }
-
-  arrayRemove(array, id) {
-    return array.filter((element) => {
-      return element.id !== id;
+this.loading = true;
+    // une fois le bouton sauvegarder cliqué
+this.consultation.motif = this.consultationForm.get('motif').value;
+this.consultation.antecedents = this.consultationForm.get('antecedents').value;
+this.consultation.examen = this.consultationForm.get('examen').value;
+this.consultation.hypotheses = this.consultationForm.get('hypotheses').value;
+this.consultation.refererContent = this.consultationForm.get('refererContent').value;
+this.consultation.referer = this.consultationForm.get('isCheckedReferer').value;
+this.consultation.ordonnance = this.consultationForm.get('isCheckedOM').value;
+this.consultation.analyse = this.consultationForm.get('isCheckedOP').value;
+this.consultation.idUser = this.docProfile._id;
+this.consultation.doctor = this.docProfile.name;
+this.consultation.idPatient = localStorage.getItem('idPatient');
+await this.consultS.addConsultation(this.consultation).subscribe(() => {
+      this.showNotification(
+        "bg-green",
+        "Consultation enregistrée",
+        "bottom",
+        "right"
+      );
+      this.goToAllConsultation();
+      this.loading = true;
+    }, (error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
+        this.router.navigate(["/authentication/signin"]);
+      }
+      else {
+        this.showNotification(
+          "bg-red",
+          error.message,
+          "bottom",
+          "right"
+        );
+      }
     });
   }
+
   showNotification(colorName, text, placementFrom, placementAlign) {
     this._snackBar.open(text, "", {
       duration: 2000,
@@ -155,9 +130,19 @@ export class AddConsultationComponent implements OnInit {
       panelClass: colorName,
     });
   }
-}
-// tslint:disable-next-line:class-name
-export interface selectRowInterface {
-  medicament: string;
-  frequence: number;
+  addNewMedoc(array) {
+    // cette fonction ajoute un medicament au tableau des medoc de la consultation elle est connecté au
+    // props des medocs
+    this.consultation.medicaments = array;
+  }
+  addNewExploration(array) {
+    // cette fonction ajoute un medicament au tableau des medoc de la consultation elle est connecté au
+    // props des medocs
+    this.consultation.exploration = array;
+  }
+
+  goToAllConsultation() { // une fois la consultation enregistrer on change de page pour aller à l'historique
+    this.page.emit('1');
+  }
+
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,9 +12,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./add-ordonnance.component.sass']
 })
 export class AddOrdonnanceComponent implements OnInit {
+    @Output() medocArray = new EventEmitter<Array<string>>();
+
   selectedRowData: selectRowInterface;
-
-
   rows = [];
   newUserImg = "assets/images/user/user1.jpg";
   data = [];
@@ -86,6 +86,7 @@ export class AddOrdonnanceComponent implements OnInit {
     this.data = [...this.data];
     // console.log(this.data);
     form.reset();
+    this.medocArray.emit(this.data);
     this.modalService.dismissAll();
     this.showNotification(
       "bg-green",
@@ -108,6 +109,8 @@ export class AddOrdonnanceComponent implements OnInit {
       this.modalService.dismissAll();
       return true;
     });
+    this.medocArray.emit(this.data);
+
     this.showNotification(
       "bg-black",
       "Edit Record Successfully",
@@ -124,6 +127,8 @@ export class AddOrdonnanceComponent implements OnInit {
       "bottom",
       "right"
     );
+    this.medocArray.emit(this.data);
+
   }
   arrayRemove(array, data) {
     return array.filter(item => {

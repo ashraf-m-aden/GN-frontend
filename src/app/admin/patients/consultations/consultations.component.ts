@@ -168,10 +168,8 @@ export class ExampleDataSource extends DataSource<Consultation> {
       let propertyA: number | string = "";
       let propertyB: number | string = "";
       switch (this._sort.active) {
-        case "id":
-          [propertyA, propertyB] = [a.id, b.id];
-          break;
-        case "contenu":
+
+        case "motif":
           [propertyA, propertyB] = [a.motif, b.motif];
           break;
         case "date":

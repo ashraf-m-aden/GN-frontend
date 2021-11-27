@@ -72,7 +72,7 @@ export class PatientProfileComponent implements AfterViewInit, OnInit, OnDestroy
   // Temporarily stores data from dialogs
   dialogData: any;
   subs: UnsubscribeOnDestroyAdapter;
-  patient: Patient;
+  public patient: Patient;
   idPatient: string;
   private transformer = (node: TreeMenu, level: number): ExampleFlatNode => ({
     expandable: !!node.children && node.children.length > 0,

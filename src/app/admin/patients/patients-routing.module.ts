@@ -29,7 +29,7 @@ const routes: Routes = [
     component: PatientProfileComponent,
   },
   {
-    path: "ordonnance",
+    path: "ordonnance:/id",
     component: OrdonnanceComponent,
   },
   {
@@ -41,11 +41,11 @@ const routes: Routes = [
     component: MedocComponent,
   },
   {
-    path: "analyse",
+    path: "analyse/:id",
     component: AnalyseComponent,
   },
   {
-    path: "referer",
+    path: "referer/:id",
     component: RefererComponent,
   },
   { path: "**", component: Page404Component },

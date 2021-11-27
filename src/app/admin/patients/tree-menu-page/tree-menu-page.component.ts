@@ -26,21 +26,25 @@ export class TreeMenuPageComponent  implements OnInit, OnChanges {
     this.page = "14";
   }
 
-  addSuivi(id){
+  goToPage(page) {
+    this.page = page;
+  }
+  addSuivi(id){ // permet d'aller a la page suivi consultation
 
     this.page = "01";
     this.id = id;
   }
 
-  isPage(page){
+  isPage(page){   // permet de voir si ya une page qui a eté cliqué, c pour afficher les explorations
     if (!page) {
       return false;
-    } else if (page[0] === '2') {
-      console.log(this.Expotype);
-
+    } else if (page[0] === '2') { // si oui elle regarde si la page contient le numero 2 comme premier chiffre
       return true;
     }
     else {return false;
     }
   }
+
+
+
 }

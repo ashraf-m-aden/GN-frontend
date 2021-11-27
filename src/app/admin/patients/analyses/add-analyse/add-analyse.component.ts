@@ -1,11 +1,10 @@
+import { Exploration } from './../analyse.model';
 import { AnalyseTypeTypeService } from './../../../services/analyse-type.service';
-import { Analyse } from './analyse.model';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -14,6 +13,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./add-analyse.component.scss']
 })
 export class AddAnalyseComponent implements OnInit {
+
+  @Output() analyseArray = new EventEmitter<Exploration>();
   selectedRowData: selectRowInterface;
 
   rows = [];
@@ -26,7 +27,7 @@ export class AddAnalyseComponent implements OnInit {
   id: number;
   isLinear = false;
   HFormGroup1: FormGroup;
-  newAnalyse = new Analyse('', '', '', '', '', '', '', '');
+  newAnalyse: Exploration = { analyses: [], typeI: '', typeII: '', typeIII: '', typeIV: '' };
   array1 = [{
     name: "SANGUIN",
     id: 21,
@@ -39,148 +40,148 @@ export class AddAnalyseComponent implements OnInit {
   }]; // l'array du type 1
   array2 = [
     {
-    name: "Hematologique",
-    id: 211,
-    idParent: 21
-  }, {
-    name: "Biochimique",
-    id: 212, idParent: 21
-  }, {
-    name: "Bilan Hormonal",
-    id: 213, idParent: 21
-  },
-  {
-    name: "Infectieux",
-    id: 214, idParent: 21
-  }, {
-    name: "Urinaire",
-    id: 221, idParent: 22
-  }, {
-    name: "Fecale",
-    id: 222, idParent: 22
-  }, {
-    name: "Standard",
-    id: 231, idParent: 23
-  }, {
-    name: "TDM",
-    id: 232, idParent: 23
-  }, {
-    name: "IRM",
-    id: 233, idParent: 23
-  }]; // l'array du type 2
+      name: "Hematologique",
+      id: 211,
+      idParent: 21
+    }, {
+      name: "Biochimique",
+      id: 212, idParent: 21
+    }, {
+      name: "Bilan Hormonal",
+      id: 213, idParent: 21
+    },
+    {
+      name: "Infectieux",
+      id: 214, idParent: 21
+    }, {
+      name: "Urinaire",
+      id: 221, idParent: 22
+    }, {
+      name: "Fecale",
+      id: 222, idParent: 22
+    }, {
+      name: "Standard",
+      id: 231, idParent: 23
+    }, {
+      name: "TDM",
+      id: 232, idParent: 23
+    }, {
+      name: "IRM",
+      id: 233, idParent: 23
+    }]; // l'array du type 2
   array3 = [
     {
-    name: "Numeration",
-    id: 2111, idParent: 211
-  }, {
-    name: "Hemostase",
-    id: 2112, idParent: 211
-  }, {
-    name: "Fonction renale",
-    id: 2121, idParent: 212
-  }, {
-    name: "Fonction hepatique",
-    id: 2122, idParent: 212
-  }, {
-    name: "Bilan pancreatique",
-    id: 2123, idParent: 212
-  },
-  {
-    name: "Bilan lipidique",
-    id: 2124, idParent: 212
-  }, {
-    name: "Diabete",
-    id: 2125, idParent: 212
-  }, {
-    name: "Inflammatoire",
-    id: 2126, idParent: 212
-  }, {
-    name: "Thyroide",
-    id: 2131, idParent: 213
-  }, {
-    name: "Surennale",
-    id: 2132, idParent: 213
-  }, {
-    name: "Reproduction",
-    id: 2133, idParent: 213
-  }, {
-    name: "Viral",
-    id: 2141, idParent: 214
-  }, {
-    name: "Parasitaire",
-    id: 2142, idParent: 214
-  }, {
-    name: "Bacterien",
-    id: 2143, idParent: 214
-  }, {
-    name: "Proteinurie",
-    id: 2211, idParent: 221
-  }, {
-    name: "Albuminurie",
-    id: 2212, idParent: 221
-  }, {
-    name: "ECBU",
-    id: 2213, idParent: 221
-  }, {
-    name: "KAOP",
-    id: 2221, idParent: 222
-  }, {
-    name: "Coproculture",
-    id: 2222, idParent: 222
-  }, {
-    name: "Thorax",
-    id: 2311, idParent: 231
-  }, {
-    name: "ASP",
-    id: 2312, idParent: 231
-  }, {
-    name: "Bassin",
-    id: 2313, idParent: 231
-  }, {
-    name: "OPN",
-    id: 2314, idParent: 231
-  }, {
-    name: "Arcad dentaire",
-    id: 2315, idParent: 231
-  }, {
-    name: "Extremité",
-    id: 2316, idParent: 231
-  }, {
-    name: "Cerebrale",
-    id: 2321, idParent: 232
-  }, {
-    name: "Cervicale",
-    id: 2322, idParent: 232
-  },
-  {
-    name: "Thoracique",
-    id: 2323, idParent: 232
-  }, {
-    name: "Abdominale",
-    id: 2324, idParent: 232
-  },
-  {
-    name: "Extremité",
-    id: 2325, idParent: 232
-  }
+      name: "Numeration",
+      id: 2111, idParent: 211
+    }, {
+      name: "Hemostase",
+      id: 2112, idParent: 211
+    }, {
+      name: "Fonction renale",
+      id: 2121, idParent: 212
+    }, {
+      name: "Fonction hepatique",
+      id: 2122, idParent: 212
+    }, {
+      name: "Bilan pancreatique",
+      id: 2123, idParent: 212
+    },
+    {
+      name: "Bilan lipidique",
+      id: 2124, idParent: 212
+    }, {
+      name: "Diabete",
+      id: 2125, idParent: 212
+    }, {
+      name: "Inflammatoire",
+      id: 2126, idParent: 212
+    }, {
+      name: "Thyroide",
+      id: 2131, idParent: 213
+    }, {
+      name: "Surennale",
+      id: 2132, idParent: 213
+    }, {
+      name: "Reproduction",
+      id: 2133, idParent: 213
+    }, {
+      name: "Viral",
+      id: 2141, idParent: 214
+    }, {
+      name: "Parasitaire",
+      id: 2142, idParent: 214
+    }, {
+      name: "Bacterien",
+      id: 2143, idParent: 214
+    }, {
+      name: "Proteinurie",
+      id: 2211, idParent: 221
+    }, {
+      name: "Albuminurie",
+      id: 2212, idParent: 221
+    }, {
+      name: "ECBU",
+      id: 2213, idParent: 221
+    }, {
+      name: "KAOP",
+      id: 2221, idParent: 222
+    }, {
+      name: "Coproculture",
+      id: 2222, idParent: 222
+    }, {
+      name: "Thorax",
+      id: 2311, idParent: 231
+    }, {
+      name: "ASP",
+      id: 2312, idParent: 231
+    }, {
+      name: "Bassin",
+      id: 2313, idParent: 231
+    }, {
+      name: "OPN",
+      id: 2314, idParent: 231
+    }, {
+      name: "Arcad dentaire",
+      id: 2315, idParent: 231
+    }, {
+      name: "Extremité",
+      id: 2316, idParent: 231
+    }, {
+      name: "Cerebrale",
+      id: 2321, idParent: 232
+    }, {
+      name: "Cervicale",
+      id: 2322, idParent: 232
+    },
+    {
+      name: "Thoracique",
+      id: 2323, idParent: 232
+    }, {
+      name: "Abdominale",
+      id: 2324, idParent: 232
+    },
+    {
+      name: "Extremité",
+      id: 2325, idParent: 232
+    }
     , {
-    name: "Cerebrale",
-    id: 2331, idParent: 233
-  }, {
-    name: "Cervicale",
-    id: 2332, idParent: 233
-  },
-  {
-    name: "Thoracique",
-    id: 2333, idParent: 233
-  }, {
-    name: "Abdominale",
-    id: 2334, idParent: 233
-  },
-  {
-    name: "Extremité",
-    id: 2335, idParent: 235
-  }]; // l'array du type 3
+      name: "Cerebrale",
+      id: 2331, idParent: 233
+    }, {
+      name: "Cervicale",
+      id: 2332, idParent: 233
+    },
+    {
+      name: "Thoracique",
+      id: 2333, idParent: 233
+    }, {
+      name: "Abdominale",
+      id: 2334, idParent: 233
+    },
+    {
+      name: "Extremité",
+      id: 2335, idParent: 235
+    }]; // l'array du type 3
   array4 = [
     , {
       name: "NFS",
@@ -364,7 +365,7 @@ export class AddAnalyseComponent implements OnInit {
   ngOnInit() {
 
     this.register = this.fb.group({
-      analyse: ["", [Validators.required, Validators.pattern("[a-zA-Z]+")]],
+      analyse: ["", [Validators.required]],
     });
   }
 
@@ -381,6 +382,8 @@ export class AddAnalyseComponent implements OnInit {
     this.data.push(form.value);
     this.data = [...this.data];
     // console.log(this.data);
+    this.newAnalyse.analyses = this.data;
+    this.analyseArray.emit(this.newAnalyse);
     form.reset();
     this.modalService.dismissAll();
     this.showNotification(
@@ -398,6 +401,8 @@ export class AddAnalyseComponent implements OnInit {
       this.modalService.dismissAll();
       return true;
     });
+    this.newAnalyse.analyses = this.data;
+    this.analyseArray.emit(this.newAnalyse);
     this.showNotification(
       "bg-black",
       "Edit Record Successfully",
@@ -424,6 +429,8 @@ export class AddAnalyseComponent implements OnInit {
       "bottom",
       "right"
     );
+    this.newAnalyse.analyses = this.data;
+    this.analyseArray.emit(this.newAnalyse);
   }
   arrayRemove(array, data) {
     return array.filter(item => {
@@ -458,8 +465,6 @@ export class AddAnalyseComponent implements OnInit {
     this.filteredArray2 = this.array3.filter(item => {
       return item.idParent === id;
     });
-    console.log(id);
-    console.log(this.filteredArray2);
     this.filteredArray3 = [];
 
   }

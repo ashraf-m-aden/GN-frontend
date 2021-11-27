@@ -5,8 +5,8 @@
     </h4>
   </div>
   <div class="float-end">
-    <p>{{consultation?.date}}</p>
-    <p>    {{consultation?.doctor}}
+    <p><strong>Date: </strong>{{consultation?.date}}</p>
+    <p><strong>Consultant:</strong>    {{consultation?.doctor}}
     </p>
   </div>
   <div class="body">
@@ -22,16 +22,37 @@
       {{consultation?.hypotheses}} </p>
     <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
     <nz-list nzItemLayout="horizontal" >
-      <nz-list-item *ngFor="let item of data">
+      <nz-list-item *ngIf="consultation.referer" >
         <nz-list-item-meta
           nzAvatar="../../../../assets/images/image-gallery/pdf.jpg"
         >
           <nz-list-item-meta-title>
-            <a (click)="checkFile(item.url)">{{ item.title }}</a>
+            <a (click)="checkFile('#/admin/patients/referer/'+consultation._id)">Consultation referer</a>
           </nz-list-item-meta-title>
         </nz-list-item-meta>
       </nz-list-item>
-      <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
+
+      <nz-list-item *ngIf="consultation.ordonnance" >
+        <nz-list-item-meta
+          nzAvatar="../../../../assets/images/image-gallery/pdf.jpg"
+        >
+          <nz-list-item-meta-title>
+            <a (click)="checkFile('#/admin/patients/ordonnance/'+consultation._id)">Ordonnance medicale</a>
+          </nz-list-item-meta-title>
+        </nz-list-item-meta>
+      </nz-list-item>
+
+      <nz-list-item *ngIf="consultation.analyse" >
+        <nz-list-item-meta
+          nzAvatar="../../../../assets/images/image-gallery/pdf.jpg"
+        >
+          <nz-list-item-meta-title>
+            <a (click)="checkFile('#/admin/patients/analyse/'+consultation._id)">Ordonnance exploration</a>
+          </nz-list-item-meta-title>
+        </nz-list-item-meta>
+      </nz-list-item>
+
+      <nz-list-empty *ngIf="consultation?.referer && consultation?.ordonnance && consultation?.analyse"></nz-list-empty>
     </nz-list>
   </div>
   <div>

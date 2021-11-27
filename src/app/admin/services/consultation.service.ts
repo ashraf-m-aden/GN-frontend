@@ -49,15 +49,10 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.get<Consultation>(`${environment.apiUrl}/consultation/` + idConsultation, { headers: this.setHeader() });
   }
-  addConsultation(consultation: Consultation): void {
-    this.dialogData = consultation;
+  addConsultation(consultation: Consultation) {
 
-    /*  this.httpClient.post(this.API_URL, patient).subscribe(data => {
-      this.dialogData = patient;
-      },
-      (err: HttpErrorResponse) => {
-     // error code here
-    });*/
+    return this.httpClient.post<Consultation>(`${environment.apiUrl}/consultation`, consultation, { headers: this.setHeader() });
+
   }
   updateConsultation(consultation: Consultation): void {
     this.dialogData = consultation;

@@ -1,6 +1,6 @@
 <app-consultations *ngIf="page ==='1' || page ==='11' ||page ==='12'" (id)="checkConsultation($event)">
 </app-consultations>
-<app-add-consultation *ngIf="page == '0'"></app-add-consultation>
+<app-add-consultation *ngIf="page == '0'" (page)="goToPage($event)"></app-add-consultation>
 <app-add-suivi *ngIf="page == '01'"></app-add-suivi>
 <app-saved-consultation *ngIf="page == '14'" (id)="addSuivi($event)" [idConsultation]="consultationId"></app-saved-consultation>
 <app-explorations *ngIf="isPage(page)" [type]="Expotype"></app-explorations>
