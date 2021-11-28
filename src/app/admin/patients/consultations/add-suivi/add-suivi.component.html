@@ -4,15 +4,15 @@
       <strong>Suivie de consultation</strong>
     </h2>
     <p>
-      Faite par Dr. Djibril Mohamed
+      <strong> Faite par {{consultation?.doctor}} </strong>
       <br>
-      Le 25/09/2021
+      <strong>Le {{consultation?.date}}</strong>
     </p>
   </div>
   <div class="body">
     <nz-divider nzText="Hypotheses diagnostique initial" nzOrientation="left" class="m-0"></nz-divider>
     <p>
-      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
+      {{consultation?.hypotheses}}
     </p>
     <nz-divider nzText="Evaluation clinique" nzOrientation="left" class="m-0"></nz-divider>
     <p>
@@ -20,17 +20,24 @@
     </p>
     <nz-divider nzText="Exploration" nzOrientation="left" class="m-0"></nz-divider>
     <table class="table">
-      <tr>
+      <tr *ngIf="consultation?.ordonnance">
         <td>Ordonnance medicale</td>
         <td>
+          <a (click)="checkFile('#/admin/patients/medoc/'+consultation?._id)">
+
           <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+        </a>
+
         </td>
       </tr>
-      <tr>
+      <tr  *ngIf="consultation?.analyse">
 
         <td>Ordonnance exploration</td>
         <td>
+          <a (click)="checkFile('#/admin/patients/analyse/'+consultation?._id)">
+
           <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+          </a>
         </td>
       </tr>
       <tr class="result">

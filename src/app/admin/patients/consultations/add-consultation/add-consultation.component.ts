@@ -95,6 +95,7 @@ this.consultation.ordonnance = this.consultationForm.get('isCheckedOM').value;
 this.consultation.analyse = this.consultationForm.get('isCheckedOP').value;
 this.consultation.idUser = this.docProfile._id;
 this.consultation.doctor = this.docProfile.name;
+this.consultation.date = new Date().getDate() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getFullYear();
 this.consultation.idPatient = localStorage.getItem('idPatient');
 await this.consultS.addConsultation(this.consultation).subscribe(() => {
       this.showNotification(
@@ -114,7 +115,7 @@ await this.consultS.addConsultation(this.consultation).subscribe(() => {
       else {
         this.showNotification(
           "bg-red",
-          error.message,
+          "Un probleme est survenu, veuillez reessayer",
           "bottom",
           "right"
         );

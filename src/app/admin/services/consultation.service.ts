@@ -49,6 +49,10 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.get<Consultation>(`${environment.apiUrl}/consultation/` + idConsultation, { headers: this.setHeader() });
   }
+  getExplorations(idExploration) {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Consultation>(`${environment.apiUrl}/exploration/` + idExploration, { headers: this.setHeader() });
+  }
   addConsultation(consultation: Consultation) {
 
     return this.httpClient.post<Consultation>(`${environment.apiUrl}/consultation`, consultation, { headers: this.setHeader() });

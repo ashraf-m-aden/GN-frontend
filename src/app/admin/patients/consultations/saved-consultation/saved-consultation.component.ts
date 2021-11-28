@@ -12,22 +12,9 @@ import { ConsultationService } from 'src/app/admin/services/consultation.service
 })
 export class SavedConsultationComponent implements OnInit, OnChanges {
   @Input() idConsultation: string;
-  @Output() id = new EventEmitter<string>();
+  @Output() suivi = new EventEmitter<Array<any>>();
   consultation: Consultation;
-  data = [
-    {
-      url: '#/admin/patients/referer',
-      title: 'Consultation prescrite'
-    },
-    {
-      url: '#/admin/patients/ordonnance',
-      title: 'Ordonnance medicale'
-    },
-    {
-      url: '#/admin/patients/analyse',
-      title: 'Ordonnance prescriptive'
-    }
-  ];
+
   constructor(private consultationService: ConsultationService, private router: Router) {
 
   }
@@ -51,7 +38,7 @@ export class SavedConsultationComponent implements OnInit, OnChanges {
     window.open(url, "_blank");
   }
   addSuivi() { // send the id of the consultation we want to follow
-    this.id.emit(this.idConsultation);
+    this.suivi.emit([this.idConsultation, this.consultation.isGN]);
   }
 
 }

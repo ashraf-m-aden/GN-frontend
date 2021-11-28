@@ -40,8 +40,8 @@
                             <tr *ngFor="let item of medocs; let i=index;">
                               <td class="text-center">{{i+1}}</td>
 
-                              <td><u>{{ item.medicament }}</u> <br>
-                                <i>{{item.unite}} comprimés <span *ngIf="item.frequence > 1"> {{item.frequence}} fois</span> par jour, pendant {{item.jour}} jours. </i></td>
+                              <td><u>{{ item?.medicament }}</u> <br>
+                                <i>{{item?.unite}} comprimés <span *ngIf="item?.frequence > 1"> {{item?.frequence}} fois</span> par jour, pendant {{item?.jour}} jours. </i></td>
                                 <td>
                             </tr>
 

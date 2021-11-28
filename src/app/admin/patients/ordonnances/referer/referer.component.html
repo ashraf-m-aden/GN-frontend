@@ -22,7 +22,7 @@
                         <address>
                           <p class="m-t-30">
                             <b>Djibouti le </b>
-                            {{consultation.date}}
+                            {{consultation?.date}}
                           </p>
                         </address>
                       </div>
@@ -31,7 +31,7 @@
                       <span class="title">CONSULTATION</span>
                     </div>
                     <div class="col-12 mt-5">
-                      <strong>NOM: {{patient.name}}</strong>
+                      <strong>NOM: {{patient?.name}}</strong>
                     </div>
                     <div class="col-md-12">
                       <div class="table-responsive m-t-40">
@@ -40,7 +40,7 @@
                             <tr>
                               <td class="text-center">1)</td>
 
-                              <td class="">{{consultation.refererContent}} <br>
+                              <td class="">{{consultation?.refererContent}} <br>
                             </tr>
 
 
@@ -54,7 +54,7 @@
                         <p class="m-b-100">Signature et tampon</p>
                         <p>
                           <strong>Prescripteur : </strong>
-                          {{consultation.doctor}}</p>
+                          {{consultation?.doctor}}</p>
                       </div>
                       <div class="clearfix"></div>
                       <hr>

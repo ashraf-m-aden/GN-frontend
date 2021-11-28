@@ -111,8 +111,6 @@ export class PatientProfileComponent implements AfterViewInit, OnInit, OnDestroy
       this.patientService.getOnePatient(data.id).subscribe((patient: Patient) => {
         this.patient = patient;
       }, (error: HttpErrorResponse) => {
-        console.log(error.status);
-
         if (error.status === 401) {
           localStorage.removeItem('currentUser');
           localStorage.removeItem('token');

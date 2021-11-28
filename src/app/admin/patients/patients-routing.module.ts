@@ -10,45 +10,56 @@ import { Page404Component } from "./../../authentication/page404/page404.compone
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { MedocComponent } from './medicaments/medicaments.component';
+import { AuthGuard } from 'src/app/core/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: "all-patients",
+    canActivate: [AuthGuard],
     component: AllpatientsComponent,
   },
   {
     path: "add-patient",
+    canActivate: [AuthGuard],
     component: AddPatientComponent,
   },
   {
     path: "edit-patient",
+    canActivate: [AuthGuard],
     component: EditPatientComponent,
   },
   {
     path: "patient-profile/:id",
+    canActivate: [AuthGuard],
     component: PatientProfileComponent,
   },
   {
-    path: "ordonnance:/id",
+    path: "medoc:/id",
+    canActivate: [AuthGuard],
     component: OrdonnanceComponent,
   },
   {
     path: "consultation",
+    canActivate: [AuthGuard],
     component: SavedConsultationComponent,
   },
   {
     path: "medoc",
+    canActivate: [AuthGuard],
     component: MedocComponent,
   },
   {
     path: "analyse/:id",
+    canActivate: [AuthGuard],
     component: AnalyseComponent,
   },
   {
     path: "referer/:id",
+    canActivate: [AuthGuard],
     component: RefererComponent,
   },
-  { path: "**", component: Page404Component },
+  { path: "**",
+  component: Page404Component },
 ];
 
 @NgModule({

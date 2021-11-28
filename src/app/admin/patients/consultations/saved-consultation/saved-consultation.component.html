@@ -22,32 +22,32 @@
       {{consultation?.hypotheses}} </p>
     <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
     <nz-list nzItemLayout="horizontal" >
-      <nz-list-item *ngIf="consultation.referer" >
+      <nz-list-item *ngIf="consultation?.referer" >
         <nz-list-item-meta
           nzAvatar="../../../../assets/images/image-gallery/pdf.jpg"
         >
           <nz-list-item-meta-title>
-            <a (click)="checkFile('#/admin/patients/referer/'+consultation._id)">Consultation referer</a>
+            <a (click)="checkFile('#/admin/patients/referer/'+consultation?._id)">Consultation referer</a>
           </nz-list-item-meta-title>
         </nz-list-item-meta>
       </nz-list-item>
 
-      <nz-list-item *ngIf="consultation.ordonnance" >
+      <nz-list-item *ngIf="consultation?.ordonnance" >
         <nz-list-item-meta
           nzAvatar="../../../../assets/images/image-gallery/pdf.jpg"
         >
           <nz-list-item-meta-title>
-            <a (click)="checkFile('#/admin/patients/ordonnance/'+consultation._id)">Ordonnance medicale</a>
+            <a (click)="checkFile('#/admin/patients/ordonnance/'+consultation?._id)">Ordonnance medicale</a>
           </nz-list-item-meta-title>
         </nz-list-item-meta>
       </nz-list-item>
 
-      <nz-list-item *ngIf="consultation.analyse" >
+      <nz-list-item *ngIf="consultation?.analyse" >
         <nz-list-item-meta
           nzAvatar="../../../../assets/images/image-gallery/pdf.jpg"
         >
           <nz-list-item-meta-title>
-            <a (click)="checkFile('#/admin/patients/analyse/'+consultation._id)">Ordonnance exploration</a>
+            <a (click)="checkFile('#/admin/patients/analyse/'+consultation?._id)">Ordonnance exploration</a>
           </nz-list-item-meta-title>
         </nz-list-item-meta>
       </nz-list-item>

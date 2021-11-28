@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 })
 export class TreeMenuPageComponent  implements OnInit, OnChanges {
 
-  @Input() page: string;
+  @Input() page: string; // c'est la page à afficher mais aussi ca peut etre l'id de l'exploration à afficher
   @Input() Expotype: string; // pour avoir le type d'exploration
   @Input() id: string; // id pour regarder les consultations existante
   @Output() idConsultation = new EventEmitter<string>();
@@ -29,10 +29,14 @@ export class TreeMenuPageComponent  implements OnInit, OnChanges {
   goToPage(page) {
     this.page = page;
   }
-  addSuivi(id){ // permet d'aller a la page suivi consultation
+  addSuivi(suivi){ // permet d'aller a la page suivi consultation
 
-    this.page = "01";
-    this.id = id;
+    this.id = suivi[0];
+    if (suivi[1]) {
+      this.page = "01";
+    } else {
+      this.page = '02';
+    }
   }
 
   isPage(page){   // permet de voir si ya une page qui a eté cliqué, c pour afficher les explorations

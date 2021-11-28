@@ -14,7 +14,7 @@
       <td>{{ data.doctor }}</td>
       <td>{{ data.type }}</td>
       <td>
-        <a [href]="data.demande" target="_blank" >
+        <a (click)="goFile('#/admin/patients/analyse/' + data._id)" >
           <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
         </a>
       </td>
