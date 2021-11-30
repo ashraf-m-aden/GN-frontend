@@ -53,6 +53,8 @@ import { AddSuiviExterneComponent } from './consultations/add-suivi-externe/add-
 import { AddOrdonnanceComponent } from './analyses/add-ordonnance/add-ordonnance.component';
 import { ExplorationsComponent } from './explorations/explorations.component';
 import { RefererComponent } from './ordonnances/referer/referer.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { UploadComponent } from './upload/upload.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -79,7 +81,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AddSuiviExterneComponent,
     AddOrdonnanceComponent,
     ExplorationsComponent,
-    RefererComponent
+    RefererComponent,
+    UploadComponent
   ],
   imports: [
     CommonModule,
@@ -116,6 +119,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   bootstrap: [ PatientProfileComponent ],
 
   providers: [
-    { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
+    { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons },
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}
+  ],
 })
 export class PatientsModule {}

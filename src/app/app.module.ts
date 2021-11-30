@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,10 +34,14 @@ import fr from '@angular/common/locales/fr';
 import { FormsModule } from '@angular/forms';
 import { NgZorro } from './ng-zero.module';
 
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
@@ -77,12 +82,15 @@ export function createTranslateLoader(http: HttpClient): any {
         deps: [HttpClient],
       },
     }),
-
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     // core & shared
     CoreModule,
     SharedModule,
     FormsModule,
-    NgZorro
+    NgZorro,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -90,7 +98,9 @@ export function createTranslateLoader(http: HttpClient): any {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
-    { provide: NZ_I18N, useValue: fr_FR }, { provide: NZ_ICONS, useValue: icons }
+    { provide: NZ_I18N, useValue: fr_FR }, { provide: NZ_ICONS, useValue: icons },
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}
+
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

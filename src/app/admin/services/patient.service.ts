@@ -45,8 +45,8 @@ export class PatientService {
   }
 
 
-  addPatient(patient: Patient): void {
-    this.httpClient.post(`${environment.apiUrl}/patient`, patient);
+  addPatient(patient: Patient) {
+    return this.httpClient.post(`${environment.apiUrl}/patient`, patient, { headers: this.setHeader() });
   }
 
   updatePatient(patient: Patient): void {

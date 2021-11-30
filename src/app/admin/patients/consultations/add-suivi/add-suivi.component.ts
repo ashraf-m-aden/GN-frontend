@@ -21,8 +21,16 @@ export class AddSuiviComponent implements OnInit, OnChanges {
   array = ["x"];
   consultation: Consultation;
   suivi: Consultation;
-  constructor(private consultationS: ConsultationService, private router: Router) {
 
+  suiviForm: FormGroup;
+  constructor(private consultationS: ConsultationService, private router: Router, private formB: FormBuilder) {
+    this.suiviForm = formB.group({
+      evaluation: ["", [Validators.required]],
+      refererContent: [""],
+      isCheckedReferer: false, // dit si on doit envoyer ailleurs ou pas
+      isCheckedOM: false, // si on doit faire une ordonnance medicale
+      isCheckedOP: false, // dit si on doit faire une ordonnance prescriptive
+    });
   }
   ngOnChanges(): void {
     this.consultationS.getOneConsultation(this.idConsultation).subscribe((consultation) => {

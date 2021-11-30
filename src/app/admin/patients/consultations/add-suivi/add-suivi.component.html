@@ -9,76 +9,78 @@
       <strong>Le {{consultation?.date}}</strong>
     </p>
   </div>
-  <div class="body">
-    <nz-divider nzText="Hypotheses diagnostique initial" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      {{consultation?.hypotheses}}
-    </p>
-    <nz-divider nzText="Evaluation clinique" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
-    </p>
-    <nz-divider nzText="Exploration" nzOrientation="left" class="m-0"></nz-divider>
-    <table class="table">
-      <tr *ngIf="consultation?.ordonnance">
-        <td>Ordonnance medicale</td>
-        <td>
-          <a (click)="checkFile('#/admin/patients/medoc/'+consultation?._id)">
-
-          <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
-        </a>
-
-        </td>
-      </tr>
-      <tr  *ngIf="consultation?.analyse">
-
-        <td>Ordonnance exploration</td>
-        <td>
-          <a (click)="checkFile('#/admin/patients/analyse/'+consultation?._id)">
-
-          <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
-          </a>
-        </td>
-      </tr>
-      <tr class="result">
-
-        <td><strong>Resultats</strong></td>
-        <td>
-          <!-- mettre un array ici et charger les fichier dans l'array -->
-          <nz-list [nzBordered]="false" *ngFor="let in of array; let i=index">
-            <nz-list-item [aria-label]="in" >
-              <nz-avatar  nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
-            </nz-list-item>
-          </nz-list>
-        </td>
-        <td>
-          <mat-form-field class="">
-            <mat-label>Charger un fichier</mat-label>
-            <ngx-mat-file-input>
-            </ngx-mat-file-input>
-            <mat-icon matSuffix>file</mat-icon>
-          </mat-form-field>
-          <button class="btn btn-group" color="primary" (click)="addFile()">Sauvegarder</button>
-        </td>
-      </tr>
-    </table>
-
-    <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
-      <label nz-checkbox [(ngModel)]="isCheckedReferer">Referer</label>
-      <p class="mt-3">
-        <textarea name="" class=" form-control" *ngIf="isCheckedReferer" id="" matTextareaAutosize
-        placeholder="Ecrire ici"></textarea>
-      </p>
-
-    <p>
-      <label nz-checkbox [(ngModel)]="isCheckedOM">Ordonnance medicale</label>
-      <app-add-ordonnance *ngIf="isCheckedOM"></app-add-ordonnance>
+  <form >
+    <div class="body">
+      <nz-divider nzText="Hypotheses diagnostique initial" nzOrientation="left" class="m-0"></nz-divider>
       <p>
-        <label nz-checkbox [(ngModel)]="isCheckedOP">Ordonnance exploration</label>
-        <app-add-analyse *ngIf="isCheckedOP"></app-add-analyse>
+        {{consultation?.hypotheses}}
       </p>
-  </div>
-  <button class="btn-group btn btn-primary" [disabled]="!isCheckedOM && !isCheckedOP && !isCheckedReferer">
-    Enregistrer
-  </button>
+      <nz-divider nzText="Evaluation clinique" nzOrientation="left" class="m-0"></nz-divider>
+      <p>
+        <textarea name="" formControlName="evaluation" class=" form-control" id="" matTextareaAutosize></textarea>
+      </p>
+      <nz-divider nzText="Exploration" nzOrientation="left" class="m-0"></nz-divider>
+      <table class="table">
+        <tr *ngIf="consultation?.ordonnance">
+          <td>Ordonnance medicale</td>
+          <td>
+            <a (click)="checkFile('#/admin/patients/ordonnance/'+consultation?._id)">
+  
+            <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+          </a>
+  
+          </td>
+        </tr>
+        <tr  *ngIf="consultation?.analyse">
+  
+          <td>Ordonnance exploration</td>
+          <td>
+            <a (click)="checkFile('#/admin/patients/analyse/'+consultation?._id)">
+  
+            <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+            </a>
+          </td>
+        </tr>
+        <tr class="result">
+  
+          <td><strong>Resultats</strong></td>
+          <td>
+            <!-- mettre un array ici et charger les fichier dans l'array -->
+            <nz-list [nzBordered]="false" *ngFor="let in of array; let i=index">
+              <nz-list-item [aria-label]="in" >
+                <nz-avatar  nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+              </nz-list-item>
+            </nz-list>
+          </td>
+          <td>
+            <mat-form-field class="">
+              <mat-label>Charger un fichier</mat-label>
+              <ngx-mat-file-input>
+              </ngx-mat-file-input>
+              <mat-icon matSuffix>file</mat-icon>
+            </mat-form-field>
+            <button class="btn btn-group" color="primary" (click)="addFile()">Sauvegarder</button>
+          </td>
+        </tr>
+      </table>
+  
+      <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
+        <label nz-checkbox [(ngModel)]="isCheckedReferer">Referer</label>
+        <p class="mt-3">
+          <textarea name="" class=" form-control" *ngIf="isCheckedReferer" id="" matTextareaAutosize
+          placeholder="Ecrire ici"></textarea>
+        </p>
+  
+      <p>
+        <label nz-checkbox [(ngModel)]="isCheckedOM">Ordonnance medicale</label>
+        <app-add-ordonnance *ngIf="isCheckedOM"></app-add-ordonnance>
+        <p>
+          <label nz-checkbox [(ngModel)]="isCheckedOP">Ordonnance exploration</label>
+          <app-add-analyse *ngIf="isCheckedOP"></app-add-analyse>
+        </p>
+    </div>
+    <button class="btn-group btn btn-primary" [disabled]="!isCheckedOM && !isCheckedOP && !isCheckedReferer">
+      Enregistrer
+    </button>
+  </form>
 </div>

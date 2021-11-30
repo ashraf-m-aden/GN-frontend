@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "gn-sante"
+  },
+  "targets": {
+    "gn-sante": {
+      "hosting": {
+        "angularlight": [
+          "gn-sante"
+        ]
+      }
+    }
   }
 }

@@ -68,6 +68,7 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 // import { NzUploadModule } from 'ng-zorro-antd/upload';
 // import { NzResizableModule } from 'ng-zorro-antd/resizable';
 // import { NzPipesModule } from 'ng-zorro-antd/pipes';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @NgModule({
   exports: [
@@ -76,6 +77,7 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
     // NzAnchorModule,
     // NzAutocompleteModule,
     NzAvatarModule,
+    NzSpaceModule,
     // NzBackTopModule,
     // NzBadgeModule,
     NzButtonModule,
