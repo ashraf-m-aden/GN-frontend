@@ -5,6 +5,10 @@ export class Exploration {
   typeII: string;
   typeIII: string;
   typeIV: string;
+  resultat: boolean;
+  resultatUrl: string;
+  // tslint:disable-next-line:variable-name
+  _id: string;
 
 
 }

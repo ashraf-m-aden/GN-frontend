@@ -15,7 +15,7 @@ export class RefererComponent implements OnInit {
 
   consultation: Consultation;
   patient: Patient;
-  medocs;
+  refererContent;
   constructor(private consultationService: ConsultationService, private router: Router,
               private activated: ActivatedRoute, private patientS: PatientService) {
     activated.params.subscribe((data: any) => {
@@ -23,7 +23,8 @@ export class RefererComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         consultation.date = new Date(consultation.createdAt).getDate() + '/' + (new Date(consultation.createdAt).getMonth() + 1) + '/' + new Date(consultation.createdAt).getFullYear();
         this.consultation = consultation; // on met le resultat dans la variable consultation
-        this.medocs = consultation.medicaments;  // ici on isole les analyses pour un meilleur rendu dans le html
+        this.refererContent = consultation.refererList
+        .filter((element) => element._id === data.refererId );  // ici on isole les analyses pour un meilleur rendu dans le html
         patientS.getOnePatient(consultation.idPatient).subscribe((patient: Patient) => { // on recupere le patient pour afficher le nom
           this.patient = patient;
         });

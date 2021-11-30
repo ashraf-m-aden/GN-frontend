@@ -36,10 +36,9 @@ export class AddConsultationComponent implements OnInit {
     resultat: false,
     createdAt: '',
     date: '',
-    refererContent: '',
+    refererList: [],
     medicaments: [],
-    exploration: new Exploration(),
-    resultatId: undefined,
+    explorations: [],
     enabled: false
   };
 
@@ -75,7 +74,6 @@ export class AddConsultationComponent implements OnInit {
 
   }
   ngOnInit() {
-
   }
   checkOrdonnance() {
 
@@ -89,7 +87,6 @@ this.consultation.motif = this.consultationForm.get('motif').value;
 this.consultation.antecedents = this.consultationForm.get('antecedents').value;
 this.consultation.examen = this.consultationForm.get('examen').value;
 this.consultation.hypotheses = this.consultationForm.get('hypotheses').value;
-this.consultation.refererContent = this.consultationForm.get('refererContent').value;
 this.consultation.referer = this.consultationForm.get('isCheckedReferer').value;
 this.consultation.ordonnance = this.consultationForm.get('isCheckedOM').value;
 this.consultation.analyse = this.consultationForm.get('isCheckedOP').value;
@@ -137,13 +134,48 @@ await this.consultS.addConsultation(this.consultation).subscribe(() => {
     this.consultation.medicaments = array;
   }
   addNewExploration(array) {
-    // cette fonction ajoute un medicament au tableau des medoc de la consultation elle est connecté au
-    // props des medocs
-    this.consultation.exploration = array;
+    // cette fonction ajoute une exploration au tableau des exploration de la consultation elle est connecté au
+    // props des explorations
+    this.consultation.explorations.push(array);
   }
 
   goToAllConsultation() { // une fois la consultation enregistrer on change de page pour aller à l'historique
     this.page.emit('1');
   }
+
+  addRowReferer(): void {
+    this.consultation.refererList = [
+      ...this.consultation.refererList,
+      {
+        refererContent: '',
+        _id: undefined,
+      }
+    ];
+  }
+
+  addRowExpo(): void {
+    this.consultation.explorations = [
+      ...this.consultation.explorations,
+      {
+        analyses: [],
+        typeI: '',
+        typeII: '',
+        typeIII: '',
+        typeIV: '',
+        resultat: false,
+        resultatUrl: '',
+        _id: undefined
+      }
+    ];
+  }
+
+  deleteRowReferer(content: string): void {
+    this.consultation.refererList = this.consultation.refererList.filter(d => d.refererContent !== content);
+  }
+
+  deleteRowExpo(content): void {
+    this.consultation.explorations = this.consultation.explorations.filter(d => d.analyses !== content);
+  }
+
 
 }

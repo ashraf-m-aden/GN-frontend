@@ -27,7 +27,8 @@ export class AddAnalyseComponent implements OnInit {
   id: number;
   isLinear = false;
   HFormGroup1: FormGroup;
-  newAnalyse: Exploration = { analyses: [], typeI: '', typeII: '', typeIII: '', typeIV: '' };
+  newAnalyse: Exploration = { _id: undefined,
+     analyses: [], typeI: '', typeII: '', typeIII: '', typeIV: '', resultat: false, resultatUrl: '' };
   array1 = [{
     name: "SANGUIN",
     id: 21,

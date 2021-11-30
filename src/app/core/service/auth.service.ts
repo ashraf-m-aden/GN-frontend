@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -40,12 +40,15 @@ export class AuthService {
     // remove user from local storage to log user out
     return this.http
     .get<any>(`${environment.apiUrl}/user/logout`, {headers: this.setHeader()}).subscribe(() => {
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('token');
+
       this.router.navigate(["/authentication/signin"]);
     },
-      () => {
-        this.router.navigate(["/authentication/signin"]);
+      (error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('token');
+          this.router.navigate(["/authentication/signin"]);
+        }
 
       });
 

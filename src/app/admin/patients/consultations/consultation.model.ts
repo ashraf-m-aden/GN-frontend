@@ -1,3 +1,4 @@
+import { Referer } from './../analyses/referer.model';
 import { Exploration } from '../analyses/analyse.model';
 import { Ordonnance } from './../analyses/ordonnance.model';
 export class Consultation {
@@ -20,10 +21,9 @@ export class Consultation {
   resultat: boolean;
   createdAt: string;
   date: string;
-  refererContent: string;
+  refererList: Array<Referer>;
   medicaments: Array<Ordonnance>;
-  exploration: Exploration;
-  resultatId: string;
+  explorations: Array<Exploration>;
   enabled: boolean;
 
 

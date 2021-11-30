@@ -55,4 +55,8 @@ export class AddSuiviComponent implements OnInit, OnChanges {
     window.open(url, "_blank");
   }
 
+  submit() {
+
+  }
+
 }
