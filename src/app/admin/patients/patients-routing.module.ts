@@ -34,7 +34,7 @@ const routes: Routes = [
     component: PatientProfileComponent,
   },
   {
-    path: "ordonnance/:id/:ordonnanceId",
+    path: "ordonnance/:id",
     canActivate: [AuthGuard],
     component: OrdonnanceComponent,
   },

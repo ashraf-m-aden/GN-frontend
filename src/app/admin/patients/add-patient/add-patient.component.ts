@@ -26,12 +26,12 @@ export class AddPatientComponent {
 
   selectedFiles: FileList;
   currentFileUpload: UploadComponent;
-  percentage: number;
+  patientLoading: boolean;
 
   constructor(private fb: FormBuilder, private patientS: PatientService,
               public httpClient: HttpClient,
               public dialog: MatDialog,
-              private router: Router,
+              private router: Router, private storage: AngularFireStorage,
               private modalService: NgbModal,
     // tslint:disable-next-line:variable-name
               private _snackBar: MatSnackBar,
@@ -142,21 +142,36 @@ export class AddPatientComponent {
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
 
+    this.patientLoading = true;
+
     this.currentFileUpload = new UploadComponent(file);
-    this.uploadService.pushFileToStorage(this.currentFileUpload, this.basePath).subscribe(
-      percentage => {
-        this.percentage = Math.round(percentage);
-        if (this.percentage === 100) {
-        }
-      },
-      error => {
+    const filePath = `${this.basePath}/${this.currentFileUpload.file.name}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, this.currentFileUpload.file);
+
+    uploadTask.snapshotChanges().
+    subscribe(() => {
+      storageRef.getDownloadURL().subscribe(downloadURL => {
+        this.patient.img = downloadURL;
+        this.patientLoading = false;
+      },  error => {
+        this.patientLoading = false;
         this.showNotification(
           "bg-red",
           "Un probleme est survenu, veuillez reessayer",
           "bottom",
           "right"
-        );      }
-    );
-  }
+        );
+      });
+    },  error => {
+      this.patientLoading = false;
+      this.showNotification(
+        "bg-red",
+        "Un probleme est survenu, veuillez reessayer",
+        "bottom",
+        "right"
+      );
+    });
+}
 
 }

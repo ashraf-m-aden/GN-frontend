@@ -1,7 +1,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="header">
     <h4>
-      <strong>Consultation</strong>
+      <strong>Consultation de type suivi</strong>
     </h4>
   </div>
   <div class="float-end">
@@ -10,16 +10,11 @@
     </p>
   </div>
   <div class="body">
-    <nz-divider nzText="Motif" nzOrientation="left" class="m-0"></nz-divider>
-    <p>{{consultation?.motif}} </p>
-    <nz-divider nzText="Antecedents" nzOrientation="left" class="m-0"></nz-divider>
-    <p>{{consultation?.antecedents}} </p>
-    <nz-divider nzText="Examen" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      {{consultation?.examen}} </p>
     <nz-divider nzText="Hypotheses" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      {{consultation?.hypotheses}} </p>
+    <p>{{consultation?.hypotheses}} </p>
+    <nz-divider nzText="Evaluation" nzOrientation="left" class="m-0"></nz-divider>
+    <p>{{consultation?.evaluation}} </p>
+
     <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
     <nz-list nzItemLayout="horizontal">
       <nz-list-item *ngIf="consultation?.referer">
@@ -63,4 +58,3 @@
   <button *ngIf="consultation?.idPreviousConsultation" type="button" class="btn btn-group btn-warning" mat-button (click)="checkConsultation(consultation?.idPreviousConsultation, consultation.previous)">Consultation anterieur</button>
   <button *ngIf="consultation?.idNextConsultation" (click)="checkConsultation(consultation?.idNextConsultation, false)" type="button" class="btn btn-group btn-primary" mat-button>Consultation suivante</button>
 </div>
-

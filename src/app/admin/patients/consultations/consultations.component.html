@@ -16,68 +16,36 @@
                 </li>
               </ul>
             </div>
-            <div class="col-4">
-              <ul class="header-buttons">
-                <!-- <li>
-                  <div class="icon-button-demo">
-                    <button mat-mini-fab color="primary" (click)="addNew()">
-                      <mat-icon class="col-white">add</mat-icon>
-                    </button>
-                  </div>
-                </li> -->
-                <li>
-                  <div class="icon-button-demo">
-                    <button mat-mini-fab color="primary" (click)="refresh()">
-                      <mat-icon class="col-white">refresh</mat-icon>
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            </div>
+
           </div>
         </div>
-        <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+        <nz-table #filterTable [nzData]="renderedData" nzTableLayout="fixed">
+          <thead>
+            <tr>
+              <th
+                *ngFor="let column of displayedColumns"
+              >
+                {{ column.name }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of filterTable.data" (click)="checkConsultation(data._id, data.initial)">
+              <td>{{ data.date }}</td>
+              <td>{{ data.doctor }}</td>
+              <td>
+                <p *ngIf="data.isGN">Consultation interne</p>
+                <p *ngIf="!data.isGN">Consultation externe</p>
+              </td>
+              <td>
+                <p *ngIf="data.initial">Consultation initiale</p>
+                <p *ngIf="!data.initial">Suivi de consultation</p>
 
-          <!-- ID Column -->
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
-          </ng-container>
+              </td>
 
-          <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbr-col-width-per-8'">Date</mat-header-cell>
-            <mat-cell *matCellDef="let row" [ngClass]="'tbr-col-width-per-8'"> {{row.date}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="doc">
-            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbr-col-width-per-8'">Docteur
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" [ngClass]="'tbr-col-width-per-8'"> {{row.doctor}}
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="motif">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Motif</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.motif}}</mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="checkConsultation(row._id)"
-            [style.cursor]="'pointer'" matRipple>
-          </mat-row>
-        </mat-table>
-        <!-- Loading spinner -->
-        <div *ngIf="exampleDatabase.isTblLoading" class="tbl-spinner">
-          <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
-          </mat-progress-spinner>
-        </div>
-        <div *ngIf="!exampleDatabase.isTblLoading" class="no-results"
-          [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-          Pas de resultats
-        </div>
-        <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="5"
-          [pageSizeOptions]="[5, 10, 25, 50]">
-        </mat-paginator>
+            </tr>
+          </tbody>
+        </nz-table>
       </div>
     </div>
 </div>

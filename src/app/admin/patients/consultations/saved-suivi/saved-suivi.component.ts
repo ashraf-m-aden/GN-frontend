@@ -1,21 +1,19 @@
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/service/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Consultation } from './../consultation.model';
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConsultationService } from 'src/app/admin/services/consultation.service';
+import { Consultation } from '../consultation.model';
 
 @Component({
-  selector: 'app-saved-consultation',
-  templateUrl: './saved-consultation.component.html',
-  styleUrls: ['./saved-consultation.component.sass']
+  selector: 'app-saved-suivi',
+  templateUrl: './saved-suivi.component.html',
+  styleUrls: ['./saved-suivi.component.sass']
 })
-export class SavedConsultationComponent implements OnInit, OnChanges {
+export class SavedSuiviComponent implements OnInit, OnChanges {
   @Input() idConsultation: string;
   @Output() suivi = new EventEmitter<Array<any>>();
-  consultation: Consultation;
   @Output() sendData = new EventEmitter<Array<string>>(); // il envoit l'id de la consultation souhaité et si c initial ou pas
-
+  consultation: Consultation;
 
   constructor(private consultationService: ConsultationService, private router: Router) {
 

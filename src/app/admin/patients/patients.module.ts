@@ -55,6 +55,7 @@ import { ExplorationsComponent } from './explorations/explorations.component';
 import { RefererComponent } from './ordonnances/referer/referer.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { UploadComponent } from './upload/upload.component';
+import { SavedSuiviComponent } from './consultations/saved-suivi/saved-suivi.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -82,7 +83,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AddOrdonnanceComponent,
     ExplorationsComponent,
     RefererComponent,
-    UploadComponent
+    UploadComponent,
+    SavedSuiviComponent
   ],
   imports: [
     CommonModule,

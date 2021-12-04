@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { Consultation } from './../consultations/consultation.model';
 import { ConsultationService } from 'src/app/admin/services/consultation.service';
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { Exploration } from './exploration.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -29,6 +28,7 @@ export class ExplorationsComponent implements OnInit, OnChanges {
     this.consultationS.getExplorations(this.idExpoType).subscribe(async (data: any) => {
       await data.forEach(element => {
         element.type = this.type;
+
       });
       this.listOfData = data;
     }, (error: HttpErrorResponse) => {

@@ -21,6 +21,9 @@ export class AddConsultationComponent implements OnInit {
     _id: undefined,
     idUser: '',
     initial: true ,
+    previous: false ,
+    idPreviousConsultation: undefined,
+    idNextConsultation: undefined,
     idPatient: '',
     doctor: '',
     patient: '',
@@ -39,8 +42,10 @@ export class AddConsultationComponent implements OnInit {
     refererList: [],
     medicaments: [],
     explorations: [],
-    enabled: false
+    enabled: true
   };
+
+  arrayExpo = []; // c'est pour compter le nombre de tableau analyse
 
   loading = false; // une fois que submit a eté cliqué le bouton loading apparait
   docProfile: User = JSON.parse(localStorage.getItem('currentUser'));
@@ -94,6 +99,8 @@ this.consultation.idUser = this.docProfile._id;
 this.consultation.doctor = this.docProfile.name;
 this.consultation.date = new Date().getDate() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getFullYear();
 this.consultation.idPatient = localStorage.getItem('idPatient');
+
+
 await this.consultS.addConsultation(this.consultation).subscribe(() => {
       this.showNotification(
         "bg-green",
@@ -133,10 +140,15 @@ await this.consultS.addConsultation(this.consultation).subscribe(() => {
     // props des medocs
     this.consultation.medicaments = array;
   }
-  addNewExploration(array) {
+  addNewExploration(analyses: Exploration) {
     // cette fonction ajoute une exploration au tableau des exploration de la consultation elle est connecté au
     // props des explorations
-    this.consultation.explorations.push(array);
+    this.consultation.explorations[this.consultation.explorations.length - 1].analyses =  analyses.analyses;
+    this.consultation.explorations[this.consultation.explorations.length - 1].typeI =  analyses.typeI;
+    this.consultation.explorations[this.consultation.explorations.length - 1].typeII =  analyses.typeII;
+    this.consultation.explorations[this.consultation.explorations.length - 1].typeIII =  analyses.typeIII;
+    this.consultation.explorations[this.consultation.explorations.length - 1].typeIV =  analyses.typeIV;
+
   }
 
   goToAllConsultation() { // une fois la consultation enregistrer on change de page pour aller à l'historique
@@ -147,6 +159,7 @@ await this.consultS.addConsultation(this.consultation).subscribe(() => {
     this.consultation.refererList = [
       ...this.consultation.refererList,
       {
+        refererType: '',
         refererContent: '',
         _id: undefined,
       }

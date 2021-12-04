@@ -389,7 +389,7 @@ export class AddAnalyseComponent implements OnInit {
     this.modalService.dismissAll();
     this.showNotification(
       "bg-green",
-      "Add Record Successfully",
+      "Analyse enregistrée",
       "bottom",
       "right"
     );
@@ -406,7 +406,7 @@ export class AddAnalyseComponent implements OnInit {
     this.analyseArray.emit(this.newAnalyse);
     this.showNotification(
       "bg-black",
-      "Edit Record Successfully",
+      "Analyse enregistrée",
       "bottom",
       "right"
     );
@@ -426,7 +426,7 @@ export class AddAnalyseComponent implements OnInit {
     this.data = this.arrayRemove(this.data, item);
     this.showNotification(
       "bg-red",
-      "Delete Record Successfully",
+      "Analyse Supprimée",
       "bottom",
       "right"
     );

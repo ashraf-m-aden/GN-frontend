@@ -22,9 +22,11 @@ export class AnalyseComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         consultation.date = new Date(consultation.createdAt).getDate() + '/' + (new Date(consultation.createdAt).getMonth() + 1) + '/' + new Date(consultation.createdAt).getFullYear();
         this.consultation = consultation; // on met le resultat dans la variable consultation
-        this.exploration = consultation.explorations.filter((element) => {
+        const array = consultation.explorations.filter((element) => {
           return element._id === data.exploId;
         });  // ici on isole les analyses pour un meilleur rendu dans le html
+        this.exploration = array[0];
+
         patientS.getOnePatient(consultation.idPatient).subscribe((patient: Patient) => { // on recupere le patient pour afficher le nom
           this.patient = patient;
         });

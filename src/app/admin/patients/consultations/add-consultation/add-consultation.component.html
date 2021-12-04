@@ -35,17 +35,18 @@
       <div *ngIf="consultationForm.get('isCheckedReferer').value">
         <br />
         <br />
-        <nz-table #editRowTable nzBordered [nzData]="consultation.refererList">
+        <nz-table #editRowTable nzBordered [nzData]="consultation?.refererList">
           <tbody>
             <tr *ngFor="let data of editRowTable.data; let i=index" class="editable-row">
               <td>
-                <textarea [(ngModel)]="data.refererContent" [ngModelOptions]="{standalone: true}" name=""
-                  class=" form-control" *ngIf="consultationForm.get('isCheckedReferer').value" id="" matTextareaAutosize
-                  placeholder="Ecrire ici"></textarea>
+                <label for="typeReferer"><strong>Type:</strong></label><input type="text" id="typeReferer" class="form-control mb-3" placeholder="Ecrivez ici le type de referer"  [ngModelOptions]="{standalone: true}" matInput [(ngModel)]="data.refererType" />
+                <label for="refererContent"><strong>Contenue:</strong></label><textarea id="refererContent" [(ngModel)]="data.refererContent" [ngModelOptions]="{standalone: true}" name=""
+                  class=" form-control" id="" matTextareaAutosize
+                  placeholder="Ecrivez ici le contenu du referer"></textarea>
               </td>
               <td>
                 <button
-                (click)="deleteRow(data.refererContent)">Supprimer</button>
+                (click)="deleteRowReferer(data.refererContent)">Supprimer</button>
               </td>
             </tr>
           </tbody>
@@ -68,16 +69,16 @@
           </div>
 
 
-          <nz-table #editRowTable nzBordered [nzData]="consultation.explorations">
+          <nz-table *ngIf="consultationForm.get('isCheckedOP').value" #editRowTable nzBordered>
             <tbody>
-              <tr *ngFor="let data of editRowTable.data; let i=index" class="editable-row">
+              <tr *ngFor="let data of consultation.explorations; let i=index" class="editable-row">
                 <td>
-                  <app-add-analyse (analyseArray)="addNewExploration($event)" *ngIf="consultationForm.get('isCheckedOP').value">
+                  <app-add-analyse (analyseArray)="addNewExploration($event)" >
                   </app-add-analyse>
                 </td>
                 <td>
                   <button
-                    (click)="deleteRow(data.analyses)">Supprimer</button>
+                    (click)="deleteRowExpo(i)">Supprimer</button>
                 </td>
               </tr>
             </tbody>

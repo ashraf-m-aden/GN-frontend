@@ -28,22 +28,9 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
       .set('X-Requested-Width', 'XMLHttpRequest').set('Authorization', 'Bearer ' + localStorage.getItem('token'));
   }
 
-  getAllConsultations(userId): void {
+  getAllConsultations(userId) {
     // tslint:disable-next-line:max-line-length
-    this.subs.sink = this.httpClient.get<Consultation[]>(`${environment.apiUrl}/consultations/` + userId, { headers: this.setHeader() }).subscribe(
-      (data) => {
-        data.forEach(element => {
-          // tslint:disable-next-line:max-line-length
-          element.date = new Date(element.createdAt).getDate() + '/' + (new Date(element.createdAt).getMonth() + 1) + '/' + new Date(element.createdAt).getFullYear();
-        });
-        this.isTblLoading = false;
-        this.dataChange.next(data);
-      },
-      (error: HttpErrorResponse) => {
-        this.isTblLoading = false;
-        console.log(error.name + " " + error.message);
-      }
-    );
+    return this.httpClient.get<Consultation[]>(`${environment.apiUrl}/consultations/` + userId, { headers: this.setHeader() });
   }
   getOneConsultation(idConsultation) {
     // tslint:disable-next-line:max-line-length

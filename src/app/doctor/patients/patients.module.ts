@@ -56,6 +56,7 @@ import { AddSuiviExterneComponent } from './consultations/add-suivi-externe/add-
 import { AddOrdonnanceComponent } from './analyses/add-ordonnance/add-ordonnance.component';
 import { ExplorationsComponent } from './explorations/explorations.component';
 import { RefererComponent } from './ordonnances/referer/referer.component';
+import { SavedSuiviComponent } from './consultations/saved-suivi/saved-suivi.component';
 
 
 const antDesignIcons = AllIcons as {
@@ -84,7 +85,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AddSuiviExterneComponent,
     AddOrdonnanceComponent,
     ExplorationsComponent,
-    RefererComponent
+    RefererComponent,
+    SavedSuiviComponent
   ],
   imports: [
     CommonModule,

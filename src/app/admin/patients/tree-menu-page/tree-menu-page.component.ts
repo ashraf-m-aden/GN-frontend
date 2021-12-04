@@ -11,7 +11,6 @@ export class TreeMenuPageComponent  implements OnInit, OnChanges {
   @Input() Expotype: string; // pour avoir le type d'exploration
   @Input() id: string; // id pour regarder les consultations existante
   @Output() idConsultation = new EventEmitter<string>();
-
   consultationId: string; // c'est l'id de la consultation saved
   constructor() { }
 
@@ -21,21 +20,27 @@ export class TreeMenuPageComponent  implements OnInit, OnChanges {
     this.idConsultation.emit(this.id);
     this.isPage(this.page);
   }
-  checkConsultation(id){ // permet d'envoyez le id de la consultation desirée on va directement au saved-consultation
-    this.consultationId = id;
-    this.page = "14";
+  checkConsultation(data){ // permet d'envoyez le id de la consultation desirée on va directement au saved-consultation
+    this.consultationId = data[0];
+    if (data[1]) {
+      this.page = "14";
+    } else {
+      this.page = "15";
+
+    }
   }
 
   goToPage(page) {
     this.page = page;
   }
   addSuivi(suivi){ // permet d'aller a la page suivi consultation
-
-    this.id = suivi[0];
+    this.idConsultation.emit(suivi[0]);
     if (suivi[1]) {
-      this.page = "01";
-    } else {
+
       this.page = '02';
+    } else {
+      this.page = '01';
+
     }
   }
 

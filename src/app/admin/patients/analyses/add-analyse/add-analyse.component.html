@@ -23,7 +23,7 @@
                         <div class="header d-flex justify-content-end">
                           <ul class="header-buttons float-end">
                             <li>
-                              <button mat-mini-fab color="primary" type="button" (click)='addRow(addRecord)'>
+                              <button mat-mini-fab [disabled]="newAnalyse.typeIII == ''" color="primary" type="button" (click)='addRow(addRecord)'>
                                 <mat-icon class="col-white">add</mat-icon>
                               </button>
                             </li>
