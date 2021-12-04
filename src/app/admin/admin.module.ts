@@ -1,4 +1,3 @@
-import { PatientService } from './../doctor/patients/allpatients/patient.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -10,6 +9,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AnalyseTypeTypeService } from './services/analyse-type.service';
 import { ConsultationService } from './services/consultation.service';
 import { MedocService } from './services/medoc.service';
+import { PatientService } from './services/patient.service';
 
 @NgModule({
   declarations: [],

@@ -29,9 +29,6 @@ import { AddPatientComponent } from "./add-patient/add-patient.component";
 import { AllpatientsComponent } from "./allpatients/allpatients.component";
 import { EditPatientComponent } from "./edit-patient/edit-patient.component";
 import { PatientProfileComponent } from "./patient-profile/patient-profile.component";
-import { DeleteComponent } from "./allpatients/dialog/delete/delete.component";
-import { FormDialogComponent } from "./allpatients/dialog/form-dialog/form-dialog.component";
-import { PatientService } from "./allpatients/patient.service";
 import { ConsultationsComponent } from './consultations/consultations.component';
 import {NgxPrintModule} from 'ngx-print';
 import { OrdonnanceComponent } from './ordonnances/ordonnance/ordonnance.component';
@@ -56,6 +53,8 @@ import { AddSuiviExterneComponent } from './consultations/add-suivi-externe/add-
 import { AddOrdonnanceComponent } from './analyses/add-ordonnance/add-ordonnance.component';
 import { ExplorationsComponent } from './explorations/explorations.component';
 import { RefererComponent } from './ordonnances/referer/referer.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { UploadComponent } from './upload/upload.component';
 import { SavedSuiviComponent } from './consultations/saved-suivi/saved-suivi.component';
 
 
@@ -70,8 +69,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AllpatientsComponent,
     EditPatientComponent,
     PatientProfileComponent,
-    DeleteComponent,
-    FormDialogComponent,
     ConsultationsComponent,
     OrdonnanceComponent,
     CommentairesComponent,
@@ -86,6 +83,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AddOrdonnanceComponent,
     ExplorationsComponent,
     RefererComponent,
+    UploadComponent,
     SavedSuiviComponent
   ],
   imports: [
@@ -122,7 +120,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   ],
   bootstrap: [ PatientProfileComponent ],
 
-  providers: [PatientService, ConsultationService, MedocService,
-    { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons },
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}
+  ],
 })
 export class PatientsModule {}

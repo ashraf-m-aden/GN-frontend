@@ -1,3 +1,4 @@
+import { PatientService } from './services/patient.service';
 import { ConsultationService } from './services/consultation.service';
 import { MedocService } from './services/medoc.service';
 import { NgModule } from '@angular/core';
@@ -57,6 +58,6 @@ import { AnalyseTypeTypeService } from './services/analyse-type.service';
     MatRadioModule,
     DragDropModule,
   ],
-  providers: [AnalyseTypeTypeService, MedocService, ConsultationService]
+  providers: [AnalyseTypeTypeService, MedocService, ConsultationService, PatientService]
 })
 export class DoctorModule {}

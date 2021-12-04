@@ -22,7 +22,7 @@
                         <address>
                           <p class="m-t-30">
                             <b>Djibouti le </b>
-                            14 Juillet 2017
+                            {{consultation?.date}}
                           </p>
                         </address>
                       </div>
@@ -31,16 +31,17 @@
                       <span class="title">CONSULTATION</span>
                     </div>
                     <div class="col-12 mt-5">
-                      <strong>NOM: Ashraf Mohamed Aden</strong>
+                      <strong>NOM: {{patient?.name}}</strong>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-5">
+                      <h3 class="text-center"><u>{{referer?.refererType}}</u></h3>
                       <div class="table-responsive m-t-40">
                         <table class="table table-hover">
                           <tbody>
                             <tr>
                               <td class="text-center">1)</td>
 
-                              <td class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur commodi quod obcaecati ducimus delectus tempore mollitia. Repudiandae mollitia, voluptates odit, blanditiis doloremque eos omnis enim corporis facilis fuga et officiis. <br>
+                              <td class="">{{referer?.refererContent}} <br>
                             </tr>
 
 
@@ -54,7 +55,7 @@
                         <p class="m-b-100">Signature et tampon</p>
                         <p>
                           <strong>Prescripteur : </strong>
-                          Dr. Djibril Mohamed</p>
+                          {{consultation?.doctor}}</p>
                       </div>
                       <div class="clearfix"></div>
                       <hr>

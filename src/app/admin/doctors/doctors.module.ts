@@ -21,7 +21,7 @@ import { AddDoctorComponent } from "./add-doctor/add-doctor.component";
 import { DoctorProfileComponent } from "./doctor-profile/doctor-profile.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { DoctorsService } from "./alldoctors/doctors.service";
+import { DoctorsService } from "../services/doctors.service";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { NgApexchartsModule } from "ng-apexcharts";

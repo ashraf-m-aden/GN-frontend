@@ -1,33 +1,35 @@
 export class Patient {
-  id: number;
-  img: string;
   name: string;
   gender: string;
-  date: string;
-  address: string;
-  mobile: string;
   matricule: string;
   gendarme: boolean;
   dossier: string;
-  constructor(patient) {
-    {
-      this.id = patient.id || this.getRandomID();
-      this.img = patient.avatar || "assets/images/user/user1.jpg";
-      this.name = patient.name || "";
-      this.gender = patient.gender || "male";
-      this.date = patient.date || "";
-      this.address = patient.address || "";
-      this.mobile = patient.mobile || "";
-      this.matricule = patient.matricule || "";
-      this.gendarme = patient.gendarme || "";
-      this.dossier = patient.dossier || "";
-    }
-  }
-  public getRandomID(): string {
-    const S4 =  () => {
-      // tslint:disable-next-line:no-bitwise
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return S4() + S4();
+  // tslint:disable-next-line:variable-name
+  _id: string;
+  numero: string;
+  addresse: string;
+  email: string;
+  bloodType: string;
+  dob: string;
+  img: string;
+  imgName: string;
+  enabled: boolean;
+  constructor() {
+    //   this._id = patient.id;
+    //  // this.img = patient.img || "assets/images/user/user1.jpg";
+    //   this.name = patient.name || "";
+    //   this.gender = patient.gender || "male";
+    //   this.email = patient.email;
+    //   this.addresse = patient.address || "";
+    //   this.numero = patient.numero || "";
+    //   this.matricule = patient.matricule || "";
+    //   this.gendarme = patient.gendarme || false;
+    //   this.dossier = patient.dossier || "0";
+    //   this.dob = patient.dob || "";
+    //   this.bloodType = patient.bloodType || "";
+    //   this.img = patient.img || "";
+    //   this.imgName = patient.imgName || "";
+    //   this.enabled = patient.enabled ;
+    // }
   }
 }

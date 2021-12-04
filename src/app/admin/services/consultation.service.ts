@@ -1,24 +1,13 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
 import { Consultation } from "../patients/consultations/consultation.model";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
 import { environment } from "src/environments/environment";
 @Injectable()
 export class ConsultationService extends UnsubscribeOnDestroyAdapter {
-  private readonly API_URL = "assets/data/consultations.json";
-  isTblLoading = true;
-  dataChange: BehaviorSubject<Consultation[]> = new BehaviorSubject<Consultation[]>([]);
-  // Temporarily stores data from dialogs
-  dialogData: any;
+
   constructor(private httpClient: HttpClient) {
     super();
-  }
-  get data(): Consultation[] {
-    return this.dataChange.value;
-  }
-  getDialogData() {
-    return this.dialogData;
   }
   /** CRUD METHODS */
 
@@ -46,7 +35,6 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
 
   }
   updateConsultation(consultation: Consultation): void {
-    this.dialogData = consultation;
 
     /* this.httpClient.put(this.API_URL + patient.id, patient).subscribe(data => {
       this.dialogData = patient;

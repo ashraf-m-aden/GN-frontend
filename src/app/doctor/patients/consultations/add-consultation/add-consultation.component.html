@@ -5,38 +5,96 @@
     </h2>
   </div>
   <div class="body">
-    <nz-divider nzText="Motif" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
-    </p>
-    <nz-divider nzText="Antecedents" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
-    </p>
-    <nz-divider nzText="Examen" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
-    </p>
-    <nz-divider nzText="Hypotheses" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      <textarea name="" class=" form-control" id="" matTextareaAutosize></textarea>
-    </p>
-    <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
-      <label nz-checkbox [(ngModel)]="isCheckedReferer">Referer</label>
-      <p class="mt-3">
-        <textarea name="" class=" form-control" *ngIf="isCheckedReferer" id="" matTextareaAutosize
-        placeholder="Ecrire ici"></textarea>
-      </p>
-    <p>
-      <label nz-checkbox [(ngModel)]="isCheckedOM">Ordonnance medicale</label>
-      <app-add-ordonnance *ngIf="isCheckedOM"></app-add-ordonnance>
-
+    <form [formGroup]="consultationForm" (ngSubmit)="onSubmit()">
+      <nz-divider nzText="Motif" nzOrientation="left" class="m-0"></nz-divider>
       <p>
-        <label nz-checkbox [(ngModel)]="isCheckedOP">Ordonnance exploration</label>
-        <app-add-analyse *ngIf="isCheckedOP"></app-add-analyse>
-        </p>
+        <textarea name="motif" formControlName="motif" class=" form-control" id="" matTextareaAutosize></textarea>
+      </p>
+      <nz-divider nzText="Antecedents" nzOrientation="left" class="m-0"></nz-divider>
+      <p>
+        <textarea name="antecedents" formControlName="antecedents" class=" form-control" id=""
+          matTextareaAutosize></textarea>
+      </p>
+      <nz-divider nzText="Examen" nzOrientation="left" class="m-0"></nz-divider>
+      <p>
+        <textarea name="examen" formControlName="examen" class=" form-control" id="" matTextareaAutosize></textarea>
+      </p>
+      <nz-divider nzText="Hypotheses" nzOrientation="left" class="m-0"></nz-divider>
+      <p>
+        <textarea name="hypotheses" formControlName="hypotheses" class=" form-control" id=""
+          matTextareaAutosize></textarea>
+      </p>
+      <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
+      <div class="d-flex justify-content-between">
+        <label class="large" nz-checkbox formControlName="isCheckedReferer">Ajouter un referer</label>
+        <button class="large" *ngIf="consultationForm.get('isCheckedReferer').value" nz-button (click)="addRowReferer()"
+          nzType="primary" type="button">+</button>
+
+      </div>
+
+      <div *ngIf="consultationForm.get('isCheckedReferer').value">
+        <br />
+        <br />
+        <nz-table #editRowTable nzBordered [nzData]="consultation?.refererList">
+          <tbody>
+            <tr *ngFor="let data of editRowTable.data; let i=index" class="editable-row">
+              <td>
+                <label for="typeReferer"><strong>Type:</strong></label><input type="text" id="typeReferer" class="form-control mb-3" placeholder="Ecrivez ici le type de referer"  [ngModelOptions]="{standalone: true}" matInput [(ngModel)]="data.refererType" />
+                <label for="refererContent"><strong>Contenue:</strong></label><textarea id="refererContent" [(ngModel)]="data.refererContent" [ngModelOptions]="{standalone: true}" name=""
+                  class=" form-control" id="" matTextareaAutosize
+                  placeholder="Ecrivez ici le contenu du referer"></textarea>
+              </td>
+              <td>
+                <button
+                (click)="deleteRowReferer(data.refererContent)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+
+      <p class="mt-4">
+
+          <label class="large" nz-checkbox formControlName="isCheckedOM">Ajouter une ordonnance medicale</label>
+        <app-add-ordonnance (medocArray)="addNewMedoc($event)" *ngIf="consultationForm.get('isCheckedOM').value">
+        </app-add-ordonnance>
+
+        <p class="mt-4">
+          <div class="d-flex justify-content-between">
+
+            <label class="large" nz-checkbox formControlName="isCheckedOP">Ajouter une ordonnance exploration</label>
+            <button class="large" *ngIf="consultationForm.get('isCheckedOP').value" nz-button
+              (click)="addRowExpo()" nzType="primary" type="button">+</button>
+
+          </div>
+
+
+          <nz-table *ngIf="consultationForm.get('isCheckedOP').value" #editRowTable nzBordered>
+            <tbody>
+              <tr *ngFor="let data of consultation.explorations; let i=index" class="editable-row">
+                <td>
+                  <app-add-analyse (analyseArray)="addNewExploration($event)" >
+                  </app-add-analyse>
+                </td>
+                <td>
+                  <button
+                    (click)="deleteRowExpo(i)">Supprimer</button>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+
+
+        <button class="mt-5 btn-group btn btn-primary" *ngIf="!loading" [disabled]=" consultationForm.invalid" type="submit">
+          Enregistrer
+        </button>
+        <button *ngIf="loading" disabled nz-button nzType="primary" class="btn-group btn btn-primary" type="button"
+          nzLoading>
+          Enregistrement
+        </button>
+    </form>
+
   </div>
-  <button class="btn-group btn btn-primary" [disabled]="!isCheckedOM && !isCheckedOP && !isCheckedReferer">
-    Enregistrer
-  </button>
+
+
 </div>

@@ -22,7 +22,7 @@
                         <address>
                           <p class="m-t-30">
                             <b>Djibouti le </b>
-                            14 Juillet 2017
+                            {{consultation?.date}}
                           </p>
                         </address>
                       </div>
@@ -31,30 +31,20 @@
                       <span class="title">ORDONNANCE MEDICALE</span>
                     </div>
                     <div class="col-12 mt-5">
-                      <strong>NOM: Ashraf Mohamed Aden</strong>
+                      <strong>NOM: {{patient?.name}}</strong>
                     </div>
                     <div class="col-md-12">
                       <div class="table-responsive m-t-40">
                         <table class="table table-hover">
                           <tbody>
-                            <tr>
-                              <td class="text-center">1)</td>
+                            <tr *ngFor="let item of medocs; let i=index;">
+                              <td class="text-center">{{i+1}}</td>
 
-                              <td class=""><u>Amoxicilline gelule 500mg</u> <br>
-                              <i>02 gel x 2 /jrs pendant 07 jours</i></td>
+                              <td><u>{{ item?.medicament }}</u> <br>
+                                <i>{{item?.unite}} comprimés <span *ngIf="item?.frequence > 1"> {{item?.frequence}} fois</span> par jour, pendant {{item?.jour}} jours. </i></td>
+                                <td>
                             </tr>
-                            <tr>
-                              <td class="text-center">2)</td>
 
-                              <td class=""><u>Paracetamol CP 1 g</u> <br>
-                              <i>01 CP x 3 /jrs pendant 5 jours </i></td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">3)</td>
-
-                              <td class=""><u>Multivitamin comprimé</u> <br>
-                              <i>01 CP / jrs </i></td>
-                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -65,7 +55,7 @@
                         <p class="m-b-100">Signature et tampon</p>
                         <p>
                           <strong>Prescripteur : </strong>
-                          Dr. Djibril Mohamed</p>
+                          {{consultation?.doctor}}</p>
                       </div>
                       <div class="clearfix"></div>
                       <hr>

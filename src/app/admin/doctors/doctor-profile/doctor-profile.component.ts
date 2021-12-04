@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { Doctors } from './../alldoctors/doctors.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
@@ -16,6 +18,7 @@ import {
   ApexGrid,
   ApexMarkers,
 } from 'ng-apexcharts';
+import { DoctorsService } from '../../services/doctors.service';
 export type areaChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -64,7 +67,18 @@ export class DoctorProfileComponent implements OnInit {
   public radialChartOptions: Partial<radialChartOptions>;
   public linechartOptions: Partial<linechartOptions>;
   public linechartOptions2: Partial<linechartOptions>;
-  constructor() {}
+
+  doc: Doctors;
+  constructor(private docService: DoctorsService, private activated: ActivatedRoute) {
+
+    this.doc = new Doctors();
+    activated.params.subscribe( (data: any) => {
+      this.docService.getOneDoctor(data.id).subscribe((doc) => {
+        this.doc = doc;
+      });
+    });
+
+  }
   //  color: ["#3FA7DC", "#F6A025", "#9BC311"],
   // Doughnut chart start
   public doughnutChartLabels: string[] = ["Haute", "Moyenne", "Faible"];
@@ -81,77 +95,9 @@ export class DoctorProfileComponent implements OnInit {
     responsive: true,
   };
   // TODO start
-  tasks = [
-    {
-      id: '1',
-      title: 'Check patient report',
-      done: true,
-      priority: 'High',
-    },
-    {
-      id: '2',
-      title: 'Request for festivle holiday',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '3',
-      title: 'Order new medicine stock',
-      done: false,
-      priority: 'Low',
-    },
-    {
-      id: '4',
-      title: 'Remind for lunch in hotel',
-      done: true,
-      priority: 'Normal',
-    },
-    {
-      id: '5',
-      title: 'Conference in london',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '6',
-      title: 'Announcement for',
-      done: false,
-      priority: 'Normal',
-    },
-    {
-      id: '7',
-      title: 'call bus driver',
-      done: true,
-      priority: 'High',
-    },
-    {
-      id: '8',
-      title: 'Web service data load issue',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '9',
-      title: 'Java compile error',
-      done: false,
-      priority: 'Low',
-    },
-    {
-      id: '10',
-      title: 'Integrate project with spring boot',
-      done: true,
-      priority: 'High',
-    },
-  ];
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-  }
 
-  toggle(task, nav: any) {
-    task.done = !task.done;
-  }
-  // TODO end
+
 
   ngOnInit() {
     this.chart1();

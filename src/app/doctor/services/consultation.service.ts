@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { Consultation } from "../patients/consultations/consultation.model";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
+import { environment } from "src/environments/environment";
 @Injectable()
 export class ConsultationService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = "assets/data/consultations.json";
@@ -20,27 +21,29 @@ export class ConsultationService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllConsultations(): void {
-    this.subs.sink = this.httpClient.get<Consultation[]>(this.API_URL).subscribe(
-      (data) => {
-        this.isTblLoading = false;
-        this.dataChange.next(data);
-      },
-      (error: HttpErrorResponse) => {
-        this.isTblLoading = false;
-        console.log(error.name + " " + error.message);
-      }
-    );
-  }
-  addConsultation(consultation: Consultation): void {
-    this.dialogData = consultation;
 
-    /*  this.httpClient.post(this.API_URL, patient).subscribe(data => {
-      this.dialogData = patient;
-      },
-      (err: HttpErrorResponse) => {
-     // error code here
-    });*/
+
+  setHeader() {
+    return new HttpHeaders().set('Content-Type', 'application/json')
+      .set('X-Requested-Width', 'XMLHttpRequest').set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  }
+
+  getAllConsultations(userId) {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Consultation[]>(`${environment.apiUrl}/consultations/` + userId, { headers: this.setHeader() });
+  }
+  getOneConsultation(idConsultation) {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Consultation>(`${environment.apiUrl}/consultation/` + idConsultation, { headers: this.setHeader() });
+  }
+  getExplorations(idExploration) {
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.get<Consultation>(`${environment.apiUrl}/exploration/` + idExploration, { headers: this.setHeader() });
+  }
+  addConsultation(consultation: Consultation) {
+
+    return this.httpClient.post<Consultation>(`${environment.apiUrl}/consultation`, consultation, { headers: this.setHeader() });
+
   }
   updateConsultation(consultation: Consultation): void {
     this.dialogData = consultation;

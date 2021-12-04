@@ -15,7 +15,7 @@ const routes: Routes = [
     component: AddDoctorComponent,
   },
   {
-    path: "doctor-profile",
+    path: "doctor-profile/:id",
     component: DoctorProfileComponent,
   },
   {

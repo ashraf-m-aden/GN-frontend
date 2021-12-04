@@ -1,8 +1,8 @@
 import { Consultation } from './consultation.model';
 import { ConsultationService } from '../../services/consultation.service';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
-import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,7 +12,18 @@ import { fromEvent, BehaviorSubject, Observable, merge, map } from 'rxjs';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 
+interface DataItem {
+  date: Date;
+  isGN: boolean;
+  initial: boolean;
+  doctor: string;
+}
+
+interface ColumnItem {
+  name: string;
+}
 @Component({
   selector: 'app-consultations',
   templateUrl: './consultations.component.html',
@@ -20,26 +31,32 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ConsultationsComponent
   extends UnsubscribeOnDestroyAdapter
-  implements OnInit {
-    @Output() id = new EventEmitter<string>();
+  implements OnInit, OnChanges {
+  @Output() sendData = new EventEmitter<Array<string>>(); // il envoit l'id de la consultation souhaité et si c initial ou pas
+  @Input() page: string;
 
-  selectedRowData: selectRowInterface;
   rows = [];
   newUserImg = "assets/images/user/user1.jpg";
   data = [];
-  filteredData = [];
+  renderedData = [];
   editForm: FormGroup;
   register: FormGroup;
   selectedOption: string;
-
-  displayedColumns = [
-    "date",
-    "doc",
-    "contenu"
+  idPatient: string = localStorage.getItem("idPatient");
+  displayedColumns: ColumnItem[] = [
+    {
+      name: 'Date',
+    },
+    {
+      name: 'Docteur',
+    },
+    {
+      name: 'Interne',
+    },
+    {
+      name: 'Initiale',
+    }
   ];
-  exampleDatabase: ConsultationService | null;
-  dataSource: ExampleDataSource | null;
-  selection = new SelectionModel<Consultation>(true, []);
   consultation: Consultation | null;
   HFormGroup1: FormGroup;
   // tslint:disable-next-line:variable-name
@@ -56,7 +73,6 @@ export class ConsultationsComponent
     this.editForm = this.fb.group({
       medicament: new FormControl(),
       frequence: new FormControl(),
-
     });
   }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -73,8 +89,20 @@ export class ConsultationsComponent
 
     });
   }
-  refresh() {
-    this.loadData();
+  ngOnChanges(): void {
+
+   switch (this.page) {
+     case '11':
+       this.loadGN();
+       break;
+   case '12':
+     this.loadExterne();
+     break;
+
+     default:
+       this.loadData();
+       break;
+   }
   }
 
   getId(min, max) {
@@ -82,113 +110,75 @@ export class ConsultationsComponent
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  checkConsultation(id) {
-    this.id.emit(id);
+  checkConsultation(id, initial) {  // envoie au tree l'id de la consultation desirée
+    this.sendData.emit([id, initial]);
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
 
-  public loadData() {
-    this.exampleDatabase = new ConsultationService(this.httpClient);
-    this.dataSource = new ExampleDataSource(
-      this.exampleDatabase,
-      this.paginator,
-      this.sort
-    );
-    this.subs.sink = fromEvent(this.filter.nativeElement, "keyup").subscribe(
-      () => {
-        if (!this.dataSource) {
-          return;
-        }
-        this.dataSource.filter = this.filter.nativeElement.value;
+   loadData() {
+    this.consultationService.getAllConsultations(localStorage.getItem('idPatient'))    .subscribe(
+      async ( data) => {
+        await data.sort((a, b) => {
+          if (a.createdAt < b.createdAt) {
+            return 1;
+          } else if (a.createdAt > b.createdAt) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+        this.renderedData = data;
+
+
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + " " + error.message);
       }
     );
   }
-}
-export class ExampleDataSource extends DataSource<Consultation> {
-  filterChange = new BehaviorSubject("");
-  get filter(): string {
-    return this.filterChange.value;
-  }
-  set filter(filter: string) {
-    this.filterChange.next(filter);
-  }
-  filteredData: Consultation[] = [];
-  renderedData: Consultation[] = [];
-  constructor(
-    public exampleDatabase: ConsultationService,
-    public paginator: MatPaginator,
-    // tslint:disable-next-line:variable-name
-    public _sort: MatSort
-  ) {
-    super();
-    // Reset to the first page when the user changes the filter.
-    this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
-  }
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Consultation[]> {
-    // Listen for any changes in the base data, sorting, filtering, or pagination
-    const displayDataChanges = [
-      this.exampleDatabase.dataChange,
-      this._sort.sortChange,
-      this.filterChange,
-      this.paginator.page,
-    ];
-    this.exampleDatabase.getAllConsultations();
-    return merge(...displayDataChanges).pipe(
-      map(() => {
-        // Filter data
-        this.filteredData = this.exampleDatabase.data
-          .slice()
-          .filter((consultation: Consultation) => {
-            const searchStr = (
-              consultation.contenu +
-              consultation.date
-            ).toLowerCase();
-            return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-          });
-        // Sort filtered data
-        const sortedData = this.sortData(this.filteredData.slice());
-        // Grab the page's slice of the filtered sorted data.
-        const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-        this.renderedData = sortedData.splice(
-          startIndex,
-          this.paginator.pageSize
-        );
-        return this.renderedData;
-      })
+   loadGN() {
+    this.consultationService.getAllConsultations(localStorage.getItem('idPatient'))    .subscribe(
+      async ( data) => {
+        await data.sort((a, b) => {
+          if (a.createdAt < b.createdAt) {
+            return 1;
+          } else if (a.createdAt > b.createdAt) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+        this.renderedData = data.filter(result => {
+          return result.isGN === true;
+        });
+
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + " " + error.message);
+      }
     );
   }
-  disconnect() { }
-  /** Returns a sorted copy of the database data. */
-  sortData(data: Consultation[]): Consultation[] {
-    if (!this._sort.active || this._sort.direction === "") {
-      return data;
-    }
-    return data.sort((a, b) => {
-      let propertyA: number | string = "";
-      let propertyB: number | string = "";
-      switch (this._sort.active) {
-        case "id":
-          [propertyA, propertyB] = [a.id, b.id];
-          break;
-        case "contenu":
-          [propertyA, propertyB] = [a.contenu, b.contenu];
-          break;
-        case "date":
-          [propertyA, propertyB] = [a.date, b.date];
-          break;
+  loadExterne() {
+    this.consultationService.getAllConsultations(localStorage.getItem('idPatient'))    .subscribe(
+      async ( data) => {
+        await data.sort((a, b) => {
+          if (a.createdAt < b.createdAt) {
+            return 1;
+          } else if (a.createdAt > b.createdAt) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+        this.renderedData = data.filter(result => {
+          return result.isGN === false;
+        });
+
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + " " + error.message);
       }
-      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-      return (
-        (valueA < valueB ? -1 : 1) * (this._sort.direction === "asc" ? 1 : -1)
-      );
-    });
+    );
   }
-}
-// tslint:disable-next-line:class-name
-export interface selectRowInterface {
-  medicament: string;
-  frequence: number;
 }

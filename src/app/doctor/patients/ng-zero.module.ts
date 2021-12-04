@@ -8,7 +8,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 // import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 // import { NzBadgeModule } from 'ng-zorro-antd/badge';
 // import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-// import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 // import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 // import { NzCardModule } from 'ng-zorro-antd/card';
 // import { NzCarouselModule } from 'ng-zorro-antd/carousel';
@@ -58,7 +58,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 // import { NzTabsModule } from 'ng-zorro-antd/tabs';
 // import { NzTagModule } from 'ng-zorro-antd/tag';
 // import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
-// import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 // import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 // import { NzTransferModule } from 'ng-zorro-antd/transfer';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
@@ -68,6 +68,7 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 // import { NzUploadModule } from 'ng-zorro-antd/upload';
 // import { NzResizableModule } from 'ng-zorro-antd/resizable';
 // import { NzPipesModule } from 'ng-zorro-antd/pipes';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @NgModule({
   exports: [
@@ -76,9 +77,10 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
     // NzAnchorModule,
     // NzAutocompleteModule,
     NzAvatarModule,
+    NzSpaceModule,
     // NzBackTopModule,
     // NzBadgeModule,
-    // NzButtonModule,
+    NzButtonModule,
     // NzBreadCrumbModule,
     // NzCalendarModule,
     // NzCardModule,
@@ -127,7 +129,7 @@ import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
     // NzTabsModule,
     // NzTagModule,
     // NzTimePickerModule,
-    // NzTimelineModule,
+    NzTimelineModule,
     // NzToolTipModule,
     NzTransButtonModule,
     // NzTransferModule,

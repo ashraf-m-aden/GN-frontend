@@ -1,28 +1,40 @@
-<nz-table #basicTable [nzData]="listOfData">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Docteur</th>
-      <th>Type</th>
-      <th>Demande</th>
-      <th>Resultat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of basicTable.data">
-      <td>{{ data.date }}</td>
-      <td>{{ data.doctor }}</td>
-      <td>{{ data.type }}</td>
-      <td>
-        <a [href]="data.demande" target="_blank" >
-          <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
-        </a>
-      </td>
-      <td>
-        <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+<div class="col-12">
+  <nz-table #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Docteur</th>
+        <th>Type</th>
+        <th>Demande</th>
+        <th>Resultat</th>    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.date }}</td>
+        <td>{{ data.doctor }}</td>
+        <td>{{ data.type }}</td>
+        <td>
+          <div *ngFor="let explo of data.explorations">
+          <a  (click)="goFile('#/doctor/patients/analyse/' + data._id + '/' + explo._id)"
+           *ngIf="explo.typeI===idExpoType || explo.typeII===idExpoType || explo.typeIII===idExpoType || explo.typeIV===idExpoType || idExpoType=== '2' ">
+            <nz-avatar nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+          </a>
+        </div>
+        </td>
+        <td>
+          <div *ngFor="let explo of data.explorations" class="d-flex" >
+            <a  (click)="goFile(explo.resultatUrl)" *ngIf="explo.resultat && (explo.typeI===idExpoType || explo.typeII===idExpoType || explo.typeIII===idExpoType || explo.typeIV===idExpoType || idExpoType=== '2' )">
+              <nz-avatar  nzIcon="file-pdf" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+            </a>
+            <p *ngIf="!explo.resultat">
+              Pas de resultat
+            </p>
+          </div>
 
-      </td>
+        </td>
 
-    </tr>
+  </tr>
   </tbody>
-</nz-table>
+  </nz-table>
+
+</div>

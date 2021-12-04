@@ -26,17 +26,16 @@
           <div class="m-b-20">
             <div class="contact-grid">
               <div class="profile-header bg-dark">
-                <div class="user-name">DR. Djibril Mohamed</div>
-                <div class="name-center">Lieutenant</div>
+                <div class="user-name">DR. {{doc?.name}}</div>
+                <div class="name-center">{{doc?.grade}}</div>
               </div>
-              <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
+              <img [src]="doc?.img"  alt="">
               <p>
-                456, Estern evenue, Courtage area,
-                <br />New York
+                {{doc?.address}}
               </p>
               <div>
                 <span class="phone">
-                  <i class="material-icons">phone</i>264-625-2583</span>
+                  <i class="material-icons">phone</i>{{doc?.numero}}</span>
               </div>
             </div>
           </div>

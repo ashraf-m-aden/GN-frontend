@@ -5,44 +5,62 @@
     </h4>
   </div>
   <div class="float-end">
-    <p>21/10/2021</p>
-    <p>    Dr. Djibril Mohamed Idrisss
+    <p><strong>Date: </strong>{{consultation?.date}}</p>
+    <p><strong>Consultant:</strong> {{consultation?.doctor}}
     </p>
   </div>
   <div class="body">
     <nz-divider nzText="Motif" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime ducimus quisquam doloremque veniam iusto odio quidem, impedit nam rem, sequi molestias voluptates temporibus architecto facere facilis natus cumque? Sit, suscipit?
-    </p>
+    <p>{{consultation?.motif}} </p>
     <nz-divider nzText="Antecedents" nzOrientation="left" class="m-0"></nz-divider>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime ducimus quisquam doloremque veniam iusto odio quidem, impedit nam rem, sequi molestias voluptates temporibus architecto facere facilis natus cumque? Sit, suscipit?
-    </p>
+    <p>{{consultation?.antecedents}} </p>
     <nz-divider nzText="Examen" nzOrientation="left" class="m-0"></nz-divider>
     <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime ducimus quisquam doloremque veniam iusto odio quidem, impedit nam rem, sequi molestias voluptates temporibus architecto facere facilis natus cumque? Sit, suscipit?
-    </p>
+      {{consultation?.examen}} </p>
     <nz-divider nzText="Hypotheses" nzOrientation="left" class="m-0"></nz-divider>
     <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime ducimus quisquam doloremque veniam iusto odio quidem, impedit nam rem, sequi molestias voluptates temporibus architecto facere facilis natus cumque? Sit, suscipit?
-    </p>
+      {{consultation?.hypotheses}} </p>
     <nz-divider nzText="CAT" nzOrientation="left"></nz-divider>
-    <nz-list nzItemLayout="horizontal" >
-      <nz-list-item *ngFor="let item of data">
-        <nz-list-item-meta
-          nzAvatar="../../../../assets/images/image-gallery/pdf.jpg"
-        >
-          <nz-list-item-meta-title>
-            <a (click)="checkFile(item.url)">{{ item.title }}</a>
-          </nz-list-item-meta-title>
+    <nz-list nzItemLayout="horizontal">
+      <nz-list-item *ngIf="consultation?.referer">
+        <div class="d-flex justify-content-around flex-wrap">
+          <strong>Consultation referer: <br></strong>
+        <nz-list-item-meta *ngFor="let referer of consultation?.refererList" (click)="checkFile('#/doctor/patients/referer/'+consultation?._id+'/'+ referer._id)"
+         nzAvatar="../../../../assets/images/image-gallery/pdf.jpg">
         </nz-list-item-meta>
+      </div>
       </nz-list-item>
-      <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
+
+
+      <nz-list-item *ngIf="consultation?.ordonnance">
+        <div class="d-flex">
+          <strong>Ordonnance medicale: <br></strong>
+          <nz-list-item-meta (click)="checkFile('#/doctor/patients/ordonnance/'+consultation?._id)"
+            nzAvatar="../../../../assets/images/image-gallery/pdf.jpg">
+          </nz-list-item-meta>
+        </div>
+
+      </nz-list-item>
+
+      <nz-list-item *ngIf="consultation?.analyse">
+        <div class="d-flex justify-content-around flex-wrap">
+          <strong>Ordonnance explorations:  <br></strong>
+        <nz-list-item-meta (click)="checkFile('#/doctor/patients/analyse/'+consultation?._id+'/'+explo._id)"
+        *ngFor="let explo of consultation?.explorations" nzAvatar="../../../../assets/images/image-gallery/pdf.jpg">
+        </nz-list-item-meta>
+      </div>
+      </nz-list-item>
+
     </nz-list>
   </div>
   <div>
-    <button class="btn-group btn btn-success" (click)="addSuivi()" >
+    <button class="btn-group btn btn-success" (click)="addSuivi()">
       Suivie
     </button>
   </div>
 </div>
+<div class="d-flex justify-content-between mt-5">
+  <button *ngIf="consultation?.idPreviousConsultation" type="button" class="btn btn-group btn-warning" mat-button (click)="checkConsultation(consultation?.idPreviousConsultation, consultation.previous)">Consultation anterieur</button>
+  <button *ngIf="consultation?.idNextConsultation" (click)="checkConsultation(consultation?.idNextConsultation, false)" type="button" class="btn btn-group btn-primary" mat-button>Consultation suivante</button>
+</div>
+

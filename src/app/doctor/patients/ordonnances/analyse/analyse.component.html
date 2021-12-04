@@ -22,7 +22,7 @@
                         <address>
                           <p class="m-t-30">
                             <b>Djibouti le </b>
-                            14 Juillet 2017
+                            {{consultation?.date}}
                           </p>
                         </address>
                       </div>
@@ -31,27 +31,18 @@
                       <span class="title">EXPLORATION</span>
                     </div>
                     <div class="col-12 mt-5">
-                      <strong>NOM: Ashraf Mohamed Aden</strong>
+                      <strong>NOM: {{patient?.name}}</strong>
                     </div>
                     <div class="col-md-12">
                       <div class="table-responsive m-t-40">
                         <table class="table table-hover">
                           <tbody>
-                            <tr>
-                              <td class="text-center">1)</td>
+                            <tr *ngFor="let analyse of exploration?.analyses; let i = index;">
+                              <td class="text-center">{{i+1}}</td>
 
-                              <td class=""><u>Analyse 1 xx Y 555</u> <br>
+                              <td class=""><u>{{analyse?.analyse}}</u> <br>
                             </tr>
-                            <tr>
-                              <td class="text-center">2)</td>
 
-                              <td class=""><u>Analyse 2 xx Y 555</u> <br>
-                              </tr>
-                            <tr>
-                              <td class="text-center">3)</td>
-
-                              <td class=""><u>Analyse 3 xx Y 555</u> <br>
-                              </tr>
                           </tbody>
                         </table>
                       </div>
@@ -62,7 +53,7 @@
                         <p class="m-b-100">Signature et tampon</p>
                         <p>
                           <strong>Prescripteur : </strong>
-                          Dr. Djibril Mohamed</p>
+                         {{consultation?.doctor}}</p>
                       </div>
                       <div class="clearfix"></div>
                       <hr>

@@ -1,7 +1,9 @@
-<app-consultations *ngIf="page ==='1' || page ==='11' ||page ==='12'" (id)="checkConsultation($event)">
+<app-consultations *ngIf="page ==='1' || page ==='11' ||page ==='12'" [page]="page" (sendData)="checkConsultation($event)">
 </app-consultations>
-<app-add-consultation *ngIf="page == '0'"></app-add-consultation>
-<app-add-suivi *ngIf="page == '01'"></app-add-suivi>
-<app-saved-consultation *ngIf="page == '14'" (id)="addSuivi($event)" [idConsultation]="id"></app-saved-consultation>
-<app-explorations *ngIf="isPage(page)" [type]="Expotype"></app-explorations>
+<app-add-consultation *ngIf="page == '0'" (page)="goToPage($event)"></app-add-consultation>
+<app-add-suivi *ngIf="page == '01'" (sendData)="checkConsultation($event)" [idConsultation]="consultationId" (page)="goToPage($event)"></app-add-suivi>
+<app-add-suivi-externe *ngIf="page == '02'" (sendData)="checkConsultation($event)" [idConsultation]="consultationId" (page)="goToPage($event)"></app-add-suivi-externe>
+<app-saved-consultation *ngIf="page == '14'" (sendData)="checkConsultation($event)" (suivi)="addSuivi($event)" [idConsultation]="consultationId"></app-saved-consultation>
+<app-saved-suivi *ngIf="page == '15'" (sendData)="checkConsultation($event)" (suivi)="addSuivi($event)" [idConsultation]="consultationId"></app-saved-suivi>
+<app-explorations *ngIf="isPage(page)" [idExpoType]="page" [type]="Expotype"></app-explorations>
 <app-commentaires *ngIf="page == '3'"></app-commentaires>

@@ -24,20 +24,36 @@
         <div class="card">
 
           <div class="body">
+           <form [formGroup]="docForm" (submit)="onSubmit()">
             <div class="row clearfix">
-              <div class="col-lg-6 col-md-12">
+              <div class="col-lg-5 col-md-12">
                 <div class="form-group">
                   <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Nom</mat-label>
-                    <input matInput>
+                    <input matInput  formControlName="name">
                   </mat-form-field>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-12">
+              <div class="col-lg-3 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Sexe</mat-label>
+                    <mat-select formControlName="gender"  required>
+                      <mat-option [value]="'Homme'">
+                        Homme
+                      </mat-option>
+                      <mat-option [value]="'Femme'">
+                        Femme
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12">
                 <div class="form-group">
                   <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Grade</mat-label>
-                    <input matInput>
+                    <mat-label>Matricule</mat-label>
+                    <input matInput formControlName="matricule">
                   </mat-form-field>
                 </div>
               </div>
@@ -45,7 +61,7 @@
                 <div class="form-group">
                   <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Numero</mat-label>
-                    <input matInput>
+                    <input matInput  formControlName="numero">
                   </mat-form-field>
                 </div>
               </div>
@@ -53,59 +69,91 @@
                 <div class="form-group">
                   <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input matInput>
+                    <input matInput  formControlName="email" placeholder="xxxx@xxx.xx">
                   </mat-form-field>
                 </div>
               </div>
               <div class="col-lg-4 col-md-12">
                 <div class="form-group">
                   <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Specialisation</mat-label>
-                    <input matInput>
+                    <mat-label>Grade</mat-label>
+                    <input matInput  formControlName="grade">
                   </mat-form-field>
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-4">
                 <div class="form-group">
                   <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Address</mat-label>
-                    <textarea matInput></textarea>
+                    <mat-label>Addresse</mat-label>
+                    <textarea matInput formControlName="address"></textarea>
                   </mat-form-field>
                 </div>
               </div>
-              <!-- <div class="col-md-12">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <mat-checkbox class="example-margin">Profile Visibility For Everyone
-                  </mat-checkbox>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Date de naissance</mat-label>
+                    <textarea matInput formControlName="dob"></textarea>
+                  </mat-form-field>
                 </div>
+              </div>
+              <div class="col-md-4 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width mb-3">
+                  <mat-label>Photo de profile</mat-label>
+                  <ngx-mat-file-input (change)="selectFile($event)">
+                  </ngx-mat-file-input>
+                  <mat-icon matSuffix>face</mat-icon>
+                </mat-form-field>
+                <button *ngIf="docLoading" disabled nz-button nzType="primary" class="btn-group btn btn-primary" type="button"
+                nzLoading>
+                Chargement
+              </button>
+              <button *ngIf="newDoc.img !== ''" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
+                >
+                Chargé!
+              </button>
+              </div>
+              <div class="col-lg-3 col-md-12">
                 <div class="form-group">
-                  <mat-checkbox class="example-margin">New task notifications
-                  </mat-checkbox>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role"  required>
+                      <mat-option [value]="'Admin'">
+                        Administrateur
+                      </mat-option>
+                      <mat-option [value]="'Doctor'">
+                        Docteur
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-                <div class="form-group">
-                  <mat-checkbox class="example-margin">New friend request notifications
-                  </mat-checkbox>
-                </div>
-              </div> -->
+              </div>
 
             </div>
             <div class="example-container">
               <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Login</mat-label>
-                <input matInput>
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput formControlName="username">
               </mat-form-field>
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Mot de passe</mat-label>
-                <input matInput type="password">
+                <input matInput formControlName="password" type="password">
               </mat-form-field>
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Confirmer</mat-label>
-                <input matInput type="password">
+                <input matInput formControlName="confirmPassword" type="password">
               </mat-form-field>
               <div class="col-md-12">
-                <button mat-raised-button color="primary">Enregistrer</button>
-              </div>
+
+                <button class="mt-5 btn-group btn btn-primary" *ngIf="!loading" [disabled]=" docForm.invalid" type="submit">
+                  Enregistrer
+                </button>
+                <button *ngIf="loading" disabled nz-button nzType="primary" class="btn-group btn btn-primary" type="button"
+                  nzLoading>
+                  Enregistrement
+                </button>              </div>
             </div>
+           </form>
           </div>
         </div>
       </div>
