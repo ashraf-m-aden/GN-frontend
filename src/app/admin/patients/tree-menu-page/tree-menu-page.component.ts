@@ -35,12 +35,16 @@ export class TreeMenuPageComponent  implements OnInit, OnChanges {
   }
   addSuivi(suivi){ // permet d'aller a la page suivi consultation
     this.idConsultation.emit(suivi[0]);
-    if (suivi[1]) {
 
-      this.page = '02';
-    } else {
-      this.page = '01';
+    switch (suivi[1] === true) {
+      case true:
+        this.page = '02';
+        break;
 
+      default:
+        this.page = '01';
+
+        break;
     }
   }
 

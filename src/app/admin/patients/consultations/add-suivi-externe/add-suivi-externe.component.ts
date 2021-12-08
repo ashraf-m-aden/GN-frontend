@@ -121,11 +121,13 @@ export class AddSuiviExterneComponent implements OnInit, OnChanges {
     this.consultation.doctor = this.docProfile.name;
     this.consultation.date = new Date().getDate() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getFullYear();
     this.consultation.idPatient = localStorage.getItem('idPatient');
-    this.consultation.explorations = this.oldConsultation.explorations;
+
     this.consultation.hypotheses = this.oldConsultation.hypotheses;
     this.consultation.previous = this.oldConsultation.initial;
 
-
+    await this.oldConsultation.explorations.forEach(explo => {
+      this.consultation.explorations.push(explo);
+    });
     await this.consultS.addConsultation(this.consultation).subscribe(() => {
       this.showNotification(
         "bg-green",

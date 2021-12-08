@@ -23,10 +23,13 @@ export class DoctorsService {
   getOneDoctor(id) {
     return this.httpClient.get<Doctors>(`${environment.apiUrl}/user/` + id,  { headers: this.setHeader() });
   }
+
   addDoctors(doctor: Doctors) {
-
     return this.httpClient.post<Doctors>(`${environment.apiUrl}/user/`, doctor,  { headers: this.setHeader() });
+  }
 
+  editDoctor(doctor: Doctors) {
+    return this.httpClient.patch<Doctors>(`${environment.apiUrl}/user/` + doctor._id, doctor,  { headers: this.setHeader() });
   }
   updateDoctors(doctors: Doctors): void {
 

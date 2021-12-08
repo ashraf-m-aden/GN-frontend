@@ -29,13 +29,15 @@ import { ChartsModule as chartjsModule } from "ng2-charts";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatMenuModule } from '@angular/material/menu';
+import { EditDoctorComponent } from './edit-doctor/edit-doctor.component';
 
 @NgModule({
   declarations: [
     AlldoctorsComponent,
     AddDoctorComponent,
     DoctorProfileComponent,
-    ChartWidgetComponent
+    ChartWidgetComponent,
+    EditDoctorComponent
   ],
   imports: [
     CommonModule,

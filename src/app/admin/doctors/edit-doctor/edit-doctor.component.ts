@@ -1,20 +1,23 @@
-import { Router } from '@angular/router';
-import { DoctorsService } from './../../services/doctors.service';
-import { Doctors } from './../alldoctors/doctors.model';
-import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { FileUploadService } from '../../services/file-upload.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { UploadComponent } from '../../patients/upload/upload.component';
+import { DoctorsService } from '../../services/doctors.service';
+import { FileUploadService } from '../../services/file-upload.service';
+import { Doctors } from '../alldoctors/doctors.model';
+
 @Component({
-  selector: "app-add-doctor",
-  templateUrl: "./add-doctor.component.html",
-  styleUrls: ["./add-doctor.component.sass"],
+  selector: 'app-edit-doctor',
+  templateUrl: './edit-doctor.component.html',
+  styleUrls: ['./edit-doctor.component.sass']
 })
-export class AddDoctorComponent {
+export class EditDoctorComponent implements OnChanges {
+  @Input() doc: Doctors;
   docForm: FormGroup;
+  credentialForm: FormGroup;
   loading = false; // enregistrement
   docLoading = false; // chargement foto
   newDoc: Doctors;
@@ -28,37 +31,74 @@ export class AddDoctorComponent {
     // tslint:disable-next-line:variable-name
               private uploadService: FileUploadService
     ) {
+    this.newDoc = this.doc;
+  }
+
+  ngOnChanges(): void {
+
     this.docForm = this.fb.group({
-      name: ["", [Validators.required]],
-      gender: ["", [Validators.required]],
-      numero: [""],
-      username: ["", [Validators.required]],
-      password: ["", [Validators.required]],
-      confirmPassword: ["", [Validators.required]],
-      role: ["", [Validators.required]],
-      grade: [""],
-      matricule: ["", [Validators.required]],
-      address: [""],
+      name: [this.doc?.name, [Validators.required]],
+      gender: [this.doc?.gender, [Validators.required]],
+      numero: [this.doc?.numero],
+      role: [this.doc?.role, [Validators.required]],
+      grade: [this.doc?.grade],
+      matricule: [this.doc?.matricule, [Validators.required]],
+      address: [this.doc?.address],
       email: [
-        "",
+        this.doc?.email,
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
-      dob: ["", [Validators.required]],
+      dob: [this.doc?.dob, [Validators.required]],
     });
-    this.newDoc = new Doctors();
+    this.credentialForm = this.fb.group({
+      username: [this.doc?.username, [Validators.required]],
+      password: ["", [Validators.required]],
+      confirmPassword: ["", [Validators.required]],
+    });
+
   }
   onSubmit() {
+      this.loading = true;
+
+      this.newDoc = { ...this.docForm.value };
+      this.newDoc.img = this.currentFileUpload.url;
+
+      this.docService.editDoctor(this.newDoc).subscribe((doctor: Doctors) => {
+        this.showNotification(
+          "bg-green",
+          "Modification enregistrée",
+          "bottom",
+          "right"
+        );
+        this.loading = false;
+      }, (error: HttpErrorResponse) => {
+        this.loading = false;
+
+        if (error.status === 401) {
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('token');
+          this.router.navigate(["/authentication/signin"]);
+        }
+        else {
+          this.loading = false;
+          this.showNotification(
+            "bg-red",
+            "Un probleme est survenu, veuillez reessayer",
+            "bottom",
+            "right"
+          );
+        }
+      });
+  }
+
+  onSubmitCredential() {
     if (this.docForm.get('password').value === this.docForm.get('confirmPassword').value) {
       this.loading = true;
 
       this.newDoc = { ...this.docForm.value };
-      if ( this.currentFileUpload && this.currentFileUpload.url.length > 0) {
-        this.newDoc.img = this.currentFileUpload.url;
+      this.newDoc.img = this.currentFileUpload.url;
 
-      }
-      console.log(this.newDoc);
-
-      /*this.docService.addDoctors(this.newDoc).subscribe((doctor: Doctors) => {
+      this.docService.addDoctors(this.newDoc).subscribe((doctor: Doctors) => {
         this.showNotification(
           "bg-green",
           "Nouveau docteur enregistré",
@@ -85,7 +125,7 @@ export class AddDoctorComponent {
             "right"
           );
         }
-      });*/
+      });
     } else {
       this.showNotification(
         "bg-red",
@@ -127,8 +167,6 @@ export class AddDoctorComponent {
     subscribe(() => {
       storageRef.getDownloadURL().subscribe(downloadURL => {
         this.currentFileUpload.url = downloadURL;
-        console.log(this.newDoc.img);
-
         this.docLoading = false;
       });
     },  error => {

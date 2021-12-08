@@ -67,7 +67,7 @@
                 {{i+1}})
               </td>
               <td>
-                <nz-avatar nzIcon="user" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
+                <nz-avatar (click)="checkFile('#/admin/patients/analyse/'+oldConsultation._id+'/'+explo._id)" nzIcon="user" nzSrc="../../../../assets/images/image-gallery/pdf.jpg"></nz-avatar>
               </td>
               <td>
                 <div *ngIf="!explo.resultat">

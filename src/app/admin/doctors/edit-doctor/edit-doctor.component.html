@@ -1,0 +1,155 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Modifications</h3>
+  </div>
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon msr-2">face</mat-icon>
+        Informations
+      </ng-template>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="project_widget">
+          <div class="header">
+
+          </div>
+          <form class="body" [formGroup]="docForm" (onSubmit)="onSubmit()">
+            <div class="row clearfix">
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="name">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Grade</mat-label>
+                    <input matInput formControlName="grade">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Numero</mat-label>
+                    <input matInput formControlName="numero">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Matricule</mat-label>
+                    <input matInput formControlName="matricule">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Addresse</mat-label>
+                    <textarea matInput formControlName="address"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Sexe</mat-label>
+                    <mat-select formControlName="gender"  required>
+                      <mat-option [value]="'Homme'">
+                        Homme
+                      </mat-option>
+                      <mat-option [value]="'Femme'">
+                        Femme
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Date de naissance</mat-label>
+                    <textarea matInput formControlName="dob"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width mb-3">
+                  <mat-label>Photo de profile</mat-label>
+                  <ngx-mat-file-input (change)="selectFile($event)">
+                  </ngx-mat-file-input>
+                  <mat-icon matSuffix>face</mat-icon>
+                </mat-form-field>
+                <button *ngIf="docLoading" disabled nz-button nzType="primary" class="btn-group btn btn-primary" type="button"
+                nzLoading>
+                Chargement
+              </button>
+              <button *ngIf="doc?.img !== ''" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
+                >
+                Chargé!
+              </button>
+              </div>
+              <div class="col-lg-3 col-md-12">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role"  required>
+                      <mat-option [value]="'Admin'">
+                        Administrateur
+                      </mat-option>
+                      <mat-option [value]="'Doctor'">
+                        Docteur
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <button mat-raised-button color="primary">Enregistrer</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon msr-2">settings</mat-icon>
+        Connection
+      </ng-template>
+      <form class="body" [formGroup]="credentialForm" (onSubmit)="onSubmitCredential()">
+        <div class="example-container">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Login</mat-label>
+            <input matInput>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput type="password">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Confirmer</mat-label>
+            <input matInput type="password">
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary">Enregistrer</button>
+      </form>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>

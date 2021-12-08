@@ -10,6 +10,7 @@ export class Doctors {
   grade: string;
   gender: string;
   username: string;
+  dob: string;
   role: string;
   password: string;
   enabled: string;

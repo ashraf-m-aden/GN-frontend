@@ -54,7 +54,7 @@
     </nz-list>
   </div>
   <div>
-    <button class="btn-group btn btn-success" (click)="addSuivi()">
+    <button *ngIf="!consultation?.idNextConsultation" class="btn-group btn btn-success" (click)="addSuivi()">
       Suivie
     </button>
   </div>

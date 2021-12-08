@@ -38,7 +38,7 @@ export class AddSuiviComponent implements OnInit, OnChanges {
     examen: '',
     hypotheses: '',
     evaluation: '',
-    isGN: false,
+    isGN: true,
     referer: false,
     ordonnance: false,
     analyse: false,
@@ -104,10 +104,7 @@ export class AddSuiviComponent implements OnInit, OnChanges {
 
   ngOnInit() {
   }
-  checkOrdonnance() {
 
-    window.open("#/doctor/patients/ordonnance", "_blank");
-  }
   async onSubmit() {
 
     this.loading = true;
@@ -120,9 +117,12 @@ export class AddSuiviComponent implements OnInit, OnChanges {
     this.consultation.doctor = this.docProfile.name;
     this.consultation.date = new Date().getDate() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getFullYear();
     this.consultation.idPatient = localStorage.getItem('idPatient');
-    this.consultation.explorations = this.oldConsultation.explorations;
     this.consultation.hypotheses = this.oldConsultation.hypotheses;
     this.consultation.previous = this.oldConsultation.initial;
+    await this.oldConsultation.explorations.forEach(explo => {
+      this.consultation.explorations.push(explo);
+    });
+
 
 
     await this.consultS.addConsultation(this.consultation).subscribe(() => {
@@ -167,11 +167,13 @@ export class AddSuiviComponent implements OnInit, OnChanges {
   addNewExploration(analyses: Exploration) {
     // cette fonction ajoute une exploration au tableau des exploration de la consultation elle est connecté au
     // props des explorations
+
     this.consultation.explorations[this.consultation.explorations.length - 1].analyses = analyses.analyses;
     this.consultation.explorations[this.consultation.explorations.length - 1].typeI = analyses.typeI;
     this.consultation.explorations[this.consultation.explorations.length - 1].typeII = analyses.typeII;
     this.consultation.explorations[this.consultation.explorations.length - 1].typeIII = analyses.typeIII;
     this.consultation.explorations[this.consultation.explorations.length - 1].typeIV = analyses.typeIV;
+
 
   }
 
