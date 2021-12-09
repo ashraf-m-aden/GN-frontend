@@ -3,3 +3,9 @@ font-size: 1.5rem;
 margin-top: 1rem;
 border: solid black 1rem;
 }
+.navbar{
+  background: rgb(59,183,247);
+  background: -moz-radial-gradient(circle, rgba(59,183,247,0.9164040616246498) 32%, rgba(81,60,244,1) 63%);
+  background: -webkit-radial-gradient(circle, rgba(59,183,247,0.9164040616246498) 32%, rgba(81,60,244,1) 63%);
+  background: radial-gradient(circle, rgba(59,183,247,0.9164040616246498) 32%, rgba(81,60,244,1) 63%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3bb7f7",endColorstr="#513cf4",GradientType=1);}

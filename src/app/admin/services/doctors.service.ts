@@ -29,6 +29,8 @@ export class DoctorsService {
   }
 
   editDoctor(doctor: Doctors) {
+    console.log(doctor);
+
     return this.httpClient.patch<Doctors>(`${environment.apiUrl}/user/` + doctor._id, doctor,  { headers: this.setHeader() });
   }
   updateDoctors(doctors: Doctors): void {

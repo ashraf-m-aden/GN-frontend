@@ -40,7 +40,8 @@ export class AuthService {
     // remove user from local storage to log user out
     return this.http
     .get<any>(`${environment.apiUrl}/user/logout`, {headers: this.setHeader()}).subscribe(() => {
-
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
       this.router.navigate(["/authentication/signin"]);
     },
       (error: HttpErrorResponse) => {

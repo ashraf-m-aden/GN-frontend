@@ -5,9 +5,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AuthLayoutComponent } from './app-layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './app-layout/main-layout/main-layout.component';
 
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
-  imports: [CommonModule, NgbModule, MatTabsModule],
+  imports: [CommonModule, NgbModule, MatTabsModule, MatSidenavModule ],
   declarations: [AuthLayoutComponent, MainLayoutComponent],
   providers: []
 })

@@ -1,11 +1,15 @@
-<div>
   <!-- Left Sidebar -->
-  <aside id="leftsidebar" class="sidebar" >
+  <div id="leftsidebar" class="sidebar" >
     <!-- Menu -->
     <div class="menu">
-      <ul class="list"
+      <ul class="list pt-3"
         [ngStyle]="{'position' : 'relative', 'max-height' : listMaxHeight+'px', 'max-width' : listMaxWidth+'px'}"
         [perfectScrollbar]>
+        <li class="sidebar-user-panel mt-2 mb-5 right">
+          <button mat-icon-button (click)="callSidemenuCollapse()" >
+            <mat-icon>menu</mat-icon>
+          </button>
+        </li>
         <li class="sidebar-user-panel">
           <a class="img" routerLink={{homePage}}>
             <img class="" src="assets/images/image-gallery/logoflat.png" alt=""  />
@@ -56,6 +60,5 @@
       </ul>
     </div>
     <!-- #Menu -->
-  </aside>
+  </div>
   <!-- #END# Left Sidebar -->
-</div>

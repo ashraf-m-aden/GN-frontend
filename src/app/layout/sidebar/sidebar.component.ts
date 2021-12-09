@@ -9,6 +9,8 @@ import {
   Renderer2,
   HostListener,
   OnDestroy,
+  Output,
+  EventEmitter,
 } from "@angular/core";
 import { ROUTES } from "./sidebar-items";
 import { AuthService } from "src/app/core/service/auth.service";
@@ -19,6 +21,8 @@ import { Role } from "src/app/core/models/role";
   styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
+  @Output() toggle = new EventEmitter<any>();
+
   public sidebarItems: any[];
   level1Menu = "";
   level2Menu = "";
@@ -67,6 +71,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   windowResizecall(event) {
     this.setMenuHeight();
     this.checkStatuForResize(false);
+  }
+  callSidemenuCollapse() {
+    this.toggle.emit();
   }
   @HostListener("document:mousedown", ["$event"])
   onGlobalClick(event): void {
@@ -137,6 +144,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
   }
+
   ngOnDestroy() {
     this.routerObj.unsubscribe();
   }

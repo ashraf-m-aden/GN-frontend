@@ -13,7 +13,7 @@
           <div class="header">
 
           </div>
-          <form class="body" [formGroup]="docForm" (onSubmit)="onSubmit()">
+          <form [formGroup]="docForm" (ngSubmit)="onSubmit()">
             <div class="row clearfix">
               <div class="col-lg-6 col-md-12">
                 <div class="form-group">
@@ -97,7 +97,7 @@
                 nzLoading>
                 Chargement
               </button>
-              <button *ngIf="doc?.img !== ''" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
+              <button *ngIf="currentFileUpload?.url" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
                 >
                 Chargé!
               </button>
@@ -119,7 +119,7 @@
               </div>
 
               <div class="col-md-12">
-                <button mat-raised-button color="primary">Enregistrer</button>
+                <button mat-raised-button [disabled]="docForm.invalid" (click)="onSubmit()" color="primary">Enregistrer</button>
               </div>
             </div>
           </form>
@@ -132,7 +132,7 @@
         <mat-icon class="example-tab-icon msr-2">settings</mat-icon>
         Connection
       </ng-template>
-      <form class="body" [formGroup]="credentialForm" (onSubmit)="onSubmitCredential()">
+      <form class="body" [formGroup]="credentialForm" (ngSubmit)="onSubmitCredential()">
         <div class="example-container">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Login</mat-label>

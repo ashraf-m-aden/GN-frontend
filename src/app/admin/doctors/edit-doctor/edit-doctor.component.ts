@@ -31,11 +31,14 @@ export class EditDoctorComponent implements OnChanges {
     // tslint:disable-next-line:variable-name
               private uploadService: FileUploadService
     ) {
-    this.newDoc = this.doc;
+
+
   }
 
   ngOnChanges(): void {
+    console.log(this.doc);
 
+    this.newDoc = this.doc;
     this.docForm = this.fb.group({
       name: [this.doc?.name, [Validators.required]],
       gender: [this.doc?.gender, [Validators.required]],
@@ -61,7 +64,11 @@ export class EditDoctorComponent implements OnChanges {
       this.loading = true;
 
       this.newDoc = { ...this.docForm.value };
-      this.newDoc.img = this.currentFileUpload.url;
+      if (this.currentFileUpload) {
+        this.newDoc.img = this.currentFileUpload.url;
+
+      }
+
 
       this.docService.editDoctor(this.newDoc).subscribe((doctor: Doctors) => {
         this.showNotification(
@@ -92,11 +99,10 @@ export class EditDoctorComponent implements OnChanges {
   }
 
   onSubmitCredential() {
-    if (this.docForm.get('password').value === this.docForm.get('confirmPassword').value) {
+    if (this.docForm.get('password').value === this.credentialForm.get('confirmPassword').value) {
       this.loading = true;
 
-      this.newDoc = { ...this.docForm.value };
-      this.newDoc.img = this.currentFileUpload.url;
+      this.newDoc = { ...this.credentialForm.value };
 
       this.docService.addDoctors(this.newDoc).subscribe((doctor: Doctors) => {
         this.showNotification(

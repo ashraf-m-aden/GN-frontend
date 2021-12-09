@@ -1,10 +1,5 @@
-<nav #navbar class="navbar active">
+<nav #navbar class="navbar active border-bottom">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a href="#" onClick="return false;" class="navbar-toggle collapsed"
-        (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
-      <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
-    </div>
     <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
       <ul class="float-start collapse-menu-icon">
         <li>
@@ -15,9 +10,11 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
 
+
+        <!-- #END# Notifications-->
         <li class="nav-item user_profile" ngbDropdown>
           <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
-            <nz-avatar nzIcon="user"></nz-avatar>
+            <img src='../../../assets/images/user/user1.jpg' class="rounded-circle" width="32" height="32" alt="User">
           </a>
           <div ngbDropdownMenu class="notification-dropdown pullDown">
             <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
@@ -26,12 +23,12 @@
                   <ul class="user_dw_menu">
                     <li>
                       <a href="#" onClick="return false;">
-                        <mat-icon aria-hidden="false" class="me-2">person</mat-icon>Profile
+                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Profile
                       </a>
                     </li>
                     <li>
                       <a href="javascript:void(0);" (click)="logout()">
-                        <mat-icon aria-hidden="false" class="me-2">power_settings_new</mat-icon>Deconnection
+                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Logout
                       </a>
                     </li>
                   </ul>
@@ -42,8 +39,7 @@
         </li>
         <!-- #END# Tasks -->
         <li class="float-end">
-          <button mat-icon-button (click)="toggleRightSidebar()" class="nav-notification-icons js-right-sidebar">
-            <mat-icon id="settingBtn">settings</mat-icon>
+          <button mat-icon-button  class="nav-notification-icons js-right-sidebar">
           </button>
         </li>
       </ul>

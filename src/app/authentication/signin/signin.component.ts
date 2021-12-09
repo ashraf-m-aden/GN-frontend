@@ -42,7 +42,7 @@ export class SigninComponent
   }
   adminSet() {
     this.authForm.get("username").setValue("ashraf.mohamed");
-    this.authForm.get("password").setValue("molotov1");
+    this.authForm.get("password").setValue("123@Passer");
   }
   doctorSet() {
     this.authForm.get("username").setValue("doctor@hospital.org");

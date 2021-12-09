@@ -1,4 +1,11 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<app-right-sidebar></app-right-sidebar>
-<router-outlet></router-outlet>
+<mat-drawer-container>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <app-sidebar (toggle)="drawer.toggle()"></app-sidebar>
+  </mat-drawer>
+  <div>
+
+  <app-header (toggle)="drawer.toggle()"></app-header>
+  <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

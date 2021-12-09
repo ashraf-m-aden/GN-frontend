@@ -1,3 +1,4 @@
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgModule } from '@angular/core';
 
 import { CoreModule } from './core/core.module';
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: HttpClient): any {
     AppRoutingModule,
     HttpClientModule,
     PerfectScrollbarModule,
+    MatSidenavModule,
     ClickOutsideModule,
     TranslateModule.forRoot({
       loader: {

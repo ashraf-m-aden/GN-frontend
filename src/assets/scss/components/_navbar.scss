@@ -66,11 +66,9 @@
 }
 .ls-closed {
   .sidebar {
-    margin-left: -300px;
   }
 
   section.content {
-    margin-left: 15px;
   }
 
   .bars {
@@ -469,6 +467,7 @@ nav.navbar {
 .sidemenu-collapse {
   height: 50px;
   padding: 0px 20px 0px 44px;
+  color: white;
   &:hover {
     text-decoration: none;
     color: #fff;

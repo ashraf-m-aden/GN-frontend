@@ -60,8 +60,9 @@ dl {
 
 section {
   &.content {
-    margin: 75px 15px 0 276px;
-    min-height: calc(100vh - 76px);
+    margin: 75px 15px 0 0;
+    min-height: 100%;
+    width: auto;
     @include transition(0.5s);
   }
 }
@@ -69,9 +70,9 @@ section {
 .horizontal-layout {
   section {
     &.content {
-      margin: 170px 15px 0 15px;
+      padding: 170px 15px 0 15px;
       float: left;
-      width: calc(100% - 30px);
+      width: auto;
     }
   }
 }

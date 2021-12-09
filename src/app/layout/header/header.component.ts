@@ -6,6 +6,8 @@ import {
   OnInit,
   Renderer2,
   AfterViewInit,
+  EventEmitter,
+  Output,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { ConfigService } from "src/app/config/config.service";
@@ -24,6 +26,7 @@ export class HeaderComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit, AfterViewInit
 {
+  @Output() toggle = new EventEmitter<any>();
   public config: any = {};
   userImg: string;
   homePage: string;
@@ -47,55 +50,8 @@ export class HeaderComponent
   ) {
     super();
   }
-  listLang = [
-    { text: "English", flag: "assets/images/flags/us.jpg", lang: "en" },
-    { text: "Spanish", flag: "assets/images/flags/spain.jpg", lang: "es" },
-    { text: "German", flag: "assets/images/flags/germany.jpg", lang: "de" },
-  ];
-  notifications: any[] = [
-    {
-      userImg: "assets/images/user/user1.jpg",
-      userName: "Sarah Smith",
-      time: "14 mins ago",
-      message: "Please check your mail",
-    },
-    {
-      userImg: "assets/images/user/user2.jpg",
-      userName: "Airi Satou",
-      time: "22 mins ago",
-      message: "Work Completed !!!",
-    },
-    {
-      userImg: "assets/images/user/user3.jpg",
-      userName: "John Doe",
-      time: "3 hours ago",
-      message: "kindly help me for code.",
-    },
-    {
-      userImg: "assets/images/user/user4.jpg",
-      userName: "Ashton Cox",
-      time: "5 hours ago",
-      message: "Lets break for lunch...",
-    },
-    {
-      userImg: "assets/images/user/user5.jpg",
-      userName: "Sarah Smith",
-      time: "14 mins ago",
-      message: "Please check your mail",
-    },
-    {
-      userImg: "assets/images/user/user6.jpg",
-      userName: "Airi Satou",
-      time: "22 mins ago",
-      message: "Work Completed !!!",
-    },
-    {
-      userImg: "assets/images/user/user7.jpg",
-      userName: "John Doe",
-      time: "3 hours ago",
-      message: "kindly help me for code.",
-    },
-  ];
+
+
   ngOnInit() {
     this.config = this.configService.configData;
     const userRole = this.currentUser.role;
@@ -111,16 +67,6 @@ export class HeaderComponent
       this.homePage = "admin/dashboard/main";
     }
 
-    this.langStoreValue = localStorage.getItem("lang");
-    const val = this.listLang.filter((x) => x.lang === this.langStoreValue);
-    this.countryName = val.map((element) => element.text);
-    if (val.length === 0) {
-      if (this.flagvalue === undefined) {
-        this.defaultFlag = "assets/images/flags/us.jpg";
-      }
-    } else {
-      this.flagvalue = val.map((element) => element.flag);
-    }
   }
 
   ngAfterViewInit() {
@@ -214,14 +160,7 @@ export class HeaderComponent
     }
   }
   callSidemenuCollapse() {
-    const hasClass = this.document.body.classList.contains("side-closed");
-    if (hasClass) {
-      this.renderer.removeClass(this.document.body, "side-closed");
-      this.renderer.removeClass(this.document.body, "submenu-closed");
-    } else {
-      this.renderer.addClass(this.document.body, "side-closed");
-      this.renderer.addClass(this.document.body, "submenu-closed");
-    }
+    this.toggle.emit();
   }
   public toggleRightSidebar(): void {
     this.subs.sink = this.rightSidebarService.sidebarState.subscribe(
