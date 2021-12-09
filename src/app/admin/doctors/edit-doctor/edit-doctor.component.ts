@@ -36,7 +36,6 @@ export class EditDoctorComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.doc);
 
     this.newDoc = this.doc;
     this.docForm = this.fb.group({

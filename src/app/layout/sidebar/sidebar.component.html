@@ -15,6 +15,17 @@
             <img class="" src="assets/images/image-gallery/logoflat.png" alt=""  />
           </a>
         </li>
+        <li class="sidebar-user-panel">
+          <div class="user-panel">
+            <div class=" image">
+              <img src={{userImg}} class="img-circle user-img-circle" alt="User Image" />
+            </div>
+          </div>
+          <div class="profile-usertitle">
+            <div class="sidebar-userpic-name">{{userFullName}} </div>
+            <div class="profile-usertitle-job ">{{userType}} </div>
+          </div>
+        </li>
         <!-- Top Most level menu -->
         <li [class.active]="level1Menu === sidebarItem.moduleName && sidebarItem.submenu.length != 0"
           *ngFor="let sidebarItem of sidebarItems" [routerLinkActive]="sidebarItem.submenu.length != 0 ? '' : 'active'">

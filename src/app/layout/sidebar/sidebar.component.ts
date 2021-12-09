@@ -113,7 +113,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       const userRole = this.currentUser.role;
       this.userFullName =
         this.currentUser.name;
-      this.userImg = this.currentUser.img;
+      this.userImg = this.currentUser.url || '../../../assets/images/user/user1.jpg';
 
 
       this.sidebarItems = ROUTES.filter(
