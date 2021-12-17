@@ -136,13 +136,14 @@
                                     </ngx-mat-file-input>
                                     <mat-icon matSuffix>face</mat-icon>
                                   </mat-form-field>
-                                  <div *ngIf="currentFileUpload" class="progress mt-2">
-                                    <div class="progress-bar progress-bar-info" role="progressbar"
-                                      attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100"
-                                      [ngStyle]="{ width: percentage + '%' }">
-                                      {{ percentage }}%
-                                    </div>
-                                  </div>
+                                  <button *ngIf="patientLoading" disabled nz-button nzType="primary" class="btn-group btn btn-primary" type="button"
+                                  nzLoading>
+                                  Chargement
+                                </button>
+                                <button *ngIf="currentFileUpload?.url !== '' && currentFileUpload?.url !== undefined" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
+                                  >
+                                  Chargé!
+                                </button>
                                 </div>
                               </div>
                               <div class="row">
@@ -267,7 +268,7 @@
                                   nzLoading>
                                   Chargement
                                 </button>
-                                <button *ngIf="patient.img !== ''" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
+                                <button *ngIf="currentFileUpload?.url !== '' && currentFileUpload?.url !== undefined" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
                                   >
                                   Chargé!
                                 </button>

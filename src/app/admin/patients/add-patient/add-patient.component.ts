@@ -47,7 +47,6 @@ export class AddPatientComponent {
       maritalStatus: [""],
       address: [""],
       bloodType: [""],
-      img: ['']
 
     });
     this.patientFamilleForm = this.fb.group({
@@ -152,16 +151,8 @@ export class AddPatientComponent {
     uploadTask.snapshotChanges().
     subscribe(() => {
       storageRef.getDownloadURL().subscribe(downloadURL => {
-        this.patient.img = downloadURL;
+        this.currentFileUpload.url = downloadURL;
         this.patientLoading = false;
-      },  error => {
-        this.patientLoading = false;
-        this.showNotification(
-          "bg-red",
-          "Un probleme est survenu, veuillez reessayer",
-          "bottom",
-          "right"
-        );
       });
     },  error => {
       this.patientLoading = false;

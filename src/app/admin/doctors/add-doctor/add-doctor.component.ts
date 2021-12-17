@@ -23,11 +23,11 @@ export class AddDoctorComponent {
   selectedFiles: FileList;
   currentFileUpload: UploadComponent;
   constructor(private fb: FormBuilder, private docService: DoctorsService, private router: Router,
-              // tslint:disable-next-line:variable-name
+    // tslint:disable-next-line:variable-name
               private _snackBar: MatSnackBar, private storage: AngularFireStorage,
     // tslint:disable-next-line:variable-name
               private uploadService: FileUploadService
-    ) {
+  ) {
     this.docForm = this.fb.group({
       name: ["", [Validators.required]],
       gender: ["", [Validators.required]],
@@ -52,13 +52,10 @@ export class AddDoctorComponent {
       this.loading = true;
 
       this.newDoc = { ...this.docForm.value };
-      if ( this.currentFileUpload && this.currentFileUpload.url.length > 0) {
-        this.newDoc.img = this.currentFileUpload.url;
+      this.newDoc.img = this.currentFileUpload.url;
 
-      }
-      console.log(this.newDoc);
 
-      /*this.docService.addDoctors(this.newDoc).subscribe((doctor: Doctors) => {
+      this.docService.addDoctors(this.newDoc).subscribe((doctor: Doctors) => {
         this.showNotification(
           "bg-green",
           "Nouveau docteur enregistré",
@@ -85,7 +82,7 @@ export class AddDoctorComponent {
             "right"
           );
         }
-      });*/
+      });
     } else {
       this.showNotification(
         "bg-red",
@@ -124,21 +121,21 @@ export class AddDoctorComponent {
     const uploadTask = this.storage.upload(filePath, this.currentFileUpload.file);
 
     uploadTask.snapshotChanges().
-    subscribe(() => {
-      storageRef.getDownloadURL().subscribe(downloadURL => {
-        this.currentFileUpload.url = downloadURL;
-        console.log(this.newDoc.img);
+      subscribe(() => {
+        storageRef.getDownloadURL().subscribe(downloadURL => {
+          this.currentFileUpload.url = downloadURL;
+          console.log(this.newDoc.img);
 
+          this.docLoading = false;
+        });
+      }, error => {
         this.docLoading = false;
+        this.showNotification(
+          "bg-red",
+          "Un probleme est survenu, veuillez reessayer",
+          "bottom",
+          "right"
+        );
       });
-    },  error => {
-      this.docLoading = false;
-      this.showNotification(
-        "bg-red",
-        "Un probleme est survenu, veuillez reessayer",
-        "bottom",
-        "right"
-      );
-    });
-}
+  }
 }

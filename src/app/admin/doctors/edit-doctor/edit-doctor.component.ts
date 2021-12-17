@@ -61,13 +61,13 @@ export class EditDoctorComponent implements OnChanges {
   }
   onSubmit() {
       this.loading = true;
+      Object.assign(this.newDoc, this.docForm.value);
 
-      this.newDoc = { ...this.docForm.value };
       if (this.currentFileUpload) {
         this.newDoc.img = this.currentFileUpload.url;
 
       }
-
+      this.newDoc._id = this.doc._id;
 
       this.docService.editDoctor(this.newDoc).subscribe((doctor: Doctors) => {
         this.showNotification(
@@ -103,41 +103,42 @@ export class EditDoctorComponent implements OnChanges {
 
       this.newDoc = { ...this.credentialForm.value };
 
-      this.docService.addDoctors(this.newDoc).subscribe((doctor: Doctors) => {
-        this.showNotification(
-          "bg-green",
-          "Nouveau docteur enregistré",
-          "bottom",
-          "right"
-        );
-        this.loading = false;
+    //   this.docService.addDoctors(this.newDoc).subscribe((doctor: Doctors) => {
+    //     this.showNotification(
+    //       "bg-green",
+    //       "Nouveau docteur enregistré",
+    //       "bottom",
+    //       "right"
+    //     );
+    //     this.loading = false;
 
-        this.router.navigateByUrl('/admin/doctors/doctor-profile/' + doctor._id);
-      }, (error: HttpErrorResponse) => {
-        this.loading = false;
+    //     this.router.navigateByUrl('/admin/doctors/doctor-profile/' + doctor._id);
+    //   }, (error: HttpErrorResponse) => {
+    //     this.loading = false;
 
-        if (error.status === 401) {
-          localStorage.removeItem('currentUser');
-          localStorage.removeItem('token');
-          this.router.navigate(["/authentication/signin"]);
-        }
-        else {
-          this.loading = false;
-          this.showNotification(
-            "bg-red",
-            "Un probleme est survenu, veuillez reessayer",
-            "bottom",
-            "right"
-          );
-        }
-      });
-    } else {
-      this.showNotification(
-        "bg-red",
-        "Veuillez confirmer le mot de passe",
-        "bottom",
-        "right"
-      );
+    //     if (error.status === 401) {
+    //       localStorage.removeItem('currentUser');
+    //       localStorage.removeItem('token');
+    //       this.router.navigate(["/authentication/signin"]);
+    //     }
+    //     else {
+    //       this.loading = false;
+    //       this.showNotification(
+    //         "bg-red",
+    //         "Un probleme est survenu, veuillez reessayer",
+    //         "bottom",
+    //         "right"
+    //       );
+    //     }
+    //   });
+    // } else {
+    //   this.showNotification(
+    //     "bg-red",
+    //     "Veuillez confirmer le mot de passe",
+    //     "bottom",
+    //     "right"
+    //   );
+    // }
     }
   }
 

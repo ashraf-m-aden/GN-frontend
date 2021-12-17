@@ -108,7 +108,7 @@
                 nzLoading>
                 Chargement
               </button>
-              <button *ngIf="newDoc.img !== ''" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
+              <button *ngIf="currentFileUpload?.url !== '' && currentFileUpload?.url !== undefined" disabled nz-button nzType="success" class="btn-group btn btn-primary" type="button"
                 >
                 Chargé!
               </button>
@@ -145,13 +145,17 @@
               </mat-form-field>
               <div class="col-md-12">
 
-                <button class="mt-5 btn-group btn btn-primary" *ngIf="!loading" [disabled]=" docForm.invalid" type="submit">
-                  Enregistrer
-                </button>
-                <button *ngIf="loading" disabled nz-button nzType="primary" class="btn-group btn btn-primary" type="button"
-                  nzLoading>
-                  Enregistrement
-                </button>              </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <button class="btn-space" [disabled]="!docForm.valid
+                  || (currentFileUpload?.file && currentFileUpload?.url == '')" mat-raised-button
+                    color="primary">Enregistrer</button>
+                    <button *ngIf="loading" disabled nz-button nzType="primary" class="btn-group btn btn-primary" type="button"
+                    nzLoading>
+                    Enregistrement
+                  </button>
+                  <button type="button" mat-button>Annuler</button>
+                </div>
+                           </div>
             </div>
            </form>
           </div>

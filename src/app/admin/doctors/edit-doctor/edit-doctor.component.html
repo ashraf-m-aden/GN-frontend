@@ -119,7 +119,8 @@
               </div>
 
               <div class="col-md-12">
-                <button mat-raised-button [disabled]="docForm.invalid" (click)="onSubmit()" color="primary">Enregistrer</button>
+                <button mat-raised-button [disabled]="!docForm.valid
+                || (currentFileUpload?.file && currentFileUpload?.url == '')" (click)="onSubmit()" color="primary">Enregistrer</button>
               </div>
             </div>
           </form>
@@ -147,7 +148,7 @@
             <input matInput type="password">
           </mat-form-field>
         </div>
-        <button mat-raised-button color="primary">Enregistrer</button>
+        <button mat-raised-button color="primary" [disabled]="!credentialForm.valid">Enregistrer</button>
       </form>
 
     </mat-tab>
