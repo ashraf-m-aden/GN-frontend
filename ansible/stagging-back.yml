@@ -1,0 +1,12 @@
+---
+- name: Start stagging process of gn frontend
+  hosts: websrvgrp
+  become: yes
+  tasks:
+    - name: copy backend to client
+      ansible.builtin.copy:
+        src: /
+        dest: /backend/ # link to /path/to/file
+        follow: yes
+    - name: Install node.js app and then run it
+      shell: cd  backend/ | npm i | npm run start

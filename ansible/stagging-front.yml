@@ -1,0 +1,10 @@
+---
+- name: Start stagging process of gn frontend
+  hosts: websrvgrp
+  become: yes
+  tasks:
+    - name: copy dist to nginx html
+      ansible.builtin.copy:
+        src: /dist
+        dest: /usr/share/nginx/html/ # link to /path/to/file
+        follow: yes
