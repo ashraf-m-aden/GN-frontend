@@ -5,6 +5,6 @@
   tasks:
     - name: copy dist to nginx html
       ansible.builtin.copy:
-        src: /dist
+        src: /var/lib/jenkins/workspace/Build GN Frontend/dist
         dest: /usr/share/nginx/html/ # link to /path/to/file
         follow: yes
